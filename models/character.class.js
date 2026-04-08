@@ -1,8 +1,10 @@
-class Character extends DrawableObjects {
+class Character extends MovableObjects {
 
     y = 115;
     height = 320;
     width = 200;
+    currentImage = 0;
+    world;
 
     IMAGES_IDLE = [
         'assets/img/2_character_pepe/1_idle/idle/I-1.png',
@@ -64,6 +66,28 @@ class Character extends DrawableObjects {
 
     constructor(){
         super().loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
-        
+        this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_IDLE_LONG);
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_HURTING);
+        this.loadImages(this.IMAGES_DYING);
+        this.animate();
+    }
+
+    animate(){
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT) {
+                this.moveRight();
+            }
+            if (this.world.keyboard.LEFT) {
+                this.moveLeft();
+            }
+        }, 1000/60);
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 50);
     }
 }

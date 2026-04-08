@@ -1,13 +1,15 @@
 class World {
 
     canvas;
+    keyboard;
     ctx;
     level = level1;
     character = new Character();
 
 
-    constructor(canvas){
+    constructor(canvas, keyboard){
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.ctx = canvas.getContext('2d');
         this.draw();
         this.setWorld();
