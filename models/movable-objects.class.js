@@ -35,15 +35,18 @@ class MovableObjects extends DrawableObjects {
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
+        this.lastActionTime = new Date().getTime();
     };
 
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = true;
+        this.lastActionTime = new Date().getTime();
     };
 
     jump(){
         this.speedY = 5;
+        this.lastActionTime = new Date().getTime();
     };
 
     hit(){
