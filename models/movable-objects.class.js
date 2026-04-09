@@ -13,9 +13,6 @@ class MovableObjects extends DrawableObjects {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration * 0.5;
             }
-            if (!this.isAboveGround()) {
-                this.canJump = true;
-            }
         }), 1000/25;
     };
 
@@ -23,7 +20,7 @@ class MovableObjects extends DrawableObjects {
         if (this instanceof ThrowableObjects) {
             return true;
         } else {
-        return this.y < 150;
+        return this.y < 115;
         };
     }
 
@@ -69,5 +66,11 @@ class MovableObjects extends DrawableObjects {
          this.y + this.height > mo.y &&
          this.x < mo.x &&
          this.y < mo.y + mo.height
+    };
+
+    collectCoins(coin) {
+        coin.x -= this.speed;
+        console.log('jup');
+        
     };
 } 

@@ -4,8 +4,10 @@ class World {
     keyboard;
     ctx;
     level = level1;
-    statusBar = new StatusBar();
     character = new Character();
+    statusBar = new StatusBar();
+    coinDisplay = new CoinDisplay();
+    bottleDisplay = new BottleDisplay();
     throwableObjects = [];
     camera_x = 0;
 
@@ -20,6 +22,9 @@ class World {
 
     setWorld(){
         this.character.world = this;
+        this.level.coins.forEach(coin => {
+            coin.world = this;
+        });
     };
 
     draw(){
@@ -30,9 +35,12 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.addToMap(this.coinDisplay);
+        this.addToMap(this.bottleDisplay);
         this.ctx.translate(this.camera_x, 0);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -77,6 +85,9 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
+            this.level.coins.forEach(coin => {
+                coin.update();
+            });
          }, 200);
     }
 
@@ -87,12 +98,20 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             }
         })
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin) && !coin.isCollected) {
+                coin.isCollected = true;
+                coin.collect(this.coinDisplay);
+                this.coinDisplay.updateNumber();
+            }
+        })
     };
 
     checkThrowableObjects() {
-        if(this.keyboard.KEYD) {
+        if(this.keyboard.KEYD && this.bottleDisplay.value > 0) {
             let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+            this.bottleDisplay.reduceNumber();
         }
     };
 };
