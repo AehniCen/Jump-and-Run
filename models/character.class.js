@@ -1,11 +1,4 @@
 class Character extends MovableObjects {
-
-    y = 80;
-    height = 320;
-    width = 200;
-    currentImage = 0;
-    world;
-
     IMAGES_IDLE = [
         'assets/img/2_character_pepe/1_idle/idle/I-1.png',
         'assets/img/2_character_pepe/1_idle/idle/I-2.png',
@@ -63,6 +56,14 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-56.png',
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
+   
+    y = 80;
+    height = 320;
+    width = 200;
+    currentImage = 0;
+    world;
+    speed = 15;
+
 
     constructor(){
         super().loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
@@ -94,7 +95,9 @@ class Character extends MovableObjects {
             this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } 
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURTING);
+            }
         }, 50);
     }
 }

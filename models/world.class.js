@@ -13,6 +13,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.draw();
         this.setWorld();
+        this.run();
     };
 
     setWorld(){
@@ -44,6 +45,7 @@ class World {
             this.flipImage(mo);
         };
         mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         };
@@ -59,5 +61,20 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    };
+
+    run(){
+        setInterval(() => {
+            this.checkCollisions();
+         }, 200);
+    }
+
+    checkCollisions(){
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                console.log(this.character, enemy);
+            }
+        })
     };
 };

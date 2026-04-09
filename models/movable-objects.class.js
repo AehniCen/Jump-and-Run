@@ -3,8 +3,9 @@ class MovableObjects extends DrawableObjects {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 0.1;
-    canJump = false;
+    acceleration = 0.12;
+    energy = 100;
+    lastHit = 0;
 
     applyGravity(){
         setInterval(() => {
@@ -31,16 +32,40 @@ class MovableObjects extends DrawableObjects {
     };
 
     moveRight() {
-        this.x += 10;
+        this.x += this.speed;
         this.otherDirection = false;
     };
 
     moveLeft() {
-        this.x -= 10;
+        this.x -= this.speed;
         this.otherDirection = true;
     };
 
     jump(){
         this.speedY = 5;
+    };
+
+    hit(){
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+        console.log(this.energy);
+        
+    };
+
+    isHurt(){
+        let timepassed = new Date().getTime() - this.lastHit; //Difference in Milliseconds
+        timepassed = timepassed / 1000; //Difference in Seconds
+        return timepassed < 1;
+    };
+
+    isColliding(mo){
+        return this.x + this.width > mo.x &&
+         this.y + this.height > mo.y &&
+         this.x < mo.x &&
+         this.y < mo.y + mo.height
     };
 } 
