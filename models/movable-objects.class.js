@@ -20,8 +20,12 @@ class MovableObjects extends DrawableObjects {
     };
 
     isAboveGround(){
-        return this.y < 115;
-    };
+        if (this instanceof ThrowableObjects) {
+            return true;
+        } else {
+        return this.y < 150;
+        };
+    }
 
 
     playAnimation(images){
@@ -51,9 +55,7 @@ class MovableObjects extends DrawableObjects {
             this.energy = 0
         } else {
             this.lastHit = new Date().getTime();
-        }
-        console.log(this.energy);
-        
+        }       
     };
 
     isHurt(){
