@@ -6,8 +6,12 @@
 }
 
 body {
+    background-image: url(../assets/img/5_background/body-background.png);
+    background-size: fill;
+    background-position: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 

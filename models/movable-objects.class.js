@@ -71,6 +71,14 @@ class MovableObjects extends DrawableObjects {
          this.y < mo.y + mo.height
     };
 
+    isAttacking(mo) {
+    return this.x + this.width > mo.x &&
+           this.x < mo.x + mo.width &&
+           this.lastY + this.height <= mo.y && // war vorher darüber
+           this.y + this.height >= mo.y &&     // jetzt berührt er ihn
+           this.speedY > 0;
+}
+
     collectCoins(coin) {
         coin.x -= this.speed;
         console.log('jup');

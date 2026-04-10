@@ -106,6 +106,9 @@ class Character extends MovableObjects {
 
     getMovementIntervall(){
         setInterval(() => {
+
+            this.lastY = this.y;
+            
             if (this.world.keyboard.RIGHT && this.x < 1440) {
                 this.moveRight();
             }

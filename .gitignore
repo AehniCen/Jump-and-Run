@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# environment
+.env
+
+# logs
+*.log
+
+# editor
+.vscode/
+
+# system
+.DS_Store
+Thumbs.db

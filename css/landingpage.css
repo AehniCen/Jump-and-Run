@@ -1,0 +1,35 @@
+#start-div {
+    width: 100%;
+    height: 100vh;
+    background-image: url(../assets/img/9_intro_outro_screens/start/startscreen_1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+#start-btn {
+    width: 480px;
+    height: 160px;
+    background-color: #F9C769;
+    border-width: 12px;
+    border: 12px solid #A0220A;
+    border-radius: 22px;
+    margin-top: 160px;
+}
+
+#start-btn :hover{
+    cursor: pointer;
+}
+
+#start-btn p {
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 100px;
+    letter-spacing: 6px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px #9A3A17;
+}

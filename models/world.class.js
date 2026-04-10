@@ -105,6 +105,13 @@ class World {
                 this.coinDisplay.updateNumber();
             }
         })
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isAttacking(enemy)) {
+                enemy.hit();
+                console.log(enemy.energy);
+                
+            }
+        })
     };
 
     checkThrowableObjects() {
