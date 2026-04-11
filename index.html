@@ -25,6 +25,21 @@
 <body onload="init()">
 
     <h1>El Pollo Loco</h1>
+
+    <div id="start-div">
+        <button id="start-btn" onclick="startGame()">
+            <p>Start Game</p>
+        </button>
+    </div>
+
+    <div id="pause-div" style="display: none;">
+        <p>Pause</p>
+        <div id="pause-btns">
+            <button onclick="continue()">Continue</button>
+            <button>Restart</button>
+            <button>Back To Start Menu</button>
+        </div>
+    </div>
     
     <canvas id="canvas" width="720" height="480">
 

@@ -1,11 +1,19 @@
 let world;
 let canvas;
 let keyboard = new Keyboard();
+let startMenu;
+let pauseMenu;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
+
+function startGame() {
+    startMenu = document.getElementById('start-div');
+    startMenu.style.display = 'none';
+    world.paused = false;
+    };
 
 window.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowRight') {
@@ -26,6 +34,18 @@ window.addEventListener('keydown', (e) => {
     if (e.key == 'd') {
         keyboard.KEYD = true;    
     };
+    if (e.key == 'Escape' && keyboard.ESC == false && startMenu.style.display == 'none') {
+        pauseMenu = document.getElementById('pause-div')
+        keyboard.ESC = true;    
+        world.paused = true;
+        pauseMenu.style.display = 'block';
+    } else if (e.key == 'Escape' && keyboard.ESC == true && startMenu.style.display == 'none') {
+        keyboard.ESC = false; 
+        world.paused = false;
+        pauseMenu.style.display = 'none';
+    };    
+    console.log(keyboard.ESC);
+    
 })
 
 window.addEventListener('keyup', (e) => {

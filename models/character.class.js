@@ -106,33 +106,32 @@ class Character extends MovableObjects {
 
     getMovementIntervall(){
         setInterval(() => {
-
             this.lastY = this.y;
-            
-            if (this.world.keyboard.RIGHT && this.x < 1440) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused) {
                 this.moveRight();
             }
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused) {
                 this.moveLeft();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000/30);
+        
     };
 
     getConditionIntervall(){
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isAboveGround() && !this.world.paused) {
                 if (this.speedY > 0)  {
                     this.playAnimationOnce(this.IMAGES_JUMPING_UP);
-                } else if (this.speedY < 0) {
+                } else if (this.speedY < 0 && !this.world.paused) {
                     this.playAnimationOnce(this.IMAGES_JUMPING_DOWN);
                 }
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if (this.world.keyboard.RIGHT && !this.world.paused || this.world.keyboard.LEFT && !this.world.paused) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isHurt()) {
+            } else if (this.isHurt() && !this.world.paused) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
         }, 70);
@@ -141,23 +140,20 @@ class Character extends MovableObjects {
     getIdleModeIntervall(){
         setInterval(() => {
             let timePassed = (new Date().getTime() - this.lastActionTime) / 1000;
-            if(this.idleMode = true){
+            if(this.idleMode = true && !this.world.paused){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
-            if(this.idleMode = true &&
-                timePassed > 1
-            ){
+            if(this.idleMode = true && timePassed > 1  && !this.world.paused){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode = true &&
-                timePassed > 10
-            ){
+            if(this.idleMode = true && timePassed > 10 && !this.world.paused){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }
         }, 1000/4)
     };
 
     animate(){
+        if (this.paused) return;
         this.getMovementIntervall();
         this.getConditionIntervall();
         this.getIdleModeIntervall();

@@ -10,21 +10,29 @@ class World {
     bottleDisplay = new BottleDisplay();
     throwableObjects = [];
     camera_x = 0;
+    paused = true;
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.ctx = canvas.getContext('2d');
         this.draw();
-        this.setWorld();
+        this.setWorld();     
         this.run();
+        
     };
+
 
     setWorld(){
         this.character.world = this;
         this.level.coins.forEach(coin => {
             coin.world = this;
         });
+        this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+            enemy.animate();
+        }
+        )
     };
 
     draw(){
