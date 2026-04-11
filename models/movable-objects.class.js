@@ -3,7 +3,7 @@ class MovableObjects extends DrawableObjects {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 0.12;
+    acceleration = 3;
     energy = 100;
     lastHit = 0;
 
@@ -11,9 +11,9 @@ class MovableObjects extends DrawableObjects {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
-                this.speedY -= this.acceleration * 0.5;
+                this.speedY -= this.acceleration;
             }
-        }), 1000/25;
+        }, 1000/25);
     };
 
     isAboveGround(){
@@ -45,7 +45,7 @@ class MovableObjects extends DrawableObjects {
     };
 
     jump(){
-        this.speedY = 5;
+        this.speedY = 30;
         this.lastActionTime = new Date().getTime();
     };
 
@@ -62,6 +62,10 @@ class MovableObjects extends DrawableObjects {
         let timepassed = new Date().getTime() - this.lastHit; //Difference in Milliseconds
         timepassed = timepassed / 1000; //Difference in Seconds
         return timepassed < 1;
+    };
+
+    isDead() {
+        return this.energy == 0;
     };
 
     isColliding(mo){

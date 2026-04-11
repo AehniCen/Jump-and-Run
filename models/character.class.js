@@ -96,24 +96,32 @@ class Character extends MovableObjects {
         this.currentImage = 0;
         this.currentAnimation = images;
     }
-
     if (this.currentImage < images.length) {
         let path = images[this.currentImage];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }   else {
+        let lastImage = images[images.length - 1];
+        this.img = this.imageCache[lastImage];
     }
     };
+
+    playDyingAnimation(images) {
+        this.speedY = 6;        // kleiner Impuls nach oben
+        this.acceleration = 1.8;
+        this.playAnimationOnce(images);
+    }
 
     getMovementIntervall(){
         setInterval(() => {
             this.lastY = this.y;
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
                 this.moveRight();
             }
-            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused) {
+            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused && !this.isHurt() && !this.isDead()) {
                 this.moveLeft();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused && !this.isDead()) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
@@ -121,20 +129,32 @@ class Character extends MovableObjects {
         
     };
 
+    getDyingAnimation(){
+        setInterval(() => {
+            if (this.isDead() && !this.world.paused) {
+                this.playDyingAnimation(this.IMAGES_DYING);
+            }
+        }, 1000/30)
+    }
+
     getConditionIntervall(){
         setInterval(() => {
-            if (this.isAboveGround() && !this.world.paused) {
+            if (this.isAboveGround() && !this.world.paused && !this.isHurt()) {
                 if (this.speedY > 0)  {
                     this.playAnimationOnce(this.IMAGES_JUMPING_UP);
                 } else if (this.speedY < 0 && !this.world.paused) {
                     this.playAnimationOnce(this.IMAGES_JUMPING_DOWN);
                 }
-            } else if (this.world.keyboard.RIGHT && !this.world.paused || this.world.keyboard.LEFT && !this.world.paused) {
+            } else if (this.world.keyboard.RIGHT && !this.world.paused && !this.isHurt()  && !this.isDead() || this.world.keyboard.LEFT && !this.world.paused && !this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isHurt() && !this.world.paused) {
-                this.playAnimation(this.IMAGES_HURTING);
+            } else if (this.world.keyboard.RIGHT && !this.world.paused && this.isHurt() && !this.isDead() || this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead()) {
+                this.playAnimationOnce(this.IMAGES_HURTING);
+            } else if (this.isHurt() && !this.world.paused && !this.isDead()) {
+                this.playAnimationOnce(this.IMAGES_HURTING);
+            } else if (this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
+                this.playAnimationOnce(this.IMAGES_HURTING);
             }
-        }, 70);
+        }, 120);
     };
 
     getIdleModeIntervall(){
@@ -155,6 +175,7 @@ class Character extends MovableObjects {
     animate(){
         if (this.paused) return;
         this.getMovementIntervall();
+        this.getDyingAnimation();
         this.getConditionIntervall();
         this.getIdleModeIntervall();
     };
