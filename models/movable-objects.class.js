@@ -72,7 +72,7 @@ class MovableObjects extends DrawableObjects {
     }
 
     hit(){
-        this.energy -= 5;
+        this.energy -= this.damage;
         if (this.energy < 0) {
             this.energy = 0
         } else {
@@ -100,7 +100,6 @@ class MovableObjects extends DrawableObjects {
     isAttacking(mo) {
     return this.x + this.width > mo.x &&
            this.x < mo.x + mo.width &&
-           this.lastY + this.height <= mo.y && // war vorher darüber
            this.y + this.height >= mo.y &&     // jetzt berührt er ihn
            this.speedY > 0;
 }

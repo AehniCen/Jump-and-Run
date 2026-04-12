@@ -67,6 +67,7 @@ class Character extends MovableObjects {
     speed = 15;
     lastActionTime = new Date().getTime();
     idleMode = false;
+    damage = 5;
 
 
     constructor(){
@@ -98,7 +99,6 @@ class Character extends MovableObjects {
 
     getMovementIntervall(){
         this.movementIntervall = setInterval(() => {
-            this.lastY = this.y;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
                 this.moveRight();
             }
@@ -135,7 +135,7 @@ class Character extends MovableObjects {
                     this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead() ||
                     this.isHurt() && !this.world.paused && !this.isDead() ||
                     this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_HURTING);
+                this.playAnimationOnce(this.IMAGES_HURTING);                
             }
         }, 120);
     };
@@ -143,20 +143,19 @@ class Character extends MovableObjects {
     getIdleModeIntervall(){
         this.idleModeIntervall = setInterval(() => {
             let timePassed = (new Date().getTime() - this.lastActionTime) / 1000;
-            if(this.idleMode === true && !this.world.paused){
+            if(this.idleMode = true && !this.world.paused){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
-            if(this.idleMode === true && timePassed > 1  && !this.world.paused){
+            if(this.idleMode = true && timePassed > 1  && !this.world.paused){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode === true && timePassed > 10 && !this.world.paused){
+            if(this.idleMode = true && timePassed > 10 && !this.world.paused){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }
         }, 1000/4)
     };
 
     animate(){
-        if (this.paused) return;
         this.getMovementIntervall();
         this.getDyingAnimation();
         this.getConditionIntervall();

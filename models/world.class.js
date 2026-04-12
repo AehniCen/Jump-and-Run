@@ -113,8 +113,11 @@ class World {
     checkCollisions(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
+                this.character.damage = 5;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+                console.log('character hp', this.character.energy);
+                
             }
         })
         this.level.coins.forEach((coin) => {
@@ -126,8 +129,9 @@ class World {
         })
         this.level.enemies.forEach((enemy) => {
             if (this.character.isAttacking(enemy)) {
+                enemy.damage = 100;
                 enemy.hit();
-                console.log(enemy.energy);
+                console.log('enemy hp',enemy.energy);
                 
             }
         })
