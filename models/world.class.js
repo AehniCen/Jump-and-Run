@@ -60,22 +60,13 @@ class World {
     };
 
     restart() {
-    // Character neu erstellen
+        this.character.stopIntervals(); 
         this.character = new Character();
-        this.character.world = this;
-        
-        // Level zurücksetzen (GANZ wichtig!)
-        this.level.restartLevel(); // oder besser: createLevel1()
-        
-        // Arrays leeren
+        this.level.restartLevel();
         this.throwableObjects = [];
-        
-        // UI zurücksetzen
         this.statusBar.setPercentage(100);
         this.coinDisplay.value = 0;
-        this.bottleDisplay.value = 0;
-        
-        // Coins & Enemies neu verbinden
+        this.bottleDisplay.value = 20;
         this.setWorld();
 }
 
