@@ -91,24 +91,8 @@ class Character extends MovableObjects {
         }
     };
 
-    playAnimationOnce(images) {
-    if (this.currentAnimation !== images) {
-        this.currentImage = 0;
-        this.currentAnimation = images;
-    }
-    if (this.currentImage < images.length) {
-        let path = images[this.currentImage];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }   else {
-        let lastImage = images[images.length - 1];
-        this.img = this.imageCache[lastImage];
-    }
-    };
-
     playDyingAnimation(images) {
-        this.speedY = 6;        // kleiner Impuls nach oben
-        this.acceleration = 1.8;
+        this.dying();
         this.playAnimationOnce(images);
     }
 
@@ -147,11 +131,10 @@ class Character extends MovableObjects {
                 }
             } else if (this.world.keyboard.RIGHT && !this.world.paused && !this.isHurt()  && !this.isDead() || this.world.keyboard.LEFT && !this.world.paused && !this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.world.keyboard.RIGHT && !this.world.paused && this.isHurt() && !this.isDead() || this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_HURTING);
-            } else if (this.isHurt() && !this.world.paused && !this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_HURTING);
-            } else if (this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
+            } else if (this.world.keyboard.RIGHT && !this.world.paused && this.isHurt() && !this.isDead() || 
+                    this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead() ||
+                    this.isHurt() && !this.world.paused && !this.isDead() ||
+                    this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
                 this.playAnimationOnce(this.IMAGES_HURTING);
             }
         }, 120);

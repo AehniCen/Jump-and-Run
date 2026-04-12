@@ -15,6 +15,26 @@ function startGame() {
     world.paused = false;
     };
 
+function backToGame() {
+    if (pauseMenu.style.display = 'block') {
+        pauseMenu.style.display = 'none';
+        world.paused = false;
+    }
+}
+
+function restartGame() {
+    world.restart();
+    pauseMenu.style.display = 'none';
+    world.paused = false;
+}
+
+function backToStartMenu() {
+    world.restart();
+    world.paused = true;
+    pauseMenu.style.display = 'none';
+    startMenu.style.display = 'flex'  
+}
+
 window.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowRight') {
         keyboard.RIGHT = true;    
@@ -44,7 +64,6 @@ window.addEventListener('keydown', (e) => {
         world.paused = false;
         pauseMenu.style.display = 'none';
     };    
-    console.log(keyboard.ESC);
     
 })
 

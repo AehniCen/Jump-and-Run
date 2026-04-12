@@ -6,6 +6,7 @@ class MovableObjects extends DrawableObjects {
     acceleration = 3;
     energy = 100;
     lastHit = 0;
+    currentImage = 0;
 
     applyGravity(){
         setInterval(() => {
@@ -32,6 +33,21 @@ class MovableObjects extends DrawableObjects {
         this.currentImage++;
     };
 
+    playAnimationOnce(images) {
+        if (this.currentAnimation !== images) {
+            this.currentImage = 0;
+            this.currentAnimation = images;
+        }
+        if (this.currentImage < images.length) {
+            let path = images[this.currentImage];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        } else if (this.currentImage >= images.length) {
+            let lastImage = images[images.length - 1];
+            this.img = this.imageCache[lastImage];
+        }
+    };
+
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
@@ -48,6 +64,12 @@ class MovableObjects extends DrawableObjects {
         this.speedY = 30;
         this.lastActionTime = new Date().getTime();
     };
+
+    dying(){
+        this.speedY = 20;
+        this.acceleration = 6;
+        this.lastActionTime = new Date().getTime();
+    }
 
     hit(){
         this.energy -= 5;
