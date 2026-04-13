@@ -36,7 +36,7 @@ class Chicken extends MovableObjects {
     };
 
     getDeadImage() {
-        if (!this.world.paused && this.isDead()) {
+        if (this.isDead() && !this.world.paused) { 
             this.loadImage('assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
         }
     };

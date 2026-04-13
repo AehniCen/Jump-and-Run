@@ -92,11 +92,6 @@ class Character extends MovableObjects {
         }
     };
 
-    playDyingAnimation(images) {
-        this.dying();
-        this.playAnimationOnce(images);
-    }
-
     getMovementIntervall(){
         this.movementIntervall = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
@@ -116,9 +111,10 @@ class Character extends MovableObjects {
     getDyingAnimation(){
         this.dyingIntervall = setInterval(() => {
             if (this.isDead() && !this.world.paused) {
-                this.playDyingAnimation(this.IMAGES_DYING);
+                this.dying();
+                this.playAnimationOnce(this.IMAGES_DYING);
             }
-        }, 1000/30)
+        }, 1000 / 7)
     }
 
     getConditionIntervall(){
@@ -143,13 +139,13 @@ class Character extends MovableObjects {
     getIdleModeIntervall(){
         this.idleModeIntervall = setInterval(() => {
             let timePassed = (new Date().getTime() - this.lastActionTime) / 1000;
-            if(this.idleMode = true && !this.world.paused){
+            if(this.idleMode = true && !this.world.paused && !this.isDead()){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
-            if(this.idleMode = true && timePassed > 1  && !this.world.paused){
+            if(this.idleMode = true && timePassed > 1  && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode = true && timePassed > 10 && !this.world.paused){
+            if(this.idleMode = true && timePassed > 10 && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }
         }, 1000/4)

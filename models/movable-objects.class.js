@@ -8,13 +8,20 @@ class MovableObjects extends DrawableObjects {
     lastHit = 0;
     currentImage = 0;
 
-    applyGravity(){
+    applyGravity() {
+        const maxHeight = -150;
+
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY;
+                if (this.y - this.speedY < maxHeight) {
+                    this.y = maxHeight;
+                    this.speedY = 0;
+                } else {
+                    this.y -= this.speedY;
+                }
                 this.speedY -= this.acceleration;
             }
-        }, 1000/25);
+        }, 1000 / 25);
     };
 
     isAboveGround(){
@@ -23,8 +30,7 @@ class MovableObjects extends DrawableObjects {
         } else {
         return this.y < 115;
         };
-    }
-
+    };
 
     playAnimation(images){
         let i = this.currentImage % images.length; // let i = 0 % (mathematische Rest) 6; => 0, Rest  0
@@ -66,10 +72,12 @@ class MovableObjects extends DrawableObjects {
     };
 
     dying(){
-        this.speedY = 20;
-        this.acceleration = 6;
-        this.lastActionTime = new Date().getTime();
+    if (!this.isDyingStarted) {
+        this.speedY = 40;
+        this.acceleration = 5;
+        this.isDyingStarted = true;
     }
+}
 
     hit(){
         this.energy -= this.damage;
