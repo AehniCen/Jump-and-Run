@@ -108,9 +108,9 @@ class MovableObjects extends DrawableObjects {
     isAttacking(mo) {
     return this.x + this.width > mo.x &&
            this.x < mo.x + mo.width &&
-           this.y + this.height >= mo.y &&     // jetzt berührt er ihn
-           this.speedY > 0;
-}
+           this.y + this.height <= mo.y + 60 &&     // jetzt berührt er ihn
+           this.speedY < -12;
+    };
 
     collectCoins(coin) {
         coin.x -= this.speed;
