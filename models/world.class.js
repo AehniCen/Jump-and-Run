@@ -104,11 +104,15 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
+            if (this.character.isDeadAnimationFinished) {
+                this.paused = true;
+                document.getElementById('pause-div').style.display = 'block';
+            };
             this.level.coins.forEach(coin => {
                 coin.update();
             });
          }, 200);
-    }
+    };
 
     checkCollisions(){
         this.level.enemies.forEach((enemy) => {
@@ -116,9 +120,13 @@ class World {
                 this.character.damage = 5;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                console.log('character hp', this.character.energy);
-                
-            }
+                console.log('character hp', this.character.energy); 
+            } else if (this.character.isAttacking(enemy)) {
+                enemy.damage = 100;
+                enemy.hit();
+                enemy.getDeadImage();
+                console.log('enemy hp',enemy.energy);
+            };
         })
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin) && !coin.isCollected) {
@@ -127,14 +135,14 @@ class World {
                 this.coinDisplay.updateNumber();
             }
         })
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isAttacking(enemy)) {
-                enemy.damage = 100;
-                enemy.hit();
-                enemy.getDeadImage();
-                console.log('enemy hp',enemy.energy);
-                
-            }
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (bottle.isColliding(enemy) && !enemy.isDead()) {
+                    enemy.damage = 100;
+                    enemy.hit();
+                    enemy.getDeadImage();
+                }
+            })
         })
     };
 

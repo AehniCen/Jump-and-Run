@@ -58,7 +58,10 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-56.png',
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
-   
+    IMAGES_GAME_OVER = [
+
+    ];
+    
     y = 80;
     height = 320;
     width = 200;
@@ -67,7 +70,14 @@ class Character extends MovableObjects {
     speed = 15;
     lastActionTime = new Date().getTime();
     idleMode = false;
+    isLanding = false;
     damage = 5;
+    isDeadAnimationFinished = false;
+    walkingSound = new Audio('assets/audio/desert-footsteps.mp3');
+    landingSound = new Audio('assets/audio/jump-landing.mp3');
+    jumpingSound = new Audio('assets/audio/jump-noise.mp3');
+    
+
 
 
     constructor(){
@@ -92,6 +102,45 @@ class Character extends MovableObjects {
         }
     };
 
+    checkLanding(){
+        if (this.isAboveGround()) {
+            this.isLanding = true;
+        } else {
+            if(this.isLanding) {
+            this.playLandingSound();
+            this.isLanding = false;
+            }
+        }
+    };
+
+    playWalkingSound() {
+        if (this.walkingSound.paused) {
+            this.walkingSound.playbackRate = 2;
+            this.walkingSound.volume = 0.5;
+            this.walkingSound.currentTime = 1;
+            this.walkingSound.play();
+        }
+    };
+
+    pauseWalkingSound() {
+        this.walkingSound.pause();
+    };
+
+    playJumpingSound(){
+        this.jumpingSound.playbackRate = 2;
+        this.jumpingSound.volume = 0.1;
+        this.jumpingSound.currentTime = 0;
+        this.jumpingSound.play();
+    };
+
+    playLandingSound(){
+        if (this.landingSound.paused && !this.world.paused) {
+            this.landingSound.playbackRate = 1;
+            this.landingSound.currentTime = 0;
+            this.landingSound.play();
+        }
+    }
+
     getMovementIntervall(){
         this.movementIntervall = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
@@ -102,6 +151,11 @@ class Character extends MovableObjects {
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused && !this.isDead()) {
                 this.jump();
+                this.pauseWalkingSound();
+                this.playJumpingSound();
+            }
+            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+                this.pauseWalkingSound();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000/30);
@@ -119,7 +173,9 @@ class Character extends MovableObjects {
 
     getConditionIntervall(){
         this.conditionIntervall = setInterval(() => {
+            this.checkLanding();
             if (this.isAboveGround() && !this.world.paused && !this.isHurt()) {
+
                 if (this.speedY > 0)  {
                     this.playAnimationOnce(this.IMAGES_JUMPING_UP);
                 } else if (this.speedY < 0 && !this.world.paused) {
@@ -127,6 +183,7 @@ class Character extends MovableObjects {
                 }
             } else if (this.world.keyboard.RIGHT && !this.world.paused && !this.isHurt()  && !this.isDead() || this.world.keyboard.LEFT && !this.world.paused && !this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
+                this.playWalkingSound();
             } else if (this.world.keyboard.RIGHT && !this.world.paused && this.isHurt() && !this.isDead() || 
                     this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead() ||
                     this.isHurt() && !this.world.paused && !this.isDead() ||
@@ -150,6 +207,14 @@ class Character extends MovableObjects {
             }
         }, 1000/4)
     };
+
+    playCharacterWalkingAudio(){
+        this.audioIntervall = setInterval(() => {
+            if (this.moveLeft() || this.moveRight()) {
+                this.play(this.AUDIO_WALKING);
+            }
+        })
+    }
 
     animate(){
         this.getMovementIntervall();

@@ -5,6 +5,8 @@ class ThrowableObjects extends MovableObjects {
         'assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
         'assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ]
+    width = 80;
+    height = 80;
 
     constructor(x, y){
         super().loadImage('assets/img/6_salsa_bottle/salsa_bottle.png');
@@ -14,10 +16,10 @@ class ThrowableObjects extends MovableObjects {
     }
 
     throw(){
-        this.speedY = 5;
+        this.speedY = 30;
         this.applyGravity();
         setInterval( () => {
-            this.x += 15;
+            this.x += 10;
         }, 25)
     }
 }

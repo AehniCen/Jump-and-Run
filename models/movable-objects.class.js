@@ -51,6 +51,9 @@ class MovableObjects extends DrawableObjects {
         } else if (this.currentImage >= images.length) {
             let lastImage = images[images.length - 1];
             this.img = this.imageCache[lastImage];
+            if (images === this.IMAGES_DYING) {
+                this.isDeadAnimationFinished = true;
+            }
         }
     };
 
