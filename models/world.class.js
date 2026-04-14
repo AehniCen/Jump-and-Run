@@ -11,6 +11,7 @@ class World {
     throwableObjects = [];
     camera_x = 0;
     paused = true;
+    worldMusic = new Audio('assets/audio/level-music.mp3');
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -102,6 +103,7 @@ class World {
 
     run(){
         setInterval(() => {
+            this.playWorldMusic();
             this.checkCollisions();
             this.checkThrowableObjects();
             if (this.character.isDeadAnimationFinished) {
@@ -114,6 +116,15 @@ class World {
          }, 200);
     };
 
+    playWorldMusic(){
+        if (!this.paused) {
+            this.worldMusic.play();
+            this.worldMusic.volume = 0.7;
+        } else {
+            this.worldMusic.pause();
+        }
+    };
+
     checkCollisions(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy)) {
@@ -121,7 +132,7 @@ class World {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 
-            } else if (this.character.isAttacking(enemy)) {
+            } else if (this.character.isAttacking(enemy) && !this.character.isHurt()) {
                 enemy.damage = 100;
                 enemy.hit();
                 enemy.getDeadImage();

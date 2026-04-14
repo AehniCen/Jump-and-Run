@@ -73,9 +73,11 @@ class Character extends MovableObjects {
     isLanding = false;
     damage = 5;
     isDeadAnimationFinished = false;
+    isAlreadyHurt = false;
     walkingSound = new Audio('assets/audio/desert-footsteps.mp3');
     landingSound = new Audio('assets/audio/jump-landing.mp3');
     jumpingSound = new Audio('assets/audio/jump-noise.mp3');
+    hurtingSound = new Audio('assets/audio/hurt.mp3');
     
 
 
@@ -121,6 +123,19 @@ class Character extends MovableObjects {
             this.walkingSound.play();
         }
     };
+
+    playHurtingSound() {
+    let now = new Date().getTime();
+
+    if (!this.lastSoundPlayed || now - this.lastSoundPlayed > 1000) {
+        this.hurtingSound.currentTime = 0;
+        this.hurtingSound.playbackRate = 2;
+        this.hurtingSound.volume = 0.2;
+        this.hurtingSound.play();
+        this.lastSoundPlayed = now;
+    }
+}
+
 
     pauseWalkingSound() {
         this.walkingSound.pause();
@@ -188,7 +203,8 @@ class Character extends MovableObjects {
                     this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead() ||
                     this.isHurt() && !this.world.paused && !this.isDead() ||
                     this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_HURTING);                
+                this.playAnimationOnce(this.IMAGES_HURTING);     
+                this.playHurtingSound();          
             }
         }, 120);
     };
@@ -196,7 +212,7 @@ class Character extends MovableObjects {
     getIdleModeIntervall(){
         this.idleModeIntervall = setInterval(() => {
             let timePassed = (new Date().getTime() - this.lastActionTime) / 1000;
-            if(this.idleMode = true && !this.world.paused && !this.isDead()){
+            if(this.idleMode = true && !this.world.paused && !this.isDead() && !this.isHurt()){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
             if(this.idleMode = true && timePassed > 1  && !this.world.paused && !this.isDead()){
