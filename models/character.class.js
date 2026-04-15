@@ -58,9 +58,6 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-56.png',
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
-    IMAGES_GAME_OVER = [
-
-    ];
     
     y = 80;
     height = 320;
@@ -72,7 +69,7 @@ class Character extends MovableObjects {
     idleMode = false;
     isLanding = false;
     damage = 5;
-    isDeadAnimationFinished = false;
+    state = 'playing';
     isAlreadyHurt = false;
     walkingSound = new Audio('assets/audio/desert-footsteps.mp3');
     landingSound = new Audio('assets/audio/jump-landing.mp3');
@@ -180,6 +177,7 @@ class Character extends MovableObjects {
     getDyingAnimation(){
         this.dyingIntervall = setInterval(() => {
             if (this.isDead() && !this.world.paused) {
+                this.state = 'dying';
                 this.dying();
                 this.playAnimationOnce(this.IMAGES_DYING);
             }
@@ -212,13 +210,13 @@ class Character extends MovableObjects {
     getIdleModeIntervall(){
         this.idleModeIntervall = setInterval(() => {
             let timePassed = (new Date().getTime() - this.lastActionTime) / 1000;
-            if(this.idleMode = true && !this.world.paused && !this.isDead() && !this.isHurt()){
+            if(this.idleMode && !this.world.paused && !this.isDead() && !this.isHurt()){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
-            if(this.idleMode = true && timePassed > 1  && !this.world.paused && !this.isDead()){
+            if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode = true && timePassed > 10 && !this.world.paused && !this.isDead()){
+            if(this.idleMode && timePassed > 10 && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }
         }, 1000/4)

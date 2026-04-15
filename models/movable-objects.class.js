@@ -54,6 +54,9 @@ class MovableObjects extends DrawableObjects {
             if (images === this.IMAGES_DYING) {
                 this.isDeadAnimationFinished = true;
             }
+            if (images === this.IMAGES_ENDSCREEN_GAMEOVER) {
+                this.isGameOverAnimationFinished = true;
+            }
         }
     };
 

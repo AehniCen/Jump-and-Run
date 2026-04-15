@@ -12,6 +12,8 @@ class World {
     camera_x = 0;
     paused = true;
     worldMusic = new Audio('assets/audio/level-music.mp3');
+    endscreen = new Endscreen();
+    gameOver = false;
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -45,6 +47,11 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.coins);
+
+        if (this.gameOver) {
+            this.endscreen.update();
+            this.addToMap(this.endscreen);
+        }
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
@@ -106,15 +113,27 @@ class World {
             this.playWorldMusic();
             this.checkCollisions();
             this.checkThrowableObjects();
-            if (this.character.isDeadAnimationFinished) {
-                this.paused = true;
-                document.getElementById('pause-div').style.display = 'block';
-            };
+            this.checkCharacterState();
             this.level.coins.forEach(coin => {
                 coin.update();
             });
          }, 200);
     };
+
+    checkCharacterState(){
+        if (this.character.state === 'dying') {
+            if (this.character.isDeadAnimationFinished) {
+                this.character.state = 'gameover'
+            }
+        };
+        if (this.character.state === 'gameover') {
+            this.gameOver = true;
+        }
+        if (this.character.state === 'gameover' && this.endscreen.animationFinished) {
+            this.paused = true;
+            document.getElementById('pause-div').style.display = 'block';
+        }
+    }
 
     playWorldMusic(){
         if (!this.paused) {
@@ -128,7 +147,7 @@ class World {
     checkCollisions(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy)) {
-                this.character.damage = 5;
+                this.character.damage = 50;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 
