@@ -14,6 +14,7 @@ class World {
     worldMusic = new Audio('assets/audio/level-music.mp3');
     endscreen = new Endscreen();
     gameOver = false;
+    endscreenDiv = document.getElementById('endscreen-div');
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -43,20 +44,23 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.coins);
-
-        if (this.gameOver) {
+        if (!this.gameOver) {
+            this.addObjectsToMap(this.throwableObjects);
+            this.addObjectsToMap(this.level.enemies);
+            this.addToMap(this.character);
+            this.addObjectsToMap(this.level.coins);
+            this.ctx.translate(-this.camera_x, 0);
+            this.addToMap(this.statusBar);
+            this.addToMap(this.coinDisplay);
+            this.addToMap(this.bottleDisplay);
+            this.ctx.translate(this.camera_x, 0);
+        }
+        
+        this.ctx.translate(-this.camera_x, 0);
+        if (this.gameOver && this.endscreenDiv.style.display === 'none') {
             this.endscreen.update();
             this.addToMap(this.endscreen);
         }
-
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.coinDisplay);
-        this.addToMap(this.bottleDisplay);
         this.ctx.translate(this.camera_x, 0);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -70,6 +74,8 @@ class World {
     restart() {
         this.character.stopIntervals(); 
         this.character = new Character();
+        this.endscreen = new Endscreen();
+        this.gameOver = false;
         this.level.restartLevel();
         this.throwableObjects = [];
         this.statusBar.setPercentage(100);
@@ -126,12 +132,14 @@ class World {
                 this.character.state = 'gameover'
             }
         };
-        if (this.character.state === 'gameover') {
+        if (this.character.state === 'gameover' && !this.endscreen.started) {
             this.gameOver = true;
+            this.endscreen.getStartTime();
+            this.endscreen.started = true;
         }
         if (this.character.state === 'gameover' && this.endscreen.animationFinished) {
             this.paused = true;
-            document.getElementById('pause-div').style.display = 'block';
+            document.getElementById('endscreen-div').style.display = 'flex';
         }
     }
 
@@ -146,7 +154,7 @@ class World {
 
     checkCollisions(){
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy)) {
+            if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead()) {
                 this.character.damage = 50;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);

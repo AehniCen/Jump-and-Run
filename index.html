@@ -36,10 +36,24 @@
     <div id="pause-div" style="display: none;">
         <p>Pause</p>
         <div id="pause-btns">
-            <button onclick="backToGame()">Back To Game</button>
-            <button onclick="restartGame()">Restart</button>
-            <button onclick="backToStartMenu()">Back To Start Menu</button>
+            <button class="menu-btns" onclick="backToGame()">Back To Game</button>
+            <button id="restart-btn" class="menu-btns" onclick="restartGame()">
+                <img id="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
+            </button>
+            <button id="start-menu-btn" class="menu-btns" onclick="backToStartMenu()">
+                <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
+            </button>
         </div>
+    </div>
+
+    <div id="endscreen-div" style="display: none;">
+        <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
+        <button id="restart-btn" class="menu-btns" onclick="restartGame()">
+            <img id="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
+        </button>
+        <button id="start-menu-btn" class="menu-btns" onclick="backToStartMenu()">
+            <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
+        </button>
     </div>
     
     <canvas id="canvas" width="720" height="480">
