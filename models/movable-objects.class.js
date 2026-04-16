@@ -57,6 +57,11 @@ class MovableObjects extends DrawableObjects {
             if (images === this.IMAGES_ENDSCREEN_GAMEOVER) {
                 this.isGameOverAnimationFinished = true;
             }
+            if (images === this.IMAGES_ALERT) {
+                this.alertAnimationFinished = true;
+                console.log(this.alertAnimationFinished);
+                
+            }
         }
     };
 
