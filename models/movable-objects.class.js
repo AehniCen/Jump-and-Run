@@ -26,7 +26,7 @@ class MovableObjects extends DrawableObjects {
 
     isAboveGround(){
         if (this instanceof ThrowableObjects) {
-            return true;
+            return this.y < 335;
         } else {
         return this.y < 115;
         };
@@ -58,9 +58,16 @@ class MovableObjects extends DrawableObjects {
                 this.isGameOverAnimationFinished = true;
             }
             if (images === this.IMAGES_ALERT) {
-                this.alertAnimationFinished = true;
-                console.log(this.alertAnimationFinished);
-                
+                this.alertAnimationFinished = true;    
+            }
+            if (images === this.IMAGES_SPLASH) {
+                this.splashAnimationFinished = true;
+            }
+            if (images === this.IMAGES_ATTACKING) {
+                this.attackingAnimationFinished = true;
+            }
+            if (images === this.IMAGES_ATTACKING_JUMP) {
+                this.attackingJumpAnimationFinished = true;
             }
         }
     };

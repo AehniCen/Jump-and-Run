@@ -55,11 +55,13 @@ class Chicken extends MovableObjects {
     };
 
     playWalkingSound(){
-        if (this.walkingSound.paused) {
+        if (this.walkingSound.paused && !this.world.paused) {
             this.walkingSound.playbackRate = 1;
             this.walkingSound.volume = 0.2;
             this.walkingSound.currentTime = 0;
             this.walkingSound.play();
+        } else {
+            this.walkingSound.pause();
         }
     };
 

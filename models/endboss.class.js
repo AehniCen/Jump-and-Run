@@ -21,11 +21,13 @@ class Endboss extends MovableObjects {
         'assets/img/4_enemie_boss_chicken/3_attack/G14.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G15.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G16.png',
-        'assets/img/4_enemie_boss_chicken/3_attack/G17.png',
+        'assets/img/4_enemie_boss_chicken/3_attack/G17.png'
+    ];
+    IMAGES_ATTACKING_JUMP = [
         'assets/img/4_enemie_boss_chicken/3_attack/G18.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G19.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G20.png'
-    ];
+    ]
     IMAGES_HURTING = [
         'assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
         'assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
@@ -43,30 +45,68 @@ class Endboss extends MovableObjects {
     x = 300;
     speed = 15;
     world;
+    currentImage;
     isAlerted = false;
     alertAnimationFinished = false;
+    attackingAnimationFinished = false;
+    attackingJumpAnimationFinished = false;
+    state = 'alert';
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACKING);
+        this.loadImages(this.IMAGES_ATTACKING_JUMP);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_WALKING);
-        this.animate();
     }
 
     animate(){
         setInterval (() => {
-            if (!this.world.paused) {
-                this.playAnimationOnce(this.IMAGES_ALERT); 
-            } 
-            if (!this.world.paused && this.alertAnimationFinished) {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft();
-                this.otherDirection = false;
-            }
-        }, 1000 / 2)
-    }
+            if (this.world.paused) return;
 
+            switch (this.state) {
+                case 'alert':
+                    this.playAnimationOnce(this.IMAGES_ALERT);
+                    if (this.alertAnimationFinished) {
+                        this.setState('walk');
+                    }
+                    break;
+                
+                case 'walk':
+                    this.playAnimation(this.IMAGES_WALKING);
+                    this.moveLeft();
+                    this.otherDirection = false;
+                    break;
+                
+                case 'attack':
+                    this.playAnimationOnce(this.IMAGES_ATTACKING);
+                    if (this.attackingAnimationFinished) {
+                        this.setState('jump');
+                    }
+                    break;
+
+                case 'jump':
+                    console.log('JUMP STATE');
+                    this.playAnimationOnce(this.IMAGES_ATTACKING_JUMP);
+                    if (this.attackingJumpAnimationFinished) {
+                        this.setState('walk');
+                    }
+                    break;
+            }
+        }, 1000 / 6)
+    };
+
+
+    setState(newState) {
+        this.state = newState;
+
+        this.alertAnimationFinished = false;
+        this.attackingAnimationFinished = false;
+        this.attackingJumpAnimationFinished = false;
+
+        this.currentImage = 0;
+        this.currentAnimation = null;
+    }
 }

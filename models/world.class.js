@@ -36,16 +36,18 @@ class World {
             enemy.world = this;
             enemy.animate();
         });
+        this.level.boss.world = this;
+        this.level.boss.animate();
     };
 
-    draw(){
+    draw(){;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
         if (!this.gameOver) {
-            this.addObjectsToMap(this.throwableObjects);
             this.addObjectsToMap(this.level.enemies);
+            this.addToMap(this.level.boss);
             this.addToMap(this.character);
             this.addObjectsToMap(this.level.coins);
             this.ctx.translate(-this.camera_x, 0);
@@ -53,6 +55,11 @@ class World {
             this.addToMap(this.coinDisplay);
             this.addToMap(this.bottleDisplay);
             this.ctx.translate(this.camera_x, 0);
+            this.throwableObjects.forEach((to) => {
+            if (!to.splashAnimationFinished) {
+                this.addToMap(to)
+            }
+            })
         }
         
         this.ctx.translate(-this.camera_x, 0);
@@ -165,6 +172,10 @@ class World {
                 console.log('enemy hp',enemy.energy);
             };
         })
+        const boss = this.level.boss;
+        if (this.character.isColliding(boss)) {
+            boss.state = 'attack';
+        }
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin) && !coin.isCollected) {
                 coin.isCollected = true;
@@ -174,10 +185,11 @@ class World {
         })
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy) && !enemy.isDead()) {
+                if (bottle.isColliding(enemy) && !enemy.isDead() && !bottle.splashAnimationFinished && !this.gameOver) {
                     enemy.damage = 100;
                     enemy.hit();
                     enemy.getDeadImage();
+                    bottle.getSplashAnimation();
                 }
             })
         })
@@ -186,6 +198,8 @@ class World {
     checkThrowableObjects() {
         if(this.keyboard.KEYD && this.bottleDisplay.value > 0) {
             let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
+            bottle.world = this;
+            bottle.throw();
             this.throwableObjects.push(bottle);
             this.bottleDisplay.reduceNumber();
         }
