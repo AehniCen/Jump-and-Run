@@ -16,18 +16,18 @@ class Endboss extends MovableObjects {
         'assets/img/4_enemie_boss_chicken/1_walk/G3.png',
         'assets/img/4_enemie_boss_chicken/1_walk/G4.png'
     ];
-    IMAGES_ATTACKING = [
+    IMAGES_ATTACKING_BEGIN = [
         'assets/img/4_enemie_boss_chicken/3_attack/G13.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G14.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G15.png',
-        'assets/img/4_enemie_boss_chicken/3_attack/G16.png',
-        'assets/img/4_enemie_boss_chicken/3_attack/G17.png'
+        'assets/img/4_enemie_boss_chicken/3_attack/G16.png'
     ];
-    IMAGES_ATTACKING_JUMP = [
-        'assets/img/4_enemie_boss_chicken/3_attack/G18.png',
+    IMAGE_JUMP_UP = 'assets/img/4_enemie_boss_chicken/3_attack/G17.png';
+    IMAGE_JUMP_DOWN = 'assets/img/4_enemie_boss_chicken/3_attack/G18.png';
+    IMAGES_ATTACKING_END = [
         'assets/img/4_enemie_boss_chicken/3_attack/G19.png',
         'assets/img/4_enemie_boss_chicken/3_attack/G20.png'
-    ]
+    ];
     IMAGES_HURTING = [
         'assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
         'assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
@@ -54,12 +54,21 @@ class Endboss extends MovableObjects {
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
+        this.loadImages([
+            this.IMAGE_JUMP_UP,
+            this.IMAGE_JUMP_DOWN
+        ]);
         this.loadImages(this.IMAGES_ALERT);
-        this.loadImages(this.IMAGES_ATTACKING);
-        this.loadImages(this.IMAGES_ATTACKING_JUMP);
+        this.loadImages(this.IMAGES_ATTACKING_BEGIN);
+        this.loadImages(this.IMAGES_ATTACKING_END);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_WALKING);
+        this.applyGravity();
+    }
+
+    getMaxHeight(){
+        return -200;
     }
 
     animate(){
@@ -80,31 +89,76 @@ class Endboss extends MovableObjects {
                     this.otherDirection = false;
                     break;
                 
-                case 'attack':
-                    this.playAnimationOnce(this.IMAGES_ATTACKING);
-                    if (this.attackingAnimationFinished) {
-                        this.setState('jump');
+                case 'attack-begin':
+                    this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN);
+                    if (this.attackingBeginAnimationFinished) {
+                        this.setState('jump-up');
                     }
                     break;
 
-                case 'jump':
-                    console.log('JUMP STATE');
-                    this.playAnimationOnce(this.IMAGES_ATTACKING_JUMP);
-                    if (this.attackingJumpAnimationFinished) {
-                        this.setState('walk');
+                case 'jump-up':
+                    if (!this.isJumping) {
+                        this.isJumping = true;
+                        this.speedY = 20;
+                    }
+                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
+                    this.x += this.speed * 2
+                    if (this.speedY < 0) {
+                        this.speedY = 0; 
+                        this.gravityPaused = true;
+                        this.hoverStart = Date.now();
+                        this.setState('hover');
+                    }
+                    break;
+
+                case 'hover':
+                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
+                    console.log(this.img);
+                    
+                    if (Date.now() - this.hoverStart > 500) {
+                        this.gravityPaused = false;
+                        this.setState('jump-down');
+                    }
+                    break;
+
+                case 'jump-down':
+                    this.img = this.imageCache[this.IMAGE_JUMP_DOWN];
+                    this.x -= this.speed * 4;
+                    if (!this.isAboveGround()) {
+                        this.setState('jump-end');
+                    }
+                    break;
+
+                case 'jump-end':
+                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
+                    this.x -= this.speed * 2;
+                    if (!this.jumpEndStarted) {
+                        this.jumpEndStarted = Date.now();
+                    }
+                    if (Date.now() - this.jumpEndStarted > 300) {
+                        this.isJumping = false;
+                        this.jumpEndStarted = null;
+                        this.setState('attack-end');
+                    }
+                    break;
+
+                case 'attack-end':
+                    this.playAnimationOnce(this.IMAGES_ATTACKING_END);
+                    if (this.attackingEndAnimationFinished) {
+                        this.setState('walk')
                     }
                     break;
             }
         }, 1000 / 6)
     };
 
-
     setState(newState) {
         this.state = newState;
 
         this.alertAnimationFinished = false;
-        this.attackingAnimationFinished = false;
+        this.attackingBeginAnimationFinished = false;
         this.attackingJumpAnimationFinished = false;
+        this.attackingEndAnimationFinished = false;
 
         this.currentImage = 0;
         this.currentAnimation = null;

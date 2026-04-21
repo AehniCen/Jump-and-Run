@@ -173,9 +173,10 @@ class World {
             };
         })
         const boss = this.level.boss;
-        if (this.character.isColliding(boss)) {
-            boss.state = 'attack';
-        }
+        let distance = Math.abs(this.character.x - boss.x);
+        if (distance < 200 && boss.state === 'walk') {          
+            boss.setState('attack-begin');    
+            }
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin) && !coin.isCollected) {
                 coin.isCollected = true;

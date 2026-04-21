@@ -153,6 +153,10 @@ class Character extends MovableObjects {
         }
     }
 
+    getMaxHeight(){
+        return -150;
+    };
+
     getMovementIntervall(){
         this.movementIntervall = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {

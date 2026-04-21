@@ -7,14 +7,16 @@ class MovableObjects extends DrawableObjects {
     energy = 100;
     lastHit = 0;
     currentImage = 0;
+    gravityPaused = false;
 
     applyGravity() {
-        const maxHeight = -150;
 
         setInterval(() => {
+            if (this.gravityPaused) return;
+            let maxHeight = this.getMaxHeight();
             if (this.isAboveGround() || this.speedY > 0) {
                 if (this.y - this.speedY < maxHeight) {
-                    this.y = maxHeight;
+                    this.y = this.maxHeight;
                     this.speedY = 0;
                 } else {
                     this.y -= this.speedY;
@@ -27,7 +29,11 @@ class MovableObjects extends DrawableObjects {
     isAboveGround(){
         if (this instanceof ThrowableObjects) {
             return this.y < 335;
-        } else {
+        } 
+        if (this instanceof Endboss) {
+            return this.y < 50;
+        }
+        else {
         return this.y < 115;
         };
     };
@@ -63,11 +69,14 @@ class MovableObjects extends DrawableObjects {
             if (images === this.IMAGES_SPLASH) {
                 this.splashAnimationFinished = true;
             }
-            if (images === this.IMAGES_ATTACKING) {
-                this.attackingAnimationFinished = true;
+            if (images === this.IMAGES_ATTACKING_BEGIN) {
+                this.attackingBeginAnimationFinished = true;
             }
             if (images === this.IMAGES_ATTACKING_JUMP) {
                 this.attackingJumpAnimationFinished = true;
+            }
+                        if (images === this.IMAGES_ATTACKING_END) {
+                this.attackingEndAnimationFinished = true;
             }
         }
     };
