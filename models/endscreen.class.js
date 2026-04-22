@@ -7,6 +7,7 @@ class Endscreen extends MovableObjects {
     animationFinished = false;
     startTime;
     started = false;
+    world;
 
     IMAGES_ENDSCREEN_GAMEOVER = [
         'assets/img/winning_loosing/You_lost.png',
@@ -33,12 +34,20 @@ class Endscreen extends MovableObjects {
 
     update() {
         let timePassed = (new Date().getTime() - this.startTime) / 1000;
-
-        if (timePassed > 2 && this.currentStep === 0) {
-            this.img = this.imageCache[this.IMAGES_ENDSCREEN_GAMEOVER[1]];
+        if (timePassed < 2 && this.currentStep === 0) {
+            if (!this.world.winner) {
+                this.img = this.imageCache[this.IMAGES_ENDSCREEN_GAMEOVER[0]];
+            } else if (this.world.winner) {
+                this.img = this.imageCache[this.IMAGES_ENDSCREEN_WINNER[0]];
+            }
+        } else if (timePassed > 2 && this.currentStep === 0) {
+            if (!this.world.winner) {
+                this.img = this.imageCache[this.IMAGES_ENDSCREEN_GAMEOVER[1]];
+            } else if (this.world.winner) {
+                this.img = this.imageCache[this.IMAGES_ENDSCREEN_WINNER[1]];
+            }
             this.currentStep = 1;
         }
-
         if (timePassed > 4 && this.currentStep === 1) {
             this.animationFinished = true;
         }

@@ -14,6 +14,7 @@ class World {
     worldMusic = new Audio('assets/audio/level-music.mp3');
     endscreen = new Endscreen();
     gameOver = false;
+    winner = false;
     endscreenDiv = document.getElementById('endscreen-div');
 
     constructor(canvas, keyboard){
@@ -38,6 +39,7 @@ class World {
         });
         this.level.boss.world = this;
         this.level.boss.animate();
+        this.endscreen.world = this;
     };
 
     draw(){;
@@ -133,6 +135,11 @@ class World {
     };
 
     checkCharacterState(){
+        this.lostTheGame();
+        this.wonTheGame();
+    }
+
+    lostTheGame(){
         if (this.character.state === 'dying') {
             if (this.character.isDeadAnimationFinished) {
                 this.character.state = 'gameover'
@@ -144,6 +151,22 @@ class World {
             this.endscreen.started = true;
         }
         if (this.character.state === 'gameover' && this.endscreen.animationFinished) {
+            this.paused = true;
+            document.getElementById('endscreen-div').style.display = 'flex';
+        }
+    }
+
+    wonTheGame(){
+        if (this.level.boss.state === 'defeated') {
+            this.character.state = 'winner'
+        };
+        if (this.character.state === 'winner' && !this.endscreen.started) {
+            this.gameOver = true;
+            this.winner = true;
+            this.endscreen.getStartTime();
+            this.endscreen.started = true;
+        }
+        if (this.character.state === 'winner' && this.endscreen.animationFinished) {
             this.paused = true;
             document.getElementById('endscreen-div').style.display = 'flex';
         }
@@ -205,6 +228,7 @@ class World {
                 boss.hit();
                 console.log(boss.energy);
                 boss.setState('hurt');
+                bottle.getSplashAnimation();
             }
         })
     };

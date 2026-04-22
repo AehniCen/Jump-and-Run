@@ -60,27 +60,6 @@ class MovableObjects extends DrawableObjects {
             if (finishFlag) {
                 this[finishFlag] = true;
             }
-            if (images === this.IMAGES_ENDSCREEN_GAMEOVER) {
-                this.isGameOverAnimationFinished = true;
-            }
-            if (images === this.IMAGES_ALERT) {
-                this.alertAnimationFinished = true;    
-            }
-            if (images === this.IMAGES_SPLASH) {
-                this.splashAnimationFinished = true;
-            }
-            if (images === this.IMAGES_ATTACKING_BEGIN) {
-                this.attackingBeginAnimationFinished = true;
-            }
-            if (images === this.IMAGES_ATTACKING_JUMP) {
-                this.attackingJumpAnimationFinished = true;
-            }
-            if (images === this.IMAGES_ATTACKING_END) {
-                this.attackingEndAnimationFinished = true;
-            }
-            if (images === this.IMAGES_HURTING) {
-                this.hurtingAnimationFinished = true;
-            }
         }
     };
 

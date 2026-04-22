@@ -183,7 +183,7 @@ class Character extends MovableObjects {
             if (this.isDead() && !this.world.paused) {
                 this.state = 'dying';
                 this.dying();
-                this.playAnimationOnce(this.IMAGES_DYING);
+                this.playAnimationOnce(this.IMAGES_DYING, 'isDeadAnimationFinished');
             }
         }, 1000 / 7)
     }
@@ -205,7 +205,7 @@ class Character extends MovableObjects {
                     this.world.keyboard.LEFT && !this.world.paused && this.isHurt() && !this.isDead() ||
                     this.isHurt() && !this.world.paused && !this.isDead() ||
                     this.isAboveGround() && !this.world.paused && this.isHurt() && !this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_HURTING);     
+                this.playAnimationOnce(this.IMAGES_HURTING, 'hurtingAnimationFinished');     
                 this.playHurtingSound();          
             }
         }, 120);

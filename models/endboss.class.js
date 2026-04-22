@@ -163,13 +163,13 @@ class Endboss extends MovableObjects {
 
     getAlertAnimation(){
         this.playAnimationOnce(this.IMAGES_ALERT, 'alertAnimationFinished');
-        if (this.alertAnimationFinished) {
+        if (this.alertAnimationFinished) {            
             this.setState('walk');
         }
     };
 
     getHurtAnimation(){
-        this.playAnimationOnce(this.IMAGES_HURTING);
+        this.playAnimationOnce(this.IMAGES_HURTING, 'hurtingAnimationFinished');
         if (this.hurtingAnimationFinished && !this.isDead()) {
             this.setState('walk');
         } else if (this.isDead()){
@@ -178,14 +178,14 @@ class Endboss extends MovableObjects {
     };
 
     getAttackAnimation(){
-        this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN);
+        this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN, 'attackingBeginAnimationFinished');
         if (this.attackingBeginAnimationFinished) {
             this.setState('jump-up');
         }
     };
 
     getAttackEndAnimation(){
-        this.playAnimationOnce(this.IMAGES_ATTACKING_END);
+        this.playAnimationOnce(this.IMAGES_ATTACKING_END, 'attackingEndAnimationFinished');
         if (this.attackingEndAnimationFinished) {
             this.setState('walk')
         }
@@ -250,7 +250,6 @@ class Endboss extends MovableObjects {
 
     if (this.isDeadAnimationFinished) {
         this.setState('defeated');
-        console.log('STATE:', this.state);
     }
 }
 }
