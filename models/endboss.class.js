@@ -31,6 +31,12 @@ class Endboss extends MovableObjects {
     IMAGES_HURTING = [
         'assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
         'assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G23.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G23.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G21.png',
+        'assets/img/4_enemie_boss_chicken/4_hurt/G22.png',
         'assets/img/4_enemie_boss_chicken/4_hurt/G23.png'
     ];
     IMAGES_DYING = [
@@ -47,10 +53,9 @@ class Endboss extends MovableObjects {
     world;
     currentImage;
     isAlerted = false;
-    alertAnimationFinished = false;
-    attackingAnimationFinished = false;
-    attackingJumpAnimationFinished = false;
     state = 'alert';
+    damage = 34;
+    
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
@@ -68,7 +73,7 @@ class Endboss extends MovableObjects {
     }
 
     getMaxHeight(){
-        return -200;
+        return -100;
     }
 
     animate(){
@@ -77,90 +82,175 @@ class Endboss extends MovableObjects {
 
             switch (this.state) {
                 case 'alert':
-                    this.playAnimationOnce(this.IMAGES_ALERT);
-                    if (this.alertAnimationFinished) {
-                        this.setState('walk');
-                    }
+                    this.getAlertAnimation();
                     break;
                 
                 case 'walk':
-                    this.playAnimation(this.IMAGES_WALKING);
-                    this.moveLeft();
-                    this.otherDirection = false;
+                    this.getWalkingAnimation();
                     break;
                 
                 case 'attack-begin':
-                    this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN);
-                    if (this.attackingBeginAnimationFinished) {
-                        this.setState('jump-up');
-                    }
+                    this.getAttackAnimation();
                     break;
 
                 case 'jump-up':
-                    if (!this.isJumping) {
-                        this.isJumping = true;
-                        this.speedY = 20;
-                    }
-                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
-                    this.x += this.speed * 2
-                    if (this.speedY < 0) {
-                        this.speedY = 0; 
-                        this.gravityPaused = true;
-                        this.hoverStart = Date.now();
-                        this.setState('hover');
-                    }
+                    this.getJumpUpAnimation();
                     break;
 
                 case 'hover':
-                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
-                    console.log(this.img);
-                    
-                    if (Date.now() - this.hoverStart > 500) {
-                        this.gravityPaused = false;
-                        this.setState('jump-down');
-                    }
+                    this.getHoverAnimation();
                     break;
 
                 case 'jump-down':
-                    this.img = this.imageCache[this.IMAGE_JUMP_DOWN];
-                    this.x -= this.speed * 4;
-                    if (!this.isAboveGround()) {
-                        this.setState('jump-end');
-                    }
+                    this.getJumpDownAnimation();
                     break;
 
                 case 'jump-end':
-                    this.img = this.imageCache[this.IMAGE_JUMP_UP];
-                    this.x -= this.speed * 2;
-                    if (!this.jumpEndStarted) {
-                        this.jumpEndStarted = Date.now();
-                    }
-                    if (Date.now() - this.jumpEndStarted > 300) {
-                        this.isJumping = false;
-                        this.jumpEndStarted = null;
-                        this.setState('attack-end');
-                    }
+                    this.getJumpEndAnimation();
                     break;
 
                 case 'attack-end':
-                    this.playAnimationOnce(this.IMAGES_ATTACKING_END);
-                    if (this.attackingEndAnimationFinished) {
-                        this.setState('walk')
-                    }
+                    this.getAttackEndAnimation();
+                    break;
+
+                case 'hurt':
+                    this.getHurtAnimation();
+                    break;
+
+                case 'dead':
+                    this.getDeadAnimation();
+                    break;
+                case 'defeated':
                     break;
             }
-        }, 1000 / 6)
+        }, 1000 / 10)
     };
 
     setState(newState) {
         this.state = newState;
-
         this.alertAnimationFinished = false;
         this.attackingBeginAnimationFinished = false;
         this.attackingJumpAnimationFinished = false;
         this.attackingEndAnimationFinished = false;
-
+        this.hurtingAnimationFinished = false;
+        this.isDeadAnimationFinished = false;
         this.currentImage = 0;
         this.currentAnimation = null;
+    };
+
+    getFrameRate(){
+        const frames = [
+            this.IMAGE_JUMP_UP,
+            this.IMAGE_JUMP_DOWN,
+            this.IMAGE_JUMP_UP,
+            this.IMAGE_JUMP_DOWN
+        ];
+        const duration = 600;
+        const elapsedJump = Date.now() - this.jumpStartTime;
+        const progress = Math.min(1, elapsedJump / duration);
+        const frameIndex = Math.min(
+            frames.length - 1,
+            Math.floor(progress * frames.length)
+        );
+        this.img = this.imageCache[frames[frameIndex]];
+    };
+
+    getWalkingAnimation(){
+        this.playAnimation(this.IMAGES_WALKING);
+        this.moveLeft();
+        this.otherDirection = false;
+    };
+
+    getAlertAnimation(){
+        this.playAnimationOnce(this.IMAGES_ALERT, 'alertAnimationFinished');
+        if (this.alertAnimationFinished) {
+            this.setState('walk');
+        }
+    };
+
+    getHurtAnimation(){
+        this.playAnimationOnce(this.IMAGES_HURTING);
+        if (this.hurtingAnimationFinished && !this.isDead()) {
+            this.setState('walk');
+        } else if (this.isDead()){
+            this.setState('dead');
+        }
+    };
+
+    getAttackAnimation(){
+        this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN);
+        if (this.attackingBeginAnimationFinished) {
+            this.setState('jump-up');
+        }
+    };
+
+    getAttackEndAnimation(){
+        this.playAnimationOnce(this.IMAGES_ATTACKING_END);
+        if (this.attackingEndAnimationFinished) {
+            this.setState('walk')
+        }
+    };
+
+    getJumpUpAnimation(){
+        if (!this.isJumping) {
+            this.isJumping = true;
+            this.speedY = 15;
+            this.maxJumpSpeed = this.speedY;
+            this.jumpStartTime = Date.now();
+        }
+        this.getFrameRate();
+        if (this.speedY <= 0) {
+            this.gravityPaused = true;
+            this.hoverStart = Date.now();
+            this.jumpStartTime = null;
+            this.setState('hover');
+        }
+        this.x += this.speed;
+    };
+
+    getHoverAnimation(){
+        const elapsed = Date.now() - this.hoverStart;
+        if (elapsed < 100) {
+            this.img = this.imageCache[this.IMAGE_JUMP_DOWN];
+        } else {
+            this.gravityPaused = false;
+            this.setState('jump-down');
+        }
+    };
+
+    getJumpDownAnimation(){
+        this.img = this.imageCache[this.IMAGE_JUMP_DOWN];
+        this.speedY = -15
+        this.x -= this.speed * 8;
+        if (!this.isAboveGround()) {
+            this.setState('jump-end');
+        }
+    };
+
+    getJumpEndAnimation(){
+        this.img = this.imageCache[this.IMAGE_JUMP_UP];
+        this.x += this.speed * 5;
+        this.speedY = 5
+        if (!this.jumpEndStarted) {
+            this.jumpEndStarted = Date.now();
+        }
+        if (Date.now() - this.jumpEndStarted > 300) {
+            this.isJumping = false;
+            this.jumpEndStarted = null;
+            this.setState('attack-end');
+        }
+    };
+
+    getDeadAnimation(){
+    console.log('dead state active');
+
+    this.playAnimationOnce(this.IMAGES_DYING, 'isDeadAnimationFinished');
+
+    console.log('finished?', this.isDeadAnimationFinished);
+
+    if (this.isDeadAnimationFinished) {
+        this.setState('defeated');
+        console.log('STATE:', this.state);
     }
+}
 }

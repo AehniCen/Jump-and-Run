@@ -30,6 +30,10 @@ class ThrowableObjects extends MovableObjects {
         this.y =y;
     }
 
+    getMaxHeight(){
+        return -150;
+    };
+
     throw(){
 
         if (this.world.gameOver === false) {

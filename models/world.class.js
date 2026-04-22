@@ -159,6 +159,12 @@ class World {
     };
 
     checkCollisions(){
+        this.checkCharacterEnemyCollision();
+        this.checkCharacterCoinCollision();
+        this.checkThrowingBottleCollision();
+    };
+
+    checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead()) {
                 this.character.damage = 50;
@@ -172,11 +178,9 @@ class World {
                 console.log('enemy hp',enemy.energy);
             };
         })
-        const boss = this.level.boss;
-        let distance = Math.abs(this.character.x - boss.x);
-        if (distance < 200 && boss.state === 'walk') {          
-            boss.setState('attack-begin');    
-            }
+    };
+
+    checkCharacterCoinCollision(){
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin) && !coin.isCollected) {
                 coin.isCollected = true;
@@ -184,6 +188,10 @@ class World {
                 this.coinDisplay.updateNumber();
             }
         })
+    };
+
+    checkThrowingBottleCollision(){
+        const boss = this.level.boss;
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (bottle.isColliding(enemy) && !enemy.isDead() && !bottle.splashAnimationFinished && !this.gameOver) {
@@ -193,6 +201,11 @@ class World {
                     bottle.getSplashAnimation();
                 }
             })
+            if (bottle.isColliding(boss) && !boss.isHurt() && !boss.isDead()) {
+                boss.hit();
+                console.log(boss.energy);
+                boss.setState('hurt');
+            }
         })
     };
 
@@ -203,6 +216,11 @@ class World {
             bottle.throw();
             this.throwableObjects.push(bottle);
             this.bottleDisplay.reduceNumber();
+        }
+        const boss = this.level.boss;
+        let distance = Math.abs(this.character.x - boss.x);
+        if (distance < 200 && boss.state === 'walk') {          
+            boss.setState('attack-begin');    
         }
     };
 };

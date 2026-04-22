@@ -45,7 +45,7 @@ class MovableObjects extends DrawableObjects {
         this.currentImage++;
     };
 
-    playAnimationOnce(images) {
+    playAnimationOnce(images, finishFlag) {
         if (this.currentAnimation !== images) {
             this.currentImage = 0;
             this.currentAnimation = images;
@@ -57,8 +57,8 @@ class MovableObjects extends DrawableObjects {
         } else if (this.currentImage >= images.length) {
             let lastImage = images[images.length - 1];
             this.img = this.imageCache[lastImage];
-            if (images === this.IMAGES_DYING) {
-                this.isDeadAnimationFinished = true;
+            if (finishFlag) {
+                this[finishFlag] = true;
             }
             if (images === this.IMAGES_ENDSCREEN_GAMEOVER) {
                 this.isGameOverAnimationFinished = true;
@@ -75,8 +75,11 @@ class MovableObjects extends DrawableObjects {
             if (images === this.IMAGES_ATTACKING_JUMP) {
                 this.attackingJumpAnimationFinished = true;
             }
-                        if (images === this.IMAGES_ATTACKING_END) {
+            if (images === this.IMAGES_ATTACKING_END) {
                 this.attackingEndAnimationFinished = true;
+            }
+            if (images === this.IMAGES_HURTING) {
+                this.hurtingAnimationFinished = true;
             }
         }
     };
@@ -108,7 +111,11 @@ class MovableObjects extends DrawableObjects {
 
     hit(){
         this.energy -= this.damage;
-        this.speedY = 35;
+        if (this instanceof Endboss) {
+            this.speedY = 0;
+        } else {
+            this.speedY = 35;
+        }
         if (this.energy < 0) {
             this.energy = 0
         } else {
