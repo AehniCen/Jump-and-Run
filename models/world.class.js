@@ -84,6 +84,7 @@ class World {
         this.character = new Character();
         this.endscreen = new Endscreen();
         this.gameOver = false;
+        this.winner = false;
         this.level.restartLevel();
         this.throwableObjects = [];
         this.statusBar.setPercentage(100);
@@ -224,7 +225,7 @@ class World {
                     bottle.getSplashAnimation();
                 }
             })
-            if (bottle.isColliding(boss) && !boss.isHurt() && !boss.isDead()) {
+            if (bottle.isColliding(boss) && !bottle.splashAnimationFinished && !bottle.splashed && !boss.isHurt() && !boss.isDead()) {
                 boss.hit();
                 console.log(boss.energy);
                 boss.setState('hurt');

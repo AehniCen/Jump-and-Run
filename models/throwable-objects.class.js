@@ -19,7 +19,7 @@ class ThrowableObjects extends MovableObjects {
     height = 80;
     splashSound = new Audio('assets/audio/bottle-smash.mp3');
     world;
-    splashAnimationFinished = false;
+    state;
 
     constructor(x, y){
         super().loadImage('assets/img/6_salsa_bottle/salsa_bottle.png');
@@ -34,32 +34,43 @@ class ThrowableObjects extends MovableObjects {
     };
 
     throw(){
-
-        if (this.world.gameOver === false) {
+        if (!this.world.gameOver) {
             this.speedY = 30;
             this.applyGravity();
-            setInterval( () => {
-                this.playAnimation(this.IMAGES_ROTATION);
-                if (this.y >= 335) {
-                this.getSplashAnimation()
+            this.rotationInterval = setInterval(() => {
+                if (!this.splashed) {
+                    this.playAnimation(this.IMAGES_ROTATION);
+                    this.state = 'flying';
                 }
-            }, 120)
-            setInterval( () => {
+                if (this.splashAnimationFinished) {
+                    clearInterval(this.rotationInterval);
+                    clearInterval(this.moveInterval);
+                    this.state = 'done';
+                    console.log(this.state);
+                }
+            }, 120);
+            this.moveInterval = setInterval(() => {
                 if (!this.splashed) {
                     this.x += 10;
                 }
-            }, 25)
+            }, 25);
+            this.splashInterval = setInterval(() =>{
+                if (this.y >= 335 && !this.splashed) {
+                    this.getSplashAnimation();
+                    this.state = 'splashed';
+                }
+            }, 30)
         }
-    }
+    };
 
     getSplashAnimation(){
         this.playAnimationOnce(this.IMAGES_SPLASH, 'splashAnimationFinished');
         this.playSplashSound();
         this.splashed = true;
-    }
+    };
 
     playSplashSound(){
-        if (!this.splashAnimationFinished) {
+        if (!this.splashed) {
             this.splashSound.play()
             this.splashSound.volume = 0.5;
             this.splashSound.playbackRate = 2;

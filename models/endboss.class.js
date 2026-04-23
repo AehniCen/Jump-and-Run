@@ -138,23 +138,6 @@ class Endboss extends MovableObjects {
         this.currentAnimation = null;
     };
 
-    getFrameRate(){
-        const frames = [
-            this.IMAGE_JUMP_UP,
-            this.IMAGE_JUMP_DOWN,
-            this.IMAGE_JUMP_UP,
-            this.IMAGE_JUMP_DOWN
-        ];
-        const duration = 600;
-        const elapsedJump = Date.now() - this.jumpStartTime;
-        const progress = Math.min(1, elapsedJump / duration);
-        const frameIndex = Math.min(
-            frames.length - 1,
-            Math.floor(progress * frames.length)
-        );
-        this.img = this.imageCache[frames[frameIndex]];
-    };
-
     getWalkingAnimation(){
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
@@ -191,21 +174,64 @@ class Endboss extends MovableObjects {
         }
     };
 
+    getFrameRate(frames, duration){
+        const elapsedJump = Date.now() - this.startTime;
+        const progress = Math.min(1, elapsedJump / duration);
+        const frameIndex = Math.min(
+            frames.length - 1,
+            Math.floor(progress * frames.length)
+        );
+        this.img = this.imageCache[frames[frameIndex]];
+        if (elapsedJump === duration) {
+            this.animationFinished = true;
+        }
+    }
+    
+    getJumpingFrame(){
+        const frames = [
+            this.IMAGE_JUMP_UP,
+            this.IMAGE_JUMP_DOWN,
+            this.IMAGE_JUMP_UP,
+            this.IMAGE_JUMP_DOWN
+        ];  
+        const duration = 600;
+        this.getFrameRate(frames, duration);
+    };
+
     getJumpUpAnimation(){
         if (!this.isJumping) {
             this.isJumping = true;
             this.speedY = 15;
             this.maxJumpSpeed = this.speedY;
-            this.jumpStartTime = Date.now();
+            this.startTime = Date.now();
         }
-        this.getFrameRate();
+        this.getJumpingFrame();
         if (this.speedY <= 0) {
             this.gravityPaused = true;
             this.hoverStart = Date.now();
-            this.jumpStartTime = null;
+            this.startTime = null;
             this.setState('hover');
         }
         this.x += this.speed;
+    };
+
+    getDyingFrame(){
+        const frames = this.IMAGES_DYING;
+        const duration = 600;
+        this.getFrameRate(frames, duration);
+    }
+
+    getDeadAnimation(){
+        if (!this.isDying) {
+            this.isDying = true;
+            this.speedY = 30;
+            this.startTime = Date.now();
+        }
+        this.getDyingFrame();
+        if (this.animationFinished) {
+            this.setState('defeated');
+            console.log(this.state);
+        }
     };
 
     getHoverAnimation(){
@@ -240,16 +266,4 @@ class Endboss extends MovableObjects {
             this.setState('attack-end');
         }
     };
-
-    getDeadAnimation(){
-    console.log('dead state active');
-
-    this.playAnimationOnce(this.IMAGES_DYING, 'isDeadAnimationFinished');
-
-    console.log('finished?', this.isDeadAnimationFinished);
-
-    if (this.isDeadAnimationFinished) {
-        this.setState('defeated');
-    }
-}
 }
