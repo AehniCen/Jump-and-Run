@@ -27,7 +27,7 @@ class ThrowableObjects extends MovableObjects {
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y =y;
-    }
+    };
 
     getMaxHeight(){
         return -150;
@@ -64,8 +64,10 @@ class ThrowableObjects extends MovableObjects {
     };
 
     getSplashAnimation(){
-        this.playAnimationOnce(this.IMAGES_SPLASH, 'splashAnimationFinished');
         this.playSplashSound();
+        setInterval(() => {
+            this.playAnimationOnce(this.IMAGES_SPLASH, 'splashAnimationFinished');
+        }, 30)
         this.splashed = true;
     };
 
@@ -74,8 +76,7 @@ class ThrowableObjects extends MovableObjects {
             this.splashSound.play()
             this.splashSound.volume = 0.5;
             this.splashSound.playbackRate = 2;
-            console.log(this.splashAnimationFinished);
-            
+            console.log(this.splashAnimationFinished);  
         }
-    }
+    };
 }

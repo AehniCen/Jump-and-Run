@@ -93,6 +93,7 @@ class Character extends MovableObjects {
     };
 
     checkIdleMode(){
+        if (!this.world || !this.world.keyboard) return;
         if(!this.world.keyboard.RIGHT &&
             !this.world.keyboard.LEFT &&
             !this.world.keyboard.SPACE
@@ -235,6 +236,9 @@ class Character extends MovableObjects {
     }
 
     animate(){
+        this.idleIntervall = setInterval(() => {
+            this.checkIdleMode();
+        }, 250);
         this.getMovementIntervall();
         this.getDyingAnimation();
         this.getConditionIntervall();

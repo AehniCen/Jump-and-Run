@@ -186,6 +186,7 @@ class World {
         this.checkCharacterEnemyCollision();
         this.checkCharacterCoinCollision();
         this.checkThrowingBottleCollision();
+        this.checkCharacterBossCollision();
     };
 
     checkCharacterEnemyCollision(){
@@ -203,6 +204,15 @@ class World {
             };
         })
     };
+
+    checkCharacterBossCollision(){
+        const boss = this.level.boss;
+        if (this.character.isColliding(boss) && !this.character.isHurt()) {
+            this.character.damage = 50;
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
 
     checkCharacterCoinCollision(){
         this.level.coins.forEach((coin) => {
