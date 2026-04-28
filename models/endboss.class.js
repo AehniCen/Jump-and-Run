@@ -55,7 +55,8 @@ class Endboss extends MovableObjects {
     isAlerted = false;
     state = 'alert';
     damage = 34;
-    
+    attackingSound = new Audio('assets/audio/rooster_attack.mp3');
+    alertSound = new Audio('assets/audio/rooster_alarm.mp3');
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
@@ -146,10 +147,20 @@ class Endboss extends MovableObjects {
 
     getAlertAnimation(){
         this.playAnimationOnce(this.IMAGES_ALERT, 'alertAnimationFinished');
+        this.getAlertSound();
         if (this.alertAnimationFinished) {            
             this.setState('walk');
         }
     };
+
+    getAlertSound(){
+        if (this.alertPlayed) return;     
+        this.alertPlayed = true;
+        setTimeout(() => {
+            this.alertSound.play();
+            this.alertSound.playbackRate = 1;
+        }, 400);
+    }
 
     getHurtAnimation(){
         this.playAnimationOnce(this.IMAGES_HURTING, 'hurtingAnimationFinished');
@@ -169,9 +180,16 @@ class Endboss extends MovableObjects {
 
     getAttackEndAnimation(){
         this.playAnimationOnce(this.IMAGES_ATTACKING_END, 'attackingEndAnimationFinished');
+        this.getAttackSound();
         if (this.attackingEndAnimationFinished) {
             this.setState('walk')
         }
+    };
+
+    getAttackSound(){
+        if (this.attackPlayed) return;
+        this.attackPlayed = true;
+        this.attackingSound.play();
     };
 
     getFrameRate(frames, duration){

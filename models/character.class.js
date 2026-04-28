@@ -227,14 +227,6 @@ class Character extends MovableObjects {
         }, 1000/4)
     };
 
-    playCharacterWalkingAudio(){
-        this.audioIntervall = setInterval(() => {
-            if (this.moveLeft() || this.moveRight()) {
-                this.play(this.AUDIO_WALKING);
-            }
-        })
-    }
-
     animate(){
         this.idleIntervall = setInterval(() => {
             this.checkIdleMode();
