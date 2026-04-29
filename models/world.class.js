@@ -16,17 +16,18 @@ class World {
     gameOver = false;
     winner = false;
     endscreenDiv = document.getElementById('endscreen-div');
+    sounds;
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.ctx = canvas.getContext('2d');
-        this.draw();
-        this.setWorld();     
+        this.setWorld(); 
+        this.collectSounds();
+        this.draw();    
         this.run();
         
     };
-
 
     setWorld(){
         this.character.world = this;
@@ -41,6 +42,32 @@ class World {
         this.level.boss.animate();
         this.endscreen.world = this;
     };
+
+    setMute(isMuted) {
+        this.isMuted = isMuted;
+        this.sounds.forEach(sound => {
+            sound.muted = isMuted;
+            if (isMuted) {
+                sound.pause();
+            }
+        });
+    };
+
+    collectSounds() {
+        this.sounds = [];
+        this.level.enemies.forEach(enemy => {
+            if (enemy.walkingSound) this.sounds.push(enemy.walkingSound);
+            if (enemy.dyingSound) this.sounds.push(enemy.dyingSound);
+        });
+        if (this.level.boss.alertSound) this.sounds.push(this.level.boss.alertSound);
+        if (this.level.boss.attackingSound) this.sounds.push(this.level.boss.attackingSound);
+        if (this.character.walkingSound) this.sounds.push(this.character.walkingSound);
+        if (this.character.hurtingSound) this.sounds.push(this.character.hurtingSound);
+        if (this.character.landingSound) this.sounds.push(this.character.landingSound);
+        if (this.character.jumpingSound) this.sounds.push(this.character.jumpingSound);
+        this.sounds.push(this.worldMusic);
+        
+    }
 
     draw(){;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -91,6 +118,7 @@ class World {
         this.coinDisplay.value = 0;
         this.bottleDisplay.value = 20;
         this.setWorld();
+        this.collectSounds();
 }
 
     addObjectsToMap(objects){

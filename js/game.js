@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let startMenu;
 let pauseMenu;
 let endscreenDiv;
+let isMuted = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -15,6 +16,27 @@ function init() {
         el.style.width = canvas.width + "px";
         el.style.height = canvas.height + "px";
     })
+    showViewportSize();
+}
+
+function showViewportSize() {
+    const div = document.createElement('div');
+    div.style.position = 'fixed';
+    div.style.bottom = '10px';
+    div.style.right = '10px';
+    div.style.background = 'black';
+    div.style.color = 'white';
+    div.style.padding = '5px 10px';
+    div.style.zIndex = '9999';
+    div.style.fontSize = '14px';
+    document.body.appendChild(div);
+
+    function update() {
+        div.textContent = `${window.innerWidth} x ${window.innerHeight}`;
+    }
+
+    window.addEventListener('resize', update);
+    update();
 }
 
 function startGame() {
@@ -23,7 +45,7 @@ function startGame() {
     };
 
 function backToGame() {
-    if (pauseMenu.style.display = 'block') {
+    if (pauseMenu.style.display === 'block') {
         pauseMenu.style.display = 'none';
         world.paused = false;
     }
@@ -42,6 +64,25 @@ function backToStartMenu() {
     pauseMenu.style.display = 'none';
     endscreenDiv.style.display = 'none';
     startMenu.style.display = 'flex'  
+}
+
+function toggleSound() {
+    isMuted = !isMuted;
+    localStorage.setItem('isMuted', isMuted);
+    updateMuteButton(); 
+    world.setMute(isMuted);
+}
+
+function updateMuteButton() {
+    const img = document.querySelector('#mute-btn img');
+
+    if (isMuted) {
+        img.src = 'assets/icons/mute.png';
+        img.alt = 'sound-off-icon';
+    } else {
+        img.src = 'assets/icons/sound.png';
+        img.alt = 'sound-on-icon';
+    }
 }
 
 window.addEventListener('keydown', (e) => {

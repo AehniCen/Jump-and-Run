@@ -1,8 +1,9 @@
 class Chicken extends MovableObjects {
 
     x = 480;
-    y = 330;
-    height = 100;
+    y = 700;
+    height = 180;
+    width = 180;
     currentImage = 0;
     world;
     damage;

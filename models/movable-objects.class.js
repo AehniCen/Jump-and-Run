@@ -34,7 +34,7 @@ class MovableObjects extends DrawableObjects {
             return this.y < 50;
         }
         else {
-        return this.y < 115;
+        return this.y < 400;
         };
     };
 

@@ -1,11 +1,11 @@
 class BackgroundObjects extends DrawableObjects {
 
-    width = 1440
-    height = 480
+    width = 3800
+    height = 1000
 
     constructor(imagePath, x){
         super().loadImage(imagePath);
-        this.y = 480 - this.height;
+        this.y = 1000 - this.height;
         this.x = x;
     }
 }

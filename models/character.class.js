@@ -59,9 +59,9 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
     
-    y = 80;
-    height = 320;
-    width = 200;
+    y = 400;
+    height = 480;
+    width = 300;
     currentImage = 0;
     world;
     speed = 15;

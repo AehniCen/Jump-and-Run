@@ -28,14 +28,17 @@
 
     <h1>El Pollo Loco</h1>
 
-    <div id="start-div">
+    <div id="start-div" class="overlay-divs">
         <button id="start-btn" onclick="startGame()">
             <p>Start Game</p>
         </button>
     </div>
 
-    <div id="pause-div" style="display: none;">
+    <div id="pause-div" class="overlay-divs" style="display: none;">
         <p>Pause</p>
+        <button id="mute-btn" onclick="toggleSound()">
+            <img src="assets/icons/sound.png" alt="sound-on-icon">
+        </button>
         <div id="pause-btns">
             <button class="menu-btns" onclick="backToGame()">Back To Game</button>
             <button id="restart-btn" class="menu-btns" onclick="restartGame()">
@@ -47,7 +50,7 @@
         </div>
     </div>
 
-    <div id="endscreen-div" style="display: none;">
+    <div id="endscreen-div" class="overlay-divs" style="display: none;">
         <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
         <button id="restart-btn" class="menu-btns" onclick="restartGame()">
             <img id="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
@@ -57,7 +60,7 @@
         </button>
     </div>
     
-    <canvas id="canvas" width="720" height="480">
+    <canvas id="canvas" width="2000" height="1000">
 
     </canvas>
 

@@ -55,7 +55,7 @@ class ThrowableObjects extends MovableObjects {
                 }
             }, 25);
             this.splashInterval = setInterval(() =>{
-                if (this.y >= 335 && !this.splashed) {
+                if (this.y >= 1000 && !this.splashed) {
                     this.getSplashAnimation();
                     this.state = 'splashed';
                 }

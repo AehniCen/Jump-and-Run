@@ -45,17 +45,17 @@ class Endboss extends MovableObjects {
         'assets/img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
-    width = 400;
-    height = 400;
-    y = 50;
-    x = 300;
+    width = 500;
+    height = 500;
+    y = 400;
+    x = 500;
     speed = 15;
     world;
     currentImage;
     isAlerted = false;
     state = 'alert';
     damage = 34;
-    attackingSound = new Audio('assets/audio/rooster_attack.mp3');
+    attackingSound = new Audio('assets/audio/rooster_alarm.mp3');
     alertSound = new Audio('assets/audio/rooster_alarm.mp3');
 
     constructor() {
@@ -164,6 +164,7 @@ class Endboss extends MovableObjects {
 
     getHurtAnimation(){
         this.playAnimationOnce(this.IMAGES_HURTING, 'hurtingAnimationFinished');
+        this.getHurtSound();
         if (this.hurtingAnimationFinished && !this.isDead()) {
             this.setState('walk');
         } else if (this.isDead()){
@@ -174,23 +175,38 @@ class Endboss extends MovableObjects {
     getAttackAnimation(){
         this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN, 'attackingBeginAnimationFinished');
         if (this.attackingBeginAnimationFinished) {
+            this.getAttackUpSound();
             this.setState('jump-up');
         }
     };
 
     getAttackEndAnimation(){
         this.playAnimationOnce(this.IMAGES_ATTACKING_END, 'attackingEndAnimationFinished');
-        this.getAttackSound();
         if (this.attackingEndAnimationFinished) {
             this.setState('walk')
         }
     };
 
-    getAttackSound(){
+    getAttackUpSound(){
         if (this.attackPlayed) return;
         this.attackPlayed = true;
         this.attackingSound.play();
+        this.attackingSound.playbackRate = 1.5;
     };
+
+    getAttackDownSound(){
+        if (this.attackPlayed) return;
+        this.attackPlayed = true;
+        this.attackingSound.play();
+        this.attackingSound.playbackRate = 1;
+    };
+
+    getHurtSound(){
+        if (this.hurtPlayed) return;
+        this.attackPlayed = true;
+        this.attackingSound.play();
+        this.attackingSound.playbackRate = 4;
+    }
 
     getFrameRate(frames, duration){
         const elapsedJump = Date.now() - this.startTime;
@@ -267,6 +283,8 @@ class Endboss extends MovableObjects {
         this.speedY = -15
         this.x -= this.speed * 8;
         if (!this.isAboveGround()) {
+            this.attackPlayed = false;
+            this.getAttackDownSound();
             this.setState('jump-end');
         }
     };
