@@ -22,9 +22,12 @@ class Level {
         this.coins = [];
 
         for (let i = 0; i < this.enemyCount; i++) {
+        if (i < 2) {
             this.enemies.push(new Chicken());
-        };
-
+        } else {
+            this.enemies.push(new BabyChicken());
+        }
+    }
         for (let i = 0; i < this.coinCount; i++) {
             this.coins.push(new CollectableObjects());
         };

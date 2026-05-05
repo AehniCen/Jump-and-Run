@@ -1,12 +1,11 @@
 class Chicken extends MovableObjects {
 
     x = 480;
-    y = 700;
-    height = 180;
-    width = 180;
+    y = 330;
+    height = 100;
+    width = 100;
     currentImage = 0;
     world;
-    damage;
     walkingSound = new Audio('assets/audio/chicken-sound-walking.mp3');
     dyingSound = new Audio('assets/audio/chicken-attack-sound-2.mp3');
     alreadyDead = false;
@@ -42,6 +41,10 @@ class Chicken extends MovableObjects {
     };
 
     getDeadImage() {
+        if (this instanceof BabyChicken && this.isDead() && !this.world.paused && !this.alreadyDead) {
+            this.loadImage('assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png');
+            this.playDyingSound();
+        }
         if (this.isDead() && !this.world.paused && !this.alreadyDead) { 
             this.loadImage('assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
             this.playDyingSound();

@@ -45,10 +45,10 @@ class Endboss extends MovableObjects {
         'assets/img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
-    width = 500;
-    height = 500;
-    y = 400;
-    x = 500;
+    width = 400;
+    height = 400;
+    y = 50;
+    x = 4000;
     speed = 15;
     world;
     currentImage;

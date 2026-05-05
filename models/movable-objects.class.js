@@ -34,7 +34,7 @@ class MovableObjects extends DrawableObjects {
             return this.y < 50;
         }
         else {
-        return this.y < 400;
+        return this.y < 115;
         };
     };
 
@@ -82,7 +82,7 @@ class MovableObjects extends DrawableObjects {
 
     dying(){
     if (!this.isDyingStarted) {
-        this.speedY = 40;
+        this.speedY = 30;
         this.acceleration = 5;
         this.isDyingStarted = true;
     }
@@ -93,7 +93,7 @@ class MovableObjects extends DrawableObjects {
         if (this instanceof Endboss) {
             this.speedY = 0;
         } else {
-            this.speedY = 35;
+            this.speedY = 20;
         }
         if (this.energy < 0) {
             this.energy = 0

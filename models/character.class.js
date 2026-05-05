@@ -59,9 +59,9 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
     
-    y = 400;
-    height = 480;
-    width = 300;
+    y = 80;
+    height = 320;
+    width = 200;
     currentImage = 0;
     world;
     speed = 15;
@@ -75,6 +75,7 @@ class Character extends MovableObjects {
     landingSound = new Audio('assets/audio/jump-landing.mp3');
     jumpingSound = new Audio('assets/audio/jump-noise.mp3');
     hurtingSound = new Audio('assets/audio/hurt.mp3');
+    snoringSound = new Audio('assets/audio/character-snoring.mp3')
     
 
 
@@ -94,11 +95,17 @@ class Character extends MovableObjects {
 
     checkIdleMode(){
         if (!this.world || !this.world.keyboard) return;
+        if (this.isHurt() || this.isDead()) {
+        this.idleMode = false;
+        return;
+        }
         if(!this.world.keyboard.RIGHT &&
-            !this.world.keyboard.LEFT &&
-            !this.world.keyboard.SPACE
+           !this.world.keyboard.LEFT &&
+           !this.world.keyboard.SPACE
         ){
             this.idleMode = true;
+        } else {
+            this.idleMode = false;
         }
     };
 
@@ -155,7 +162,7 @@ class Character extends MovableObjects {
     }
 
     getMaxHeight(){
-        return -150;
+        return -100;
     };
 
     getMovementIntervall(){
@@ -193,7 +200,6 @@ class Character extends MovableObjects {
         this.conditionIntervall = setInterval(() => {
             this.checkLanding();
             if (this.isAboveGround() && !this.world.paused && !this.isHurt()) {
-
                 if (this.speedY > 0)  {
                     this.playAnimationOnce(this.IMAGES_JUMPING_UP);
                 } else if (this.speedY < 0 && !this.world.paused) {
@@ -221,11 +227,23 @@ class Character extends MovableObjects {
             if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode && timePassed > 10 && !this.world.paused && !this.isDead()){
+            if(this.idleMode && timePassed > 2 && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
+                this.getSnoringSound();
+            } else {
+                this.pauseSnoringSound();
             }
         }, 1000/4)
     };
+
+    getSnoringSound(){
+        this.snoringSound.play()
+        this.snoringSound.volume = 0.5;
+    }
+
+    pauseSnoringSound(){
+        this.snoringSound.pause();
+    }
 
     animate(){
         this.idleIntervall = setInterval(() => {

@@ -17,6 +17,7 @@ class World {
     winner = false;
     endscreenDiv = document.getElementById('endscreen-div');
     sounds;
+    gameOverSound = new Audio('assets/audio/game-over.mp3');
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -172,6 +173,8 @@ class World {
         if (this.character.state === 'dying') {
             if (this.character.isDeadAnimationFinished) {
                 this.character.state = 'gameover'
+                this.pauseWorldMusic();
+                this.getGameOverSound();
             }
         };
         if (this.character.state === 'gameover' && !this.endscreen.started) {
@@ -182,6 +185,14 @@ class World {
         if (this.character.state === 'gameover' && this.endscreen.animationFinished) {
             this.paused = true;
             document.getElementById('endscreen-div').style.display = 'flex';
+        }
+    }
+
+    getGameOverSound(){
+        if (!this.gameIsOver) {
+            this.gameOverSound.play();
+            this.gameOverSound.playbackRate = 0.7;
+            this.gameIsOver = true;
         }
     }
 
@@ -210,6 +221,10 @@ class World {
         }
     };
 
+    pauseWorldMusic(){
+        this.worldMusic.pause();
+    }
+
     checkCollisions(){
         this.checkCharacterEnemyCollision();
         this.checkCharacterCoinCollision();
@@ -219,8 +234,8 @@ class World {
 
     checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead()) {
-                this.character.damage = 50;
+            if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead() && !this.character.isHurt()) {
+                this.character.damage = 100;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 
@@ -239,6 +254,10 @@ class World {
             this.character.damage = 50;
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
+        }
+        let distance = Math.abs(this.character.x - boss.x);
+        if (distance < 200 && boss.state === 'walk') {          
+            boss.setState('attack-begin');    
         }
     }
 
@@ -279,11 +298,6 @@ class World {
             bottle.throw();
             this.throwableObjects.push(bottle);
             this.bottleDisplay.reduceNumber();
-        }
-        const boss = this.level.boss;
-        let distance = Math.abs(this.character.x - boss.x);
-        if (distance < 200 && boss.state === 'walk') {          
-            boss.setState('attack-begin');    
-        }
+        }   
     };
 };

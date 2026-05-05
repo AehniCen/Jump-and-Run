@@ -5,6 +5,7 @@ class CollectableObjects extends MovableObjects {
     speed = 10;
     isAttracted = false;
     isCollected = false;
+    collectingSound = new Audio('assets/audio/coin-collected.mp3');
 
     constructor(){
         super().loadImage('assets/img/8_coin/coin_2.png');
@@ -15,7 +16,13 @@ class CollectableObjects extends MovableObjects {
     collect(collectedCoins) {
         this.isAttracted = true;
         this.collectedCoins = collectedCoins;
+        this.getCollectingSound();
     }  
+
+    getCollectingSound(){
+        this.collectingSound.play();
+        this.collectingSound.volume = 0.3;
+    }
 
     update() {
     if (this.isAttracted && this.collectedCoins) {

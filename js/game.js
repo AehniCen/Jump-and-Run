@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let startMenu;
 let pauseMenu;
 let endscreenDiv;
+let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
 
 function init() {
@@ -42,12 +43,14 @@ function showViewportSize() {
 function startGame() {
     startMenu.style.display = 'none';
     world.paused = false;
+    getButtonSound();
     };
 
 function backToGame() {
     if (pauseMenu.style.display === 'block') {
         pauseMenu.style.display = 'none';
         world.paused = false;
+        getButtonSound();
     }
 }
 
@@ -56,6 +59,7 @@ function restartGame() {
     pauseMenu.style.display = 'none';
     endscreenDiv.style.display = 'none';
     world.paused = false;
+    getButtonSound();
 }
 
 function backToStartMenu() {
@@ -64,6 +68,7 @@ function backToStartMenu() {
     pauseMenu.style.display = 'none';
     endscreenDiv.style.display = 'none';
     startMenu.style.display = 'flex'  
+    getButtonSound();
 }
 
 function toggleSound() {
@@ -83,6 +88,12 @@ function updateMuteButton() {
         img.src = 'assets/icons/sound.png';
         img.alt = 'sound-on-icon';
     }
+}
+
+function getButtonSound() {
+    btnSound.play();
+    btnSound.volume = 0.5;
+    btnSound.playbackRate = 1.5;
 }
 
 window.addEventListener('keydown', (e) => {

@@ -18,6 +18,7 @@ class ThrowableObjects extends MovableObjects {
     width = 80;
     height = 80;
     splashSound = new Audio('assets/audio/bottle-smash.mp3');
+    throwingSound = new Audio('assets/audio/throwing-sound.mp3')
     world;
     state;
 
@@ -40,6 +41,7 @@ class ThrowableObjects extends MovableObjects {
             this.rotationInterval = setInterval(() => {
                 if (!this.splashed) {
                     this.playAnimation(this.IMAGES_ROTATION);
+                    this.getThrowingSound();
                     this.state = 'flying';
                 }
                 if (this.splashAnimationFinished) {
@@ -55,7 +57,7 @@ class ThrowableObjects extends MovableObjects {
                 }
             }, 25);
             this.splashInterval = setInterval(() =>{
-                if (this.y >= 1000 && !this.splashed) {
+                if (this.y >= 335 && !this.splashed) {
                     this.getSplashAnimation();
                     this.state = 'splashed';
                 }
@@ -70,6 +72,17 @@ class ThrowableObjects extends MovableObjects {
         }, 30)
         this.splashed = true;
     };
+
+    getThrowingSound(){
+        if (!this.throwed) {
+            this.throwingSound.play();
+            this.throwingSound.volume = 0.2;
+            this.throwingSound.currentTime = 0.2;
+            this.throwed = true;
+        }
+        
+
+    }
 
     playSplashSound(){
         if (!this.splashed) {

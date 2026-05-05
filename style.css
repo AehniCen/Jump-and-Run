@@ -121,7 +121,7 @@ canvas {
 
 #pause-div p {
     font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 200px;
+    font-size: 100px;
     text-align: center;
     background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
     -webkit-background-clip: text;
@@ -131,6 +131,7 @@ canvas {
 
 #pause-btns {
     height: 60%;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,14 +139,14 @@ canvas {
 }
 
 .menu-btns {
-    font-size: 100px;
-    margin-top: 100px;
-    width: 900px;
+    font-size: 60px;
+    margin-top: 30px;
+    width: 500px;
 }
 
 .menu-btns:hover {
-    width: 950px;
-    height: 140px;
+    width: 510px;
+    height: 96px;
 }
 
 #endscreen-div {
