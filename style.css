@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SairaStencilOne';
+    src: url('fonts/SairaStencilOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-image: url(../assets/img/5_background/body-background.png);
     background-size: fill;
@@ -49,49 +56,67 @@ h1 {
 
 canvas {
     background-color: black;
+    overflow: hidden;
 }
 
 #start-div {
     position: absolute;
     background-image: url(../assets/img/9_intro_outro_screens/start/startscreen_1.png);
-    
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: -75px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: start;
+    z-index: 2;
 }
 
-#mute-btn {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+#controls-btn {
+    width: 100px;
+    height: 90px;
+    margin-top: 20px;
+    margin-left: 10px;
     border: none;
     background-color: transparent;
 }
 
-#mute-btn:hover {
-    right: 15px;
-    top: 15px;
+#controls-btn img{
+    width: 60px;
+    transition: transform 125ms ease;
+}
+
+#controls-btn img:hover{
+    transform: scale(1.15);
+    filter: brightness(1.5);
+}
+
+#mute-btn {
+    margin-top: 30px;
+    margin-right: 20px;
+    border: none;
+    background-color: transparent;
 }
 
 #mute-btn img{
     height: 60px;
+    width: 50px;
+    transition: transform 125ms ease;
 }
 
 #mute-btn img:hover{
-    height: 70px;
+    transform: scale(1.15);
     filter: brightness(1.5);
 }
 
 #start-btn {
-    width: 360px;
+    width: 340px;
     height: 100px;
     margin-top: 20px;
+    transition: transform 125ms ease;
 }
 
 #start-btn:hover {
-    width: 365px;
-    height: 105px;
+    transform: scale(1.05);
 }
 
 #start-btn p {
@@ -127,6 +152,16 @@ canvas {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 3px #9A3A17;
+}
+
+#pause-div-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#pause-div-header #mute-btn{
+    margin-top: 10px;
 }
 
 #pause-btns {
@@ -171,4 +206,57 @@ canvas {
 #start-menu-arrow {
     width: 60px;
     padding-right: 20px;
+}
+
+#controls-div{
+    position: absolute;
+    width: 30%;
+    height: 20%;
+    background-color: #f5c681;
+    border: 12px solid #bb371c;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    z-index: 5;
+}
+
+.control-icons{
+    height: 50px;
+}
+
+#control-icons-div, #control-text-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#close-btn{
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+#close-btn img:hover{
+    width: 43px;
+    filter: brightness(1.5);
+}
+
+#close-btn img{
+    width: 40px;
+}
+
+#controls-div-overlay{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    z-index: 3;
 }

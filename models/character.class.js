@@ -227,7 +227,7 @@ class Character extends MovableObjects {
             if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode && timePassed > 2 && !this.world.paused && !this.isDead()){
+            if(this.idleMode && timePassed > 5 && !this.world.paused &&!this.world.winner && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
                 this.getSnoringSound();
             } else {

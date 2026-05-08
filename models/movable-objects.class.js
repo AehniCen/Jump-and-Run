@@ -93,7 +93,7 @@ class MovableObjects extends DrawableObjects {
         if (this instanceof Endboss) {
             this.speedY = 0;
         } else {
-            this.speedY = 20;
+            this.speedY = 15;
         }
         if (this.energy < 0) {
             this.energy = 0

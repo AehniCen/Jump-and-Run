@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let startMenu;
 let pauseMenu;
 let endscreenDiv;
+let controlsDiv;
 let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
 
@@ -71,23 +72,30 @@ function backToStartMenu() {
     getButtonSound();
 }
 
-function toggleSound() {
+function toggleSound(button) {
     isMuted = !isMuted;
     localStorage.setItem('isMuted', isMuted);
-    updateMuteButton(); 
     world.setMute(isMuted);
+    updateMuteButtons();
 }
 
-function updateMuteButton() {
-    const img = document.querySelector('#mute-btn img');
+function openControls() {
+    controlsDiv = document.getElementById('controls-div-overlay');
+    controlsDiv.style.display = 'flex';
+}
 
-    if (isMuted) {
-        img.src = 'assets/icons/mute.png';
-        img.alt = 'sound-off-icon';
-    } else {
-        img.src = 'assets/icons/sound.png';
-        img.alt = 'sound-on-icon';
-    }
+function closeControls() {
+    controlsDiv = document.getElementById('controls-div-overlay');
+    controlsDiv.style.display = 'none';
+}
+
+function updateMuteButtons() {
+    const icon = isMuted 
+        ? 'assets/icons/mute.png'
+        : 'assets/icons/sound.png';
+    document.querySelectorAll('#mute-btn img').forEach(img => {
+        img.src = icon;
+    });
 }
 
 function getButtonSound() {

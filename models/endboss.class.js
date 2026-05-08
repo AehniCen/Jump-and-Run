@@ -48,7 +48,7 @@ class Endboss extends MovableObjects {
     width = 400;
     height = 400;
     y = 50;
-    x = 4000;
+    x = 10000;
     speed = 15;
     world;
     currentImage;
@@ -258,7 +258,7 @@ class Endboss extends MovableObjects {
     getDeadAnimation(){
         if (!this.isDying) {
             this.isDying = true;
-            this.speedY = 30;
+            this.speedY = 15;
             this.startTime = Date.now();
         }
         this.getDyingFrame();

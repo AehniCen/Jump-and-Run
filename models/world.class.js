@@ -14,10 +14,11 @@ class World {
     worldMusic = new Audio('assets/audio/level-music.mp3');
     endscreen = new Endscreen();
     gameOver = false;
-    winner = false;
+    winner;
     endscreenDiv = document.getElementById('endscreen-div');
     sounds;
     gameOverSound = new Audio('assets/audio/game-over.mp3');
+    winnerSound = new Audio('assets/audio/winner.mp3')
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -26,8 +27,7 @@ class World {
         this.setWorld(); 
         this.collectSounds();
         this.draw();    
-        this.run();
-        
+        this.run();   
     };
 
     setWorld(){
@@ -40,7 +40,6 @@ class World {
             enemy.animate();
         });
         this.level.boss.world = this;
-        this.level.boss.animate();
         this.endscreen.world = this;
     };
 
@@ -67,8 +66,9 @@ class World {
         if (this.character.landingSound) this.sounds.push(this.character.landingSound);
         if (this.character.jumpingSound) this.sounds.push(this.character.jumpingSound);
         this.sounds.push(this.worldMusic);
-        
-    }
+        this.sounds.push(this.winnerSound);
+        this.sounds.push(this.gameOverSound);
+    };
 
     draw(){;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -158,6 +158,7 @@ class World {
             this.checkCollisions();
             this.checkThrowableObjects();
             this.checkCharacterState();
+            this.checkBossActivation();
             this.level.coins.forEach(coin => {
                 coin.update();
             });
@@ -167,6 +168,15 @@ class World {
     checkCharacterState(){
         this.lostTheGame();
         this.wonTheGame();
+    };
+
+    checkBossActivation(){
+        const boss = this.level.boss;
+        let distance = Math.abs(this.character.x - boss.x);
+        if (distance < 400 && !boss.active) {
+            boss.active = true;
+            boss.animate();
+        }
     }
 
     lostTheGame(){
@@ -191,29 +201,39 @@ class World {
     getGameOverSound(){
         if (!this.gameIsOver) {
             this.gameOverSound.play();
-            this.gameOverSound.playbackRate = 0.7;
+            this.gameOverSound.volume = 0.5;
             this.gameIsOver = true;
         }
     }
 
-    wonTheGame(){
-        if (this.level.boss.state === 'defeated') {
-            this.character.state = 'winner'
-        };
-        if (this.character.state === 'winner' && !this.endscreen.started) {
-            this.gameOver = true;
+    wonTheGame() {
+        if (this.level.boss.state === 'defeated' && !this.winner) {
             this.winner = true;
+            this.character.state = 'winner';
+            this.getWinnerSound();
+            this.pauseWorldMusic();
             this.endscreen.getStartTime();
             this.endscreen.started = true;
+            setTimeout(() => {
+                this.gameOver = true;
+            }, 100);
         }
-        if (this.character.state === 'winner' && this.endscreen.animationFinished) {
-            this.paused = true;
+        if (this.winner && this.endscreen.animationFinished) {
             document.getElementById('endscreen-div').style.display = 'flex';
+            this.paused = true;
         }
     }
 
+    getWinnerSound() {
+        this.winnerSound.volume = 0.5;
+        this.winnerSound.currentTime = 0;
+        this.winnerSound.play()
+            .then(() => console.log('winner sound playing'))
+            .catch(e => console.log('winner sound error', e));
+    };
+
     playWorldMusic(){
-        if (!this.paused) {
+        if (!this.paused && !this.winner) {
             this.worldMusic.play();
             this.worldMusic.volume = 0.7;
         } else {
@@ -243,6 +263,11 @@ class World {
                 enemy.damage = 100;
                 enemy.hit();
                 enemy.getDeadImage();
+                if (enemy.isDead()) {
+                    setTimeout(() => {
+                        this.level.enemies = this.level.enemies.filter(e => e !== enemy);
+                    }, 500);
+                };
                 console.log('enemy hp',enemy.energy);
             };
         })

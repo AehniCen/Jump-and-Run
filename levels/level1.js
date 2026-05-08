@@ -1,14 +1,14 @@
 const level1 = new Level(
     [
-        new BackgroundObjects('assets/img/5_background/complete_background.png', -720),
+        new BackgroundObjects('assets/img/5_background/complete_background.png', -1440),
         new BackgroundObjects('assets/img/5_background/complete_background.png', 0),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 720),
         new BackgroundObjects('assets/img/5_background/complete_background.png', 1440),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 2160),
         new BackgroundObjects('assets/img/5_background/complete_background.png', 2880),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 3600),
         new BackgroundObjects('assets/img/5_background/complete_background.png', 4320),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 5040)
+        new BackgroundObjects('assets/img/5_background/complete_background.png', 5760),
+        new BackgroundObjects('assets/img/5_background/complete_background.png', 7200),
+        new BackgroundObjects('assets/img/5_background/complete_background.png', 8640),
+        new BackgroundObjects('assets/img/5_background/complete_background.png', 10080)
     ],
     [
         new Chicken(),
