@@ -1,4 +1,4 @@
-class CollectableObjects extends MovableObjects {
+class CollectableCoins extends MovableObjects {
 
     height = 240;
     y = 270

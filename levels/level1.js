@@ -20,9 +20,21 @@ const level1 = new Level(
     ],
         new Endboss(),
     [
-        new CollectableObjects(),
-        new CollectableObjects(),
-        new CollectableObjects(),
-        new CollectableObjects()
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins()
+    ],
+    [
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles()
     ]
 );

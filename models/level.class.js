@@ -3,9 +3,10 @@ class Level {
     enemies;
     boss;
     coins;
-    level_end_x = 10000;
+    bottles;
+    level_end_x = 8700;
 
-    constructor(backgroundObjects, enemies, boss, coins){
+    constructor(backgroundObjects, enemies, boss, coins, bottles){
         this.backgroundObjects = backgroundObjects;
         this.enemyCount = enemies.length;
         this.coinCount = coins.length;
@@ -13,6 +14,7 @@ class Level {
         this.enemies = enemies;
         this.boss = boss;
         this.coins = coins;
+        this.bottles = bottles;
         this.bossStartX = boss.x;
         this.bossStartY = boss.y;
     }
@@ -29,7 +31,7 @@ class Level {
         }
     }
         for (let i = 0; i < this.coinCount; i++) {
-            this.coins.push(new CollectableObjects());
+            this.coins.push(new CollectableCoins());
         };
 
         this.boss = new Endboss(this.bossStartX, this.bossStartY);
