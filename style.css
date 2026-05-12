@@ -260,3 +260,34 @@ canvas {
     height: 100vh;
     z-index: 3;
 }
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    position: absolute;
+
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: black;
+    color: white;
+
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.tooltip-container:hover .tooltip-text {
+    opacity: 1;
+}

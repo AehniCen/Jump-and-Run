@@ -77,6 +77,8 @@ function toggleSound(button) {
     localStorage.setItem('isMuted', isMuted);
     world.setMute(isMuted);
     updateMuteButtons();
+    let tooltip = button.parentElement.querySelector('.tooltip-text');
+    tooltip.innerText = isMuted ? 'Sound on' : 'Sound off';
 }
 
 function openControls() {

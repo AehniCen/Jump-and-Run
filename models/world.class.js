@@ -163,7 +163,10 @@ class World {
             this.level.coins.forEach(coin => {
                 coin.update();
             });
-         }, 200);
+            this.level.bottles.forEach(bottle => {
+                bottle.update();
+            });
+         }, 1000 / 60);
     };
 
     checkCharacterState(){
@@ -249,6 +252,7 @@ class World {
     checkCollisions(){
         this.checkCharacterEnemyCollision();
         this.checkCharacterCoinCollision();
+        this.checkCharacterBottleCollision();
         this.checkThrowingBottleCollision();
         this.checkCharacterBossCollision();
     };
@@ -297,22 +301,33 @@ class World {
         })
     };
 
+    checkCharacterBottleCollision(){
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle) && !bottle.isCollected) {
+                bottle.isCollected = true;
+                bottle.collect(this.bottleDisplay);
+                this.bottleDisplay.updateNumber();
+
+            }
+        })
+     }
+
     checkThrowingBottleCollision(){
         const boss = this.level.boss;
-        this.throwableObjects.forEach((bottle) => {
+        this.throwableObjects.forEach((throwBottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy) && !enemy.isDead() && !bottle.splashAnimationFinished && !this.gameOver) {
+                if (throwBottle.isColliding(enemy) && !enemy.isDead() && !throwBottle.splashAnimationFinished && !this.gameOver) {
                     enemy.damage = 100;
                     enemy.hit();
                     enemy.getDeadImage();
-                    bottle.getSplashAnimation();
+                    throwBottle.getSplashAnimation();
                 }
             })
-            if (bottle.isColliding(boss) && !bottle.splashAnimationFinished && !bottle.splashed && !boss.isHurt() && !boss.isDead()) {
+            if (throwBottle.isColliding(boss) && !throwBottle.splashAnimationFinished && !throwBottle.splashed && !boss.isHurt() && !boss.isDead()) {
                 boss.hit();
                 console.log(boss.energy);
                 boss.setState('hurt');
-                bottle.getSplashAnimation();
+                throwBottle.getSplashAnimation();
             }
         })
     };

@@ -1,3 +1,13 @@
+function createCoinArc(startX, baseY, amount) {
+        let coins = [];
+        for (let i = 0; i < amount; i++) {
+            let x = startX + i * 100;
+            let y = baseY - Math.sin(i / (amount - 1) * Math.PI) * 100;
+            coins.push(new CollectableCoins(x, y));
+        }
+        return coins;
+    }
+
 const level1 = new Level(
     [
         new BackgroundObjects('assets/img/5_background/complete_background.png', -1440),
@@ -20,10 +30,11 @@ const level1 = new Level(
     ],
         new Endboss(),
     [
-        new CollectableCoins(),
-        new CollectableCoins(),
-        new CollectableCoins(),
-        new CollectableCoins()
+        ...createCoinArc(220, 100, 5),
+        ...createCoinArc(1000, 100, 7),
+        ...createCoinArc(2200, 100, 7),
+        ...createCoinArc(3000, 100, 7),
+        ...createCoinArc(4500, 100, 6)
     ],
     [
         new CollectableBottles(),

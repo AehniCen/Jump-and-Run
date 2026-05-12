@@ -21,4 +21,8 @@ class BottleDisplay extends DrawableObjects {
     reduceNumber(){
         this.value -= 1;
     };
+
+    updateNumber(){
+        this.value += 1;
+    };
 }

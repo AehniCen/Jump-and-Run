@@ -1,16 +1,37 @@
 class CollectableCoins extends MovableObjects {
 
-    height = 240;
-    y = 270
+    height = 180;
+    width = 180;
     speed = 10;
     isAttracted = false;
     isCollected = false;
     collectingSound = new Audio('assets/audio/coin-collected.mp3');
 
-    constructor(){
+    IMAGES = [
+        'assets/img/8_coin/coin_1.png',
+        'assets/img/8_coin/coin_2.png'
+    ]
+
+    constructor(x, y){
         super().loadImage('assets/img/8_coin/coin_2.png');
-        this.width = this.height;
-        this.x = 180 + Math.random() * 300;
+        this.loadImages(this.IMAGES);
+        this.x = x;
+        this.y = y;
+        this.baseY = y;
+        this.animate()
+    }
+
+    animate(){
+        setInterval(() => {
+            if (!this.isCollected) {
+                this.playAnimation(this.IMAGES);
+            }
+        }, 500);
+        setInterval(() => {
+            if (!this.isCollected) {
+                this.y = this.baseY + Math.sin(Date.now() / 200) * 5;
+            }
+        }, 1000 / 60);
     }
 
     collect(collectedCoins) {
@@ -25,18 +46,13 @@ class CollectableCoins extends MovableObjects {
     }
 
     update() {
-    if (this.isAttracted && this.collectedCoins) {
-        setInterval(() => {
-            let ax = this.collectedCoins - this.world.camera_x;
-            let dx = ax - this.x;
-            let dy = this.collectedCoins.y - this.y;
+        if (this.isAttracted && this.collectedCoins) {
             this.y -= this.speed;
             this.x = this.collectedCoins.x + 80;
             if (this.width > 0 && this.height > 0) {
                 this.width -= this.speed / 2;
                 this.height -= this.speed / 2;
             }
-        }, 1000/50);
-    }
+        }
     }
 }

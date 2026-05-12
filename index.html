@@ -31,26 +31,38 @@
     <h1>El Pollo Loco</h1>
 
     <div id="start-div" class="overlay-divs">
-        <button id="controls-btn" onclick="openControls()">
-            <img src="assets/icons/game-controls-colored.png" alt="">
-        </button>
+        <div class="tooltip-container">
+            <button id="controls-btn" onclick="openControls()">
+                <img src="assets/icons/game-controls-colored.png" alt="">
+            </button>
+            <span class="tooltip-text">Controls</span>
+        </div>
         <button id="start-btn" onclick="startGame()">
             <p>Start Game</p>
         </button>
-        <button id="mute-btn" onclick="toggleSound(this)">
-            <img src="assets/icons/sound.png" alt="sound-on-icon">
-        </button>
+        <div class="tooltip-container">
+            <button id="mute-btn" onclick="toggleSound(this)">
+                <img src="assets/icons/sound.png" alt="sound-on-icon">
+            </button>
+            <span class="tooltip-text" id="tool-text-sound">Sound off</span>
+        </div>
     </div>
 
     <div id="pause-div" class="overlay-divs" style="display: none;">
         <div id="pause-div-header">
-            <button id="controls-btn" onclick="openControls()">
-                <img src="assets/icons/game-controls-colored.png" alt="">
-            </button>
+            <div class="tooltip-container">
+                <button id="controls-btn" onclick="openControls()">
+                    <img src="assets/icons/game-controls-colored.png" alt="">
+                </button>
+                <span class="tooltip-text">Controls</span>
+            </div>
             <p>Pause</p>
-            <button id="mute-btn" onclick="toggleSound(this)">
-                <img src="assets/icons/sound.png" alt="sound-on-icon">
-            </button>
+            <div class="tooltip-container">
+                <button id="mute-btn" onclick="toggleSound(this)">
+                    <img src="assets/icons/sound.png" alt="sound-on-icon">
+                </button>
+                <span class="tooltip-text" id="tool-text-sound">Sound off</span>
+            </div>
         </div>
         <div id="pause-btns">
             <button class="menu-btns" onclick="backToGame()">Back To Game</button>

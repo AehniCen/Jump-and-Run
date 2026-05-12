@@ -126,9 +126,4 @@ class MovableObjects extends DrawableObjects {
            this.speedY < -12;
     };
 
-    collectCoins(coin) {
-        coin.x -= this.speed;
-        console.log('jup');
-        
-    };
 } 
