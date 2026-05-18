@@ -281,7 +281,7 @@ class Endboss extends MovableObjects {
     getJumpDownAnimation(){
         this.img = this.imageCache[this.IMAGE_JUMP_DOWN];
         this.speedY = -15
-        this.x -= this.speed * 8;
+        this.x -= this.speed * 12;
         if (!this.isAboveGround()) {
             this.attackPlayed = false;
             this.getAttackDownSound();

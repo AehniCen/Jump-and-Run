@@ -30,11 +30,14 @@ const level1 = new Level(
     ],
         new Endboss(),
     [
-        ...createCoinArc(220, 100, 5),
-        ...createCoinArc(1000, 100, 7),
-        ...createCoinArc(2200, 100, 7),
-        ...createCoinArc(3000, 100, 7),
-        ...createCoinArc(4500, 100, 6)
+        ...createCoinArc(220, 100, 3),
+        ...createCoinArc(1000, 100, 5),
+        ...createCoinArc(2200, 100, 5),
+        ...createCoinArc(3000, 100, 3),
+        ...createCoinArc(4500, 100, 3),
+        ...createCoinArc(6400, 100, 5),
+        ...createCoinArc(8700, 100, 5),
+        ...createCoinArc(9500, 100, 3)
     ],
     [
         new CollectableBottles(),

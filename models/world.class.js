@@ -260,7 +260,7 @@ class World {
     checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead() && !this.character.isHurt()) {
-                this.character.damage = 100;
+                this.character.damage = 5;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 
@@ -281,7 +281,7 @@ class World {
     checkCharacterBossCollision(){
         const boss = this.level.boss;
         if (this.character.isColliding(boss) && !this.character.isHurt()) {
-            this.character.damage = 50;
+            this.character.damage = 5;
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
         }

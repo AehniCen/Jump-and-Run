@@ -5,7 +5,7 @@ class CollectableBottles extends MovableObjects {
     speed = 10;
     isAttracted = false;
     isCollected = false;
-    collectingSound = new Audio('assets/audio/coin-collected.mp3');
+    collectingSound = new Audio('assets/audio/salsa_bottle.mp3');
 
     IMAGES = [
         'assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
@@ -29,6 +29,7 @@ class CollectableBottles extends MovableObjects {
     
     getCollectingSound(){
         this.collectingSound.play();
+        this.collectingSound.volume = 10;
     }
 
     update() {

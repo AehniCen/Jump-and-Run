@@ -58,6 +58,13 @@ class Character extends MovableObjects {
         'assets/img/2_character_pepe/5_dead/D-56.png',
         'assets/img/2_character_pepe/5_dead/D-57.png'
     ];
+
+    offset = {
+        top: 220,
+        bottom: 10,
+        right: 30,
+        left: 10
+    }
     
     y = 80;
     height = 320;
@@ -170,7 +177,7 @@ class Character extends MovableObjects {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
                 this.moveRight();
             }
-            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused && !this.isHurt() && !this.isDead()) {
+            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused && !this.isDead()) {
                 this.moveLeft();
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused && !this.isDead()) {

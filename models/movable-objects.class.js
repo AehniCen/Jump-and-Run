@@ -9,6 +9,13 @@ class MovableObjects extends DrawableObjects {
     currentImage = 0;
     gravityPaused = false;
 
+    offset = {
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 20
+    };
+
     applyGravity() {
 
         setInterval(() => {
@@ -113,16 +120,16 @@ class MovableObjects extends DrawableObjects {
     };
 
     isColliding(mo){
-        return this.x + this.width > mo.x &&
-         this.y + this.height > mo.y &&
-         this.x < mo.x &&
-         this.y < mo.y + mo.height
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+         this.y + this.height - this.offset.bottom > mo.y &&
+         this.x + this.offset.left < mo.x &&
+         this.y + this.offset.top < mo.y + mo.height
     };
 
     isAttacking(mo) {
     return this.x + this.width > mo.x &&
            this.x < mo.x + mo.width &&
-           this.y + this.height <= mo.y + 60 &&     // jetzt berührt er ihn
+           this.y + this.height <= mo.y + 60 &&
            this.speedY < -12;
     };
 
