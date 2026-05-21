@@ -267,7 +267,7 @@ class Character extends MovableObjects {
         clearInterval(this.dyingIntervall);
         clearInterval(this.conditionIntervall);
         clearInterval(this.idleModeIntervall);
-    }
+    };
     
 
 

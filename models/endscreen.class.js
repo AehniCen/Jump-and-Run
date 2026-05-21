@@ -33,6 +33,9 @@ class Endscreen extends MovableObjects {
     }
 
     update() {
+        if (this.world.paused) {
+            return;
+        }
         let timePassed = (new Date().getTime() - this.startTime) / 1000;
         if (timePassed < 2 && this.currentStep === 0) {
             if (!this.world.winner) {

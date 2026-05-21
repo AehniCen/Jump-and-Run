@@ -180,8 +180,8 @@ class World {
         if (distance < 400 && !boss.active) {
             boss.active = true;
             boss.animate();
-        }
-    }
+        };
+    };
 
     lostTheGame(){
         if (this.character.state === 'dying') {
@@ -191,24 +191,24 @@ class World {
                 this.getGameOverSound();
             }
         };
-        if (this.character.state === 'gameover' && !this.endscreen.started) {
+        if (this.character.state === 'gameover' && !this.endscreen.started && !this.paused) {
             this.gameOver = true;
             this.endscreen.getStartTime();
             this.endscreen.started = true;
-        }
-        if (this.character.state === 'gameover' && this.endscreen.animationFinished) {
+        };
+        if (this.character.state === 'gameover' && this.endscreen.animationFinished && !this.paused) {
             this.paused = true;
             document.getElementById('endscreen-div').style.display = 'flex';
-        }
-    }
+        };
+    };
 
     getGameOverSound(){
         if (!this.gameIsOver) {
             this.gameOverSound.play();
             this.gameOverSound.volume = 0.5;
             this.gameIsOver = true;
-        }
-    }
+        };
+    };
 
     wonTheGame() {
         if (this.level.boss.state === 'defeated' && !this.winner) {
@@ -260,7 +260,7 @@ class World {
     checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead() && !this.character.isHurt()) {
-                this.character.damage = 5;
+                this.character.damage = 100;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 

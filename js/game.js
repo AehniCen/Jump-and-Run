@@ -125,7 +125,7 @@ window.addEventListener('keydown', (e) => {
     if (e.key == 'd') {
         keyboard.KEYD = true;    
     };
-    if (e.key == 'Escape' && keyboard.ESC == false && startMenu.style.display == 'none') {
+    if (e.key == 'Escape' && keyboard.ESC == false && startMenu.style.display == 'none' && endscreenDiv.style.display == 'none') {
         keyboard.ESC = true;    
         world.paused = true;
         pauseMenu.style.display = 'block';

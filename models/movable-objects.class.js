@@ -92,8 +92,8 @@ class MovableObjects extends DrawableObjects {
         this.speedY = 30;
         this.acceleration = 5;
         this.isDyingStarted = true;
-    }
-}
+        };
+    };
 
     hit(){
         this.energy -= this.damage;
@@ -106,7 +106,7 @@ class MovableObjects extends DrawableObjects {
             this.energy = 0
         } else {
             this.lastHit = new Date().getTime();
-        }       
+        };       
     };
 
     isHurt(){

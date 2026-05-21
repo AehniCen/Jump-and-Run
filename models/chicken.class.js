@@ -33,12 +33,14 @@ class Chicken extends MovableObjects {
 
     getWalkingInterval() {
         setInterval(() => {
-            if(!this.world.paused && !this.isDead()){
-                this.playAnimation(this.IMAGES_WALKING);
-                this.playWalkingSound();
+            if(this.world.paused || this.isDead()) {
+                this.walkingSound.pause();
+                return;
             }
+            this.playAnimation(this.IMAGES_WALKING);
+            this.playWalkingSound();
         }, 120);
-    };
+    }
 
     getDeadImage() {
         if (this instanceof BabyChicken && this.isDead() && !this.world.paused && !this.alreadyDead) {
@@ -59,16 +61,9 @@ class Chicken extends MovableObjects {
     };
 
     playWalkingSound() {
-        if (!this.world) {
-            return;
-        }
-        if (!this.world.paused) {
-            this.walkingSound.playbackRate = 1;
-            this.walkingSound.volume = 0.2;
-            this.walkingSound.currentTime = 0;
-            this.walkingSound.play();
-        }
-}
+        this.walkingSound.volume = 0.2;
+        this.walkingSound.play();
+    };
 
     playDyingSound(){
         if (this.dyingSound.paused) {

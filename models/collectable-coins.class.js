@@ -6,6 +6,7 @@ class CollectableCoins extends MovableObjects {
     isAttracted = false;
     isCollected = false;
     collectingSound = new Audio('assets/audio/coin-collected.mp3');
+    world;
 
     IMAGES = [
         'assets/img/8_coin/coin_1.png',
@@ -23,12 +24,18 @@ class CollectableCoins extends MovableObjects {
 
     animate(){
         setInterval(() => {
-            if (!this.isCollected) {
+            if (!this.world) {
+                return;
+            }
+            if (!this.isCollected && !this.world.paused) {
                 this.playAnimation(this.IMAGES);
             }
         }, 500);
         setInterval(() => {
-            if (!this.isCollected) {
+            if (!this.world) {
+                return;
+            }
+            if (!this.isCollected && !this.world.paused) {
                 this.y = this.baseY + Math.sin(Date.now() / 200) * 5;
             }
         }, 1000 / 60);
