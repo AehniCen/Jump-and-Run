@@ -29,7 +29,7 @@ class CollectableBottles extends MovableObjects {
     
     getCollectingSound(){
         this.collectingSound.play();
-        this.collectingSound.volume = 10;
+        this.collectingSound.volume = 1;
     }
 
     update() {

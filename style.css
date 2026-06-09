@@ -13,7 +13,7 @@
 }
 
 body {
-    background-image: url(../assets/img/5_background/body-background.png);
+    background-image: url(./assets/img/5_background/body-background.png);
     background-size: fill;
     background-position: center;
     display: flex;
@@ -79,7 +79,7 @@ canvas {
 }
 
 #start-div {
-    background-image: url(../assets/img/9_intro_outro_screens/start/startscreen_1.png);
+    background-image: url(./assets/img/9_intro_outro_screens/start/startscreen_1.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: -75px;
@@ -202,7 +202,6 @@ canvas {
     justify-content: center;
     align-items: center;
     background-color: #13131354;
-    
 }
 
 #game-over-img {
@@ -221,13 +220,14 @@ canvas {
 
 #controls-div{
     position: absolute;
-    width: 30%;
-    height: 20%;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 60%;
+    height: 80%;
     background-color: #f5c681;
     border: 12px solid #bb371c;
     border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     padding: 20px;
     font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
     font-size: 28px;
@@ -243,6 +243,7 @@ canvas {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    text-align: center;
 }
 
 #close-btn{
@@ -264,11 +265,10 @@ canvas {
 
 #controls-div-overlay{
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 10px;
+    left: 15%;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     z-index: 3;
 }
 
@@ -314,10 +314,18 @@ canvas {
         width: 100% !important;
         height: 100% !important;
     }
+    #controls-div{
+        width: 50% !important;
+        height: 80% !important;
+    }
     .menu-btns {
         width: 70%;
         height: 30%;
         font-size: 50px;
+    }
+    #endscreen-div .menu-btns {
+        margin-top: 20px;
+        height: 15%;
     }
     #pause-div p {
         font-size: 90px;
@@ -346,6 +354,10 @@ canvas {
     button {
         border: 8px solid #A0220A;
     }
+
+    #controls-div{
+        width: 60% !important;
+    }
 }
 
 @media only screen and (max-width: 690px) {
@@ -357,6 +369,24 @@ canvas {
     #start-btn p {
         font-size: 55px;
     }
+
+}
+
+@media only screen and (max-width: 650px) {
+    #controls-div{
+        font-size: 24px;
+        width: 70% !important;
+        padding-bottom: 5px;
+    }
+
+    #control-icons-div img {
+        height: 40px;
+    }
+
+    #controls-div-overlay{
+        left: 10%;
+    }
+
 }
 
 
@@ -377,11 +407,31 @@ canvas {
     #start-menu-arrow {
         width: 50px;
     }
+
+    body {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    #game-over-img {
+        width: 300px;    
+    }
 }
 
 @media only screen and (max-width: 590px) {
     #start-btn p {
         font-size: 50px;
+    }
+    #controls-div {
+        padding: 10px;
+    }
+    #close-btn img{
+        width: 30px;
     }
 }
 
@@ -403,6 +453,15 @@ canvas {
     #start-btn {
         width: 60%;
     }
+
+    #game-over-img {
+        width: 250px;    
+    }
+
+    #endscreen-div .menu-btns {
+        font-size: 30px;
+        margin-top: 15px;
+    }
 }
 
 @media only screen and (max-width: 500px) {  
@@ -417,6 +476,11 @@ canvas {
 
     #start-btn p {
         font-size: 45px;
+    }
+
+    #endscreen-div .menu-btns {
+        height: 20%;
+        margin-top: 10px;
     }
 }
 
@@ -434,6 +498,26 @@ canvas {
         height: 40px;
         width: 30px;
     }
+
+    #controls-div{
+        font-size: 22px;
+        width: 80% !important;
+    }
+
+    #control-icons-div img {
+        height: 35px;
+    }
+
+    #controls-div-overlay{
+        left: 5%;
+        top: 5px;
+    }
+
+    #game-over-img {
+        width: 200px;    
+    }
+
+    
 
 }
 
@@ -454,6 +538,11 @@ canvas {
     .controls-btn {
         margin-left: 5px;
     }
+
+    #controls-div-overlay{
+        top: 2px;
+    }
+
 }
 
 @media only screen and (max-width: 420px) { 
@@ -475,6 +564,32 @@ canvas {
 
     button {
         border: 6px solid #A0220A;
+    }
+
+    #controls-div{
+        font-size: 20px;
+        height: 70% !important;
+    }
+
+    #controls-div-overlay{
+        top: 10px;
+    }
+
+    #control-icons-div img {
+        height: 30px;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    #controls-div-overlay{
+        left: 3%;
+    }
+    #endscreen-div .menu-btns {
+        font-size: 25px;
+        height: 15%;
+    }
+    #endscreen-div .restart-arrow {
+        width: 20px;
     }
 }
 
@@ -512,10 +627,34 @@ canvas {
     .controls-btn {
         margin-left: 0px;
     }
+    #endscreen-div .menu-btns {
+        font-size: 20px;
+        height: 15%;
+        margin-top: 5px;
+    }
+    #endscreen-div .restart-arrow {
+        width: 15px;
+    }
 }
 
 @media only screen and (max-width: 340px) { 
     #start-btn p {
         font-size: 30px;
+    }
+
+    #controls-div{
+        font-size: 18px;
+    }
+
+    #control-icons-div img {
+        height: 25px;
+    }
+
+    #controls-div-overlay{
+        left: 2%;
+    }
+
+    #game-over-img {
+        width: 150px;
     }
 }

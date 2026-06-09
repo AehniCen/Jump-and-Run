@@ -228,6 +228,7 @@ class World {
             this.character.state = 'winner';
             this.getWinnerSound();
             this.pauseWorldMusic();
+            this.pauseEndbossMusic();
             this.endscreen.getStartTime();
             this.endscreen.started = true;
             setTimeout(() => {
@@ -270,6 +271,13 @@ class World {
         if (distance < 600 && !this.paused && !this.winner) {
             this.endbossSound.play();
             this.endbossSound.volume = 0.3;  
+        }
+    }
+
+    pauseEndbossMusic(){
+        if (!this.endbossSoundPaused) {
+            this.endbossSoundPaused = true;
+            this.endbossSound.pause();
         }
     }
 

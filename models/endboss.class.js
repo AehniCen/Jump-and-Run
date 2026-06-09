@@ -217,7 +217,7 @@ class Endboss extends MovableObjects {
             Math.floor(progress * frames.length)
         );
         this.img = this.imageCache[frames[frameIndex]];
-        if (elapsedJump === duration) {
+        if (elapsedJump >= duration) {
             this.animationFinished = true;
         }
     }

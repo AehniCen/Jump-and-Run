@@ -124,8 +124,8 @@ window.addEventListener('keydown', (e) => {
     if (e.key == ' ') {
         keyboard.SPACE = true;    
     };
-    if (e.key == 'd') {
-        keyboard.KEYD = true;    
+    if (e.key.toLowerCase() === 'd') {
+        keyboard.KEYD = true;
     };
     if (e.key == 'Escape' && keyboard.ESC == false && startMenu.style.display == 'none' && endscreenDiv.style.display == 'none') {
         keyboard.ESC = true;    
