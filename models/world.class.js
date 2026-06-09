@@ -12,13 +12,17 @@ class World {
     camera_x = 0;
     paused = true;
     worldMusic = new Audio('assets/audio/level-music.mp3');
+    worldMusicPaused = false;
     endscreen = new Endscreen();
     gameOver = false;
     winner;
     endscreenDiv = document.getElementById('endscreen-div');
     sounds;
     gameOverSound = new Audio('assets/audio/game-over.mp3');
-    winnerSound = new Audio('assets/audio/winner.mp3')
+    winnerSound = new Audio('assets/audio/winner.mp3');
+    endbossSound = new Audio('assets/audio/endboss-music-entrance.mp3');
+    endbossSoundPaused;
+    canThrow = true;
 
     constructor(canvas, keyboard){
         this.canvas = canvas;
@@ -59,7 +63,7 @@ class World {
             if (enemy.walkingSound) this.sounds.push(enemy.walkingSound);
             if (enemy.dyingSound) this.sounds.push(enemy.dyingSound);
         });
-        if (this.level.boss.alertSound) this.sounds.push(this.level.boss.alertSound);
+        if (this.endbossSound) this.sounds.push(this.endbossSound);
         if (this.level.boss.attackingSound) this.sounds.push(this.level.boss.attackingSound);
         if (this.character.walkingSound) this.sounds.push(this.character.walkingSound);
         if (this.character.hurtingSound) this.sounds.push(this.character.hurtingSound);
@@ -109,6 +113,7 @@ class World {
     };
 
     restart() {
+        console.log("NEW COINS", this.coins);
         this.character.stopIntervals(); 
         this.character = new Character();
         this.endscreen = new Endscreen();
@@ -121,13 +126,18 @@ class World {
         this.bottleDisplay.value = 20;
         this.setWorld();
         this.collectSounds();
-}
+        this.level.coins.forEach(c => c.world = this);
+        this.level.bottles.forEach(b => b.world = this);
+        this.level.enemies.forEach(e => e.world = this);
+        this.enemies = this.level.enemies;
+        this.coins = this.level.coins;
+        this.bottles = this.level.bottles;
+    }
 
     addObjectsToMap(objects){
         objects.forEach((o) => {
             this.addToMap(o);
         });
-
     };
 
     addToMap(mo){
@@ -156,6 +166,7 @@ class World {
     run(){
         setInterval(() => {
             this.playWorldMusic();
+            this.playEndbossMusic();
             this.checkCollisions();
             this.checkThrowableObjects();
             this.checkCharacterState();
@@ -167,6 +178,7 @@ class World {
                 bottle.update();
             });
          }, 1000 / 60);
+         console.log(this.level.coins.map(c => c.isCollected));
     };
 
     checkCharacterState(){
@@ -237,7 +249,7 @@ class World {
     };
 
     playWorldMusic(){
-        if (!this.paused && !this.winner) {
+        if (!this.paused && !this.winner && !this.worldMusicPaused) {
             this.worldMusic.play();
             this.worldMusic.volume = 0.7;
         } else {
@@ -246,8 +258,21 @@ class World {
     };
 
     pauseWorldMusic(){
-        this.worldMusic.pause();
+        if (!this.worldMusicPaused) {
+            this.worldMusicPaused = true;
+            this.worldMusic.pause();  
+        }
     }
+
+    playEndbossMusic(){
+        let boss = this.level.boss;
+        let distance = Math.abs(this.character.x - boss.x);
+        if (distance < 600 && !this.paused && !this.winner) {
+            this.endbossSound.play();
+            this.endbossSound.volume = 0.3;  
+        }
+    }
+
 
     checkCollisions(){
         this.checkCharacterEnemyCollision();
@@ -286,8 +311,13 @@ class World {
             this.statusBar.setPercentage(this.character.energy);
         }
         let distance = Math.abs(this.character.x - boss.x);
-        if (distance < 200 && boss.state === 'walk') {          
-            boss.setState('attack-begin');    
+        if (distance < 400 && boss.state === 'rest' && !this.paused) {       
+            this.pauseWorldMusic(); 
+            boss.setState('alert'); 
+            this.playEndbossMusic();
+        }
+        if (distance < 200 && boss.state === 'walk') {       
+            boss.setState('attack-begin'); 
         }
     }
 
@@ -333,12 +363,16 @@ class World {
     };
 
     checkThrowableObjects() {
-        if(this.keyboard.KEYD && this.bottleDisplay.value > 0) {
+        if(this.keyboard.KEYD && this.bottleDisplay.value > 0 && this.canThrow) {
             let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
             bottle.world = this;
             bottle.throw();
             this.throwableObjects.push(bottle);
             this.bottleDisplay.reduceNumber();
+            this.canThrow = false;
         }   
+        if (!this.keyboard.KEYD) {
+            this.canThrow = true;
+        }
     };
 };

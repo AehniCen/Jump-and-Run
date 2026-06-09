@@ -10,6 +10,7 @@ class Level {
         this.backgroundObjects = backgroundObjects;
         this.enemyCount = enemies.length;
         this.coinCount = coins.length;
+        this.bottleCount = bottles.length;
 
         this.enemies = enemies;
         this.boss = boss;
@@ -22,18 +23,20 @@ class Level {
     restartLevel(){
         this.enemies = [];
         this.coins = [];
-
+        this.bottles = [];
         for (let i = 0; i < this.enemyCount; i++) {
-        if (i < 2) {
-            this.enemies.push(new Chicken());
-        } else {
-            this.enemies.push(new BabyChicken());
+            if (i < 2) {
+                this.enemies.push(new Chicken());
+            } else {
+                this.enemies.push(new BabyChicken());
+            }
         }
-    }
         for (let i = 0; i < this.coinCount; i++) {
             this.coins.push(new CollectableCoins());
-        };
-
+        }
+        for (let i = 0; i < this.bottleCount; i++) {
+            this.bottles.push(new CollectableBottles());
+        }
         this.boss = new Endboss(this.bossStartX, this.bossStartY);
-    };
+    }
 }

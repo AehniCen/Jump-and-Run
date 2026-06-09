@@ -48,12 +48,12 @@ class Endboss extends MovableObjects {
     width = 400;
     height = 400;
     y = 50;
-    x = 10000;
+    x = 1000;
     speed = 15;
     world;
     currentImage;
     isAlerted = false;
-    state = 'alert';
+    state = 'rest';
     damage = 34;
     attackingSound = new Audio('assets/audio/rooster_alarm.mp3');
     alertSound = new Audio('assets/audio/rooster_alarm.mp3');
@@ -123,6 +123,7 @@ class Endboss extends MovableObjects {
                     break;
                 case 'defeated':
                     break;
+                
             }
         }, 1000 / 10)
     };
@@ -147,7 +148,6 @@ class Endboss extends MovableObjects {
 
     getAlertAnimation(){
         this.playAnimationOnce(this.IMAGES_ALERT, 'alertAnimationFinished');
-        this.getAlertSound();
         if (this.alertAnimationFinished) {            
             this.setState('walk');
         }
@@ -158,7 +158,8 @@ class Endboss extends MovableObjects {
         this.alertPlayed = true;
         setTimeout(() => {
             this.alertSound.play();
-            this.alertSound.playbackRate = 1;
+            this.alertSound.playbackRate = 0.5;
+            this.alertSound.volume = 10;
         }, 400);
     }
 

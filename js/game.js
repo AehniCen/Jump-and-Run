@@ -11,6 +11,7 @@ let isMuted = false;
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    world.paused = true;
     startMenu = document.getElementById('start-div');
     pauseMenu = document.getElementById('pause-div');
     endscreenDiv = document.getElementById('endscreen-div');
@@ -44,6 +45,7 @@ function showViewportSize() {
 function startGame() {
     startMenu.style.display = 'none';
     world.paused = false;
+    world.character.lastActionTime = Date.now();
     getButtonSound();
     };
 
@@ -128,6 +130,7 @@ window.addEventListener('keydown', (e) => {
     if (e.key == 'Escape' && keyboard.ESC == false && startMenu.style.display == 'none' && endscreenDiv.style.display == 'none') {
         keyboard.ESC = true;    
         world.paused = true;
+        world.endbossSound.pause();
         pauseMenu.style.display = 'block';
     } else if (e.key == 'Escape' && keyboard.ESC == true && startMenu.style.display == 'none') {
         keyboard.ESC = false; 

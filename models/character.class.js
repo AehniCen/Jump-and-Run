@@ -108,7 +108,8 @@ class Character extends MovableObjects {
         }
         if(!this.world.keyboard.RIGHT &&
            !this.world.keyboard.LEFT &&
-           !this.world.keyboard.SPACE
+           !this.world.keyboard.SPACE &&
+           !this.world.paused
         ){
             this.idleMode = true;
         } else {
@@ -234,7 +235,7 @@ class Character extends MovableObjects {
             if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode && timePassed > 5 && !this.world.paused &&!this.world.winner && !this.isDead()){
+            if(this.idleMode && timePassed > 10 && !this.world.paused &&!this.world.winner && !this.isDead()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
                 this.getSnoringSound();
             } else {
@@ -259,7 +260,8 @@ class Character extends MovableObjects {
         this.getMovementIntervall();
         this.getDyingAnimation();
         this.getConditionIntervall();
-        this.getIdleModeIntervall();
+        this.getIdleModeIntervall();   
+
     };
 
     stopIntervals() {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/flavicon/sombrero-hut.png">
     <title>Jump'n'Run</title>
     <script src="models/level.class.js"></script>
     <script src="models/keyboard.class.js"></script>
@@ -30,84 +31,89 @@
 
     <h1>El Pollo Loco</h1>
 
-    <div id="start-div" class="overlay-divs">
-        <div class="tooltip-container">
-            <button id="controls-btn" onclick="openControls()">
-                <img src="assets/icons/game-controls-colored.png" alt="">
-            </button>
-            <span class="tooltip-text">Controls</span>
-        </div>
-        <button id="start-btn" onclick="startGame()">
-            <p>Start Game</p>
-        </button>
-        <div class="tooltip-container">
-            <button id="mute-btn" onclick="toggleSound(this)">
-                <img src="assets/icons/sound.png" alt="sound-on-icon">
-            </button>
-            <span class="tooltip-text" id="tool-text-sound">Sound off</span>
-        </div>
-    </div>
+    <div id="game-div">
 
-    <div id="pause-div" class="overlay-divs" style="display: none;">
-        <div id="pause-div-header">
+        <div id="start-div" class="overlay-divs">
             <div class="tooltip-container">
-                <button id="controls-btn" onclick="openControls()">
+                <button class="controls-btn" onclick="openControls()">
                     <img src="assets/icons/game-controls-colored.png" alt="">
                 </button>
                 <span class="tooltip-text">Controls</span>
             </div>
-            <p>Pause</p>
+            <button id="start-btn" onclick="startGame()">
+                <p>Start Game</p>
+            </button>
             <div class="tooltip-container">
-                <button id="mute-btn" onclick="toggleSound(this)">
+                <button class="mute-btn" onclick="toggleSound(this)">
                     <img src="assets/icons/sound.png" alt="sound-on-icon">
                 </button>
                 <span class="tooltip-text" id="tool-text-sound">Sound off</span>
             </div>
         </div>
-        <div id="pause-btns">
-            <button class="menu-btns" onclick="backToGame()">Back To Game</button>
-            <button id="restart-btn" class="menu-btns" onclick="restartGame()">
-                <img id="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
+
+        <div id="pause-div" class="overlay-divs" style="display: none;">
+            <div id="pause-div-header">
+                <div class="tooltip-container">
+                    <button class="controls-btn" onclick="openControls()">
+                        <img src="assets/icons/game-controls-colored.png" alt="">
+                    </button>
+                    <span class="tooltip-text">Controls</span>
+                </div>
+                <p>Pause</p>
+                <div class="tooltip-container">
+                    <button class="mute-btn" onclick="toggleSound(this)">
+                        <img src="assets/icons/sound.png" alt="sound-on-icon">
+                    </button>
+                    <span class="tooltip-text" id="tool-text-sound">Sound off</span>
+                </div>
+            </div>
+            <div class="pause-btns">
+                <button class="menu-btns" onclick="backToGame()">Back To Game</button>
+                <button class="restart-btn menu-btns" onclick="restartGame()">
+                    <img class="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
+                </button>
+                <button class="start-menu-btn menu-btns" onclick="backToStartMenu()">
+                    <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
+                </button>
+            </div>
+        </div>
+
+        <div id="endscreen-div" class="overlay-divs" style="display: none;">
+            <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
+            <button class="restart-btn" class="menu-btns" onclick="restartGame()">
+                <img class="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
             </button>
-            <button id="start-menu-btn" class="menu-btns" onclick="backToStartMenu()">
+            <button class="start-menu-btn menu-btns" onclick="backToStartMenu()">
                 <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
             </button>
         </div>
-    </div>
 
-    <div id="endscreen-div" class="overlay-divs" style="display: none;">
-        <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
-        <button id="restart-btn" class="menu-btns" onclick="restartGame()">
-            <img id="restart-arrow" src="assets/icons/restart-arrow.png" alt="">Restart
-        </button>
-        <button id="start-menu-btn" class="menu-btns" onclick="backToStartMenu()">
-            <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
-        </button>
-    </div>
-
-    <div id="controls-div-overlay" onclick="closeControls()" style="display: none;">
-        <div id="controls-div" class="overlay-divs">
-            <div id="control-icons-div">
-                <img class="control-icons" id="arrows-icon" src="assets/icons/arrow-keys.png" alt="arrow-icon">
-                <img class="control-icons" id="space-icon" src="assets/icons/space-key.png" alt="space-icon">
-                <img class="control-icons" id="d-key-icon" src="assets/icons/d-key.png" alt="d-key">
-                <img class="control-icons" id="espace-icon" src="assets/icons/pause-key.png" alt="">
+        <div id="controls-div-overlay" onclick="closeControls()" style="display: none;">
+            <div id="controls-div" class="overlay-divs">
+                <div id="control-icons-div">
+                    <img class="control-icons" id="arrows-icon" src="assets/icons/arrow-keys.png" alt="arrow-icon">
+                    <img class="control-icons" id="space-icon" src="assets/icons/space-key.png" alt="space-icon">
+                    <img class="control-icons" id="d-key-icon" src="assets/icons/d-key.png" alt="d-key">
+                    <img class="control-icons" id="espace-icon" src="assets/icons/pause-key.png" alt="">
+                </div>
+                <div id="control-text-div">
+                    <p>walk</p>
+                    <p>jump</p>
+                    <p>throw bottles</p>
+                    <p>pause game</p>
+                </div>
+                <button id="close-btn" onclick="closeControls()">
+                    <img src="assets/icons/close.png" alt="close-png">
+                </button>
             </div>
-            <div id="control-text-div">
-                <p>walk</p>
-                <p>jump</p>
-                <p>throw bottles</p>
-                <p>pause game</p>
-            </div>
-            <button id="close-btn" onclick="closeControls()">
-                <img src="assets/icons/close.png" alt="close-png">
-            </button>
         </div>
-    </div>
-    
-    <canvas id="canvas" width="720" height="480">
 
-    </canvas>
+        <canvas id="canvas" width="720" height="480">
+
+        </canvas>
+
+    </div>
+
 
 </body>
 </html>
