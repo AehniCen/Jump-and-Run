@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="assets/flavicon/sombrero-hut.png">
-    <title>Jump'n'Run</title>
+    <title>El Pollo Loco</title>
     <script src="models/level.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/drawable-objects.class.js"></script>
@@ -31,7 +31,9 @@
 
     <h1>El Pollo Loco</h1>
 
-    <div id="game-div">
+    <div class="game-div" id="fullscreen">
+
+        <img onclick="fullscreen()" id="expand-icon" src="assets/icons/expand.png" alt="fullscreen-icon">
 
         <div id="start-div" class="overlay-divs">
             <div class="tooltip-container">
@@ -108,9 +110,21 @@
             </div>
         </div>
 
+        <div id="mobile-controls">
+            <div class="mobile-movement">
+                <img src="assets/icons/right-arrow.png" alt="" id="left-arrow">
+                <img src="assets/icons/right-arrow.png" alt="" id="right-arrow">
+            </div>
+            <div class="mobile-actions">
+                <img src="assets/icons/arrow-up.png" alt="" id="jump-arrow">
+                <img src="assets/icons/arrow.png" alt="" id="throw-arrow">
+            </div>
+        </div>
+
         <canvas id="canvas" width="720" height="480">
 
         </canvas>
+
 
     </div>
 

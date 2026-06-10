@@ -48,7 +48,7 @@ class Endboss extends MovableObjects {
     width = 400;
     height = 400;
     y = 50;
-    x = 1000;
+    x = 9700;
     speed = 15;
     world;
     currentImage;

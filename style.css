@@ -23,7 +23,7 @@ body {
 
 }
 
-#game-div {
+.game-div {
     position: relative;
     width: 720px;
     height: 480px;
@@ -303,8 +303,42 @@ canvas {
     opacity: 1;
 }
 
+#mobile-controls {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    bottom: 5px;
+}
+
+.mobile-movement img{
+    width: 50px;
+}
+
+.mobile-actions img{
+    width: 50px;
+    padding-right: 20px;
+}
+
+#left-arrow {
+    transform: scaleX(-1);
+    padding-right: 20px;
+}
+
+#right-arrow {
+    padding-left: 20px;
+}
+
+#expand-icon {
+    position: absolute;
+    z-index: 10000;
+    width: 50px;
+    bottom: 5px;
+    right: 5px;
+}
+
 @media only screen and (max-width: 760px) {
-    #game-div {
+    .game-div {
         width: 100%;
         height: auto;
         aspect-ratio: 720 / 480;

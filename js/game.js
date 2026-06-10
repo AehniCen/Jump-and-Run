@@ -5,6 +5,7 @@ let startMenu;
 let pauseMenu;
 let endscreenDiv;
 let controlsDiv;
+let mobileControls;
 let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
 
@@ -14,12 +15,10 @@ function init() {
     world.paused = true;
     startMenu = document.getElementById('start-div');
     pauseMenu = document.getElementById('pause-div');
+    mobileControls = document.getElementById('mobile-controls');
     endscreenDiv = document.getElementById('endscreen-div');
-    [startMenu, pauseMenu, endscreenDiv].forEach(el => {
-        el.style.width = canvas.width + "px";
-        el.style.height = canvas.height + "px";
-    })
     showViewportSize();
+    bindBtnsPressEvents();
 }
 
 function showViewportSize() {
@@ -97,7 +96,7 @@ function updateMuteButtons() {
     const icon = isMuted 
         ? 'assets/icons/mute.png'
         : 'assets/icons/sound.png';
-    document.querySelectorAll('#mute-btn img').forEach(img => {
+    document.querySelectorAll('.mute-btn img').forEach(img => {
         img.src = icon;
     });
 }
@@ -106,6 +105,40 @@ function getButtonSound() {
     btnSound.play();
     btnSound.volume = 0.5;
     btnSound.playbackRate = 1.5;
+}
+
+function bindBtnsPressEvents() {
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+    const jumpArrow = document.getElementById('jump-arrow');
+    const throwArrow = document.getElementById('throw-arrow');
+
+    leftArrow.addEventListener('pointerdown', () => {
+        keyboard.LEFT = true;
+    });
+    leftArrow.addEventListener('pointerup', () => {
+        keyboard.LEFT = false;
+    });
+    rightArrow.addEventListener('pointerdown', () => {
+        keyboard.RIGHT = true;
+    });
+    rightArrow.addEventListener('pointerup', () => {
+        keyboard.RIGHT = false;
+    });
+    jumpArrow.addEventListener('pointerdown', () => {
+        keyboard.SPACE = true;
+    });
+    jumpArrow.addEventListener('pointerup', () => {
+        keyboard.SPACE = false;
+    });
+    throwArrow.addEventListener('pointerup', () => {
+        keyboard.KEYD = false;
+    });
+    throwArrow.addEventListener('pointerdown', () => {
+        keyboard.KEYD = true;
+    });
+
+
 }
 
 window.addEventListener('keydown', (e) => {
@@ -132,10 +165,12 @@ window.addEventListener('keydown', (e) => {
         world.paused = true;
         world.endbossSound.pause();
         pauseMenu.style.display = 'block';
+        mobileControls.style.display = 'none';
     } else if (e.key == 'Escape' && keyboard.ESC == true && startMenu.style.display == 'none') {
         keyboard.ESC = false; 
         world.paused = false;
         pauseMenu.style.display = 'none';
+        mobileControls.style.display = 'flex';
     };    
     
 })
@@ -160,3 +195,35 @@ window.addEventListener('keyup', (e) => {
         keyboard.KEYD = false;    
     };
 })
+
+async function fullscreen() {
+    let element = document.getElementById('fullscreen');
+
+    await element.requestFullscreen();
+
+    console.log(
+    document.getElementById('fullscreen').getBoundingClientRect()
+);
+
+console.log(
+    document.getElementById('start-div').getBoundingClientRect()
+);
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
