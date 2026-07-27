@@ -6,7 +6,8 @@ class Chicken extends MovableObjects {
     width = 100;
     currentImage = 0;
     world;
-    walkingSound = new Audio('assets/audio/chicken-sound-walking.mp3');
+    static walkingSound = new Audio('assets/audio/chicken-sound-walking.mp3');
+    static aliveCount = 0;
     dyingSound = new Audio('assets/audio/chicken-attack-sound-2.mp3');
     alreadyDead = false;
 
@@ -21,6 +22,7 @@ class Chicken extends MovableObjects {
         this.loadImages(this.IMAGES_WALKING);
         this.x = 300 + Math.random() * 9500;
         this.speed = 0.15 + Math.random() * 0.35;
+        Chicken.aliveCount++;
     }
 
     getPositionInterval(){
@@ -34,11 +36,12 @@ class Chicken extends MovableObjects {
     getWalkingInterval() {
         setInterval(() => {
             if(this.world.paused || this.isDead()) {
-                this.walkingSound.pause();
+                this.pauseWalkingSound();
                 return;
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+                this.playWalkingSound();
             }
-            this.playAnimation(this.IMAGES_WALKING);
-            this.playWalkingSound();
         }, 120);
     }
 
@@ -61,9 +64,16 @@ class Chicken extends MovableObjects {
     };
 
     playWalkingSound() {
-        this.walkingSound.volume = 0.2;
-        this.walkingSound.play();
+        Chicken.walkingSound.volume = 0.5;
+        if (Chicken.walkingSound.paused && !this.world.paused) {
+            Chicken.walkingSound.loop = true;
+            Chicken.walkingSound.play();
+        }
     };
+
+    pauseWalkingSound(){
+        Chicken.walkingSound.pause();
+    }
 
     playDyingSound(){
         if (this.dyingSound.paused) {
@@ -72,6 +82,12 @@ class Chicken extends MovableObjects {
             this.dyingSound.currentTime = 0;
             this.dyingSound.play();
             this.alreadyDead = true;
+            Chicken.aliveCount--;
+
+            if (Chicken.aliveCount <= 0) {
+                Chicken.walkingSound.pause();
+                Chicken.walkingSound.currentTime = 0;
+            }
         }
     };
 

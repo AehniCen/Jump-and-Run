@@ -57,9 +57,9 @@ button {
     font-family: 'Zabars', Arial, Helvetica, sans-serif;
 }
 
-button:hover {
-    background-color: #f5c681;
-    border: 12px solid #bb371c;
+button :hover {
+    transform: scale(1.15);
+    filter: brightness(1.5);
 }
 
 h1 {
@@ -83,16 +83,52 @@ canvas {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: -75px;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: start;
     z-index: 2;
+}
+
+#settings-btn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#settings-btn img{
+    width: 50px;
+}
+
+#settings-div-overlay {
+    position: absolute;
+    background-image: url('assets/img/5_background/complete_background_mirrored.png');
+    background-size: cover;
+    background-position: -75px;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+#return-to-start-btn {
+    position: absolute;
+    display: flex;
+    align-items: start;
+    background-color: transparent;
+    border: none;
+    filter: brightness(0.7);
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+}
+
+#return-to-start-btn img{
+    width: 80px;
 }
 
 .controls-btn {
     width: 100px;
     height: 90px;
-    margin-top: 20px;
-    margin-left: 10px;
     border: none;
     background-color: transparent;
 }
@@ -102,17 +138,11 @@ canvas {
     transition: transform 125ms ease;
 }
 
-.controls-btn img:hover{
-    transform: scale(1.15);
-    filter: brightness(1.5);
-}
-
 .mute-btn {
-    margin-top: 30px;
-    margin-right: 20px;
     border: none;
     background-color: transparent;
 }
+
 
 .mute-btn img{
     height: 60px;
@@ -120,20 +150,11 @@ canvas {
     transition: transform 125ms ease;
 }
 
-.mute-btn img:hover{
-    transform: scale(1.15);
-    filter: brightness(1.5);
-}
-
 #start-btn {
     width: 340px;
     height: 100px;
     margin-top: 20px;
     transition: transform 125ms ease;
-}
-
-#start-btn:hover {
-    transform: scale(1.05);
 }
 
 #start-btn p {
@@ -166,7 +187,7 @@ canvas {
 #pause-div-header{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
 }
 
@@ -219,16 +240,14 @@ canvas {
 }
 
 #controls-div{
-    position: absolute;
+    width: 100%;
     display: grid;
+    justify-content: center;
     grid-template-columns: auto auto;
-    width: 60%;
-    height: 80%;
-    background-color: #f5c681;
-    border: 12px solid #bb371c;
-    border-radius: 20px;
+    background-image: url('assets/img/5_background/complete_background_mirrored.png');
+    background-size: cover;
+    background-position: -75px;
     display: grid;
-    padding: 20px;
     font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
     font-size: 28px;
     z-index: 5;
@@ -246,17 +265,20 @@ canvas {
     text-align: center;
 }
 
+#control-icons-div {
+    margin-right: 20px;
+}
+
 #close-btn{
     position: absolute;
-    right: 0px;
-    top: 5px;
+    left: 20px;
+    top: 20px;
     border: none;
     background-color: transparent;
 }
 
 #close-btn img:hover{
     width: 43px;
-    filter: brightness(1.5);
 }
 
 #close-btn img{
@@ -265,38 +287,30 @@ canvas {
 
 #controls-div-overlay{
     position: absolute;
-    top: 10px;
-    left: 15%;
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 100%;
     z-index: 3;
 }
 
-.tooltip-container {
-    position: relative;
-    display: inline-block;
+.menu-divs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    font-family: 'Zabars';
+    font-size: 60px;
 }
 
-.tooltip-text {
-    position: absolute;
 
-    bottom: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background-color: black;
-    color: white;
-
-    padding: 6px 10px;
-    border-radius: 6px;
-
-    font-size: 14px;
-
-    opacity: 0;
-    transition: opacity 0.2s;
-
-    pointer-events: none;
-    white-space: nowrap;
+.tooltip-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 .tooltip-container:hover .tooltip-text {
@@ -311,16 +325,25 @@ canvas {
     bottom: 5px;
 }
 
-.mobile-movement img{
+.controls-mobile-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.controls-mobile-btn img {
     width: 50px;
+}
+
+.mobile-actions {
+    padding-right: 10px;
 }
 
 .mobile-actions img{
-    width: 50px;
     padding-right: 20px;
 }
 
-#left-arrow {
+#left-arrow-mobile {
+    background: url("assets/icons/right-arrow.png");
     transform: scaleX(-1);
     padding-right: 20px;
 }
@@ -331,10 +354,10 @@ canvas {
 
 #expand-icon {
     position: absolute;
-    z-index: 10000;
-    width: 50px;
-    bottom: 5px;
-    right: 5px;
+    z-index: 12000;
+    width: 40px;
+    top: 20px;
+    right: 20px;
 }
 
 @media only screen and (max-width: 760px) {

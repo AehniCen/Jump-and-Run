@@ -175,18 +175,18 @@ class Character extends MovableObjects {
 
     getMovementIntervall(){
         this.movementIntervall = setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead()) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.world.paused && !this.isDead() && !this.world.winner) {
                 this.moveRight();
             }
-            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused && !this.isDead()) {
+            if (this.world.keyboard.LEFT && this.x > 0 && !this.world.paused && !this.isDead() && !this.world.winner) {
                 this.moveLeft();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused && !this.isDead()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.paused && !this.isDead() && !this.world.winner) {
                 this.jump();
                 this.pauseWalkingSound();
                 this.playJumpingSound();
             }
-            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) {
+            if (!this.world.keyboard.RIGHT && !this.world.keyboard.LEFT || this.world.winner) {
                 this.pauseWalkingSound();
             }
             this.world.camera_x = -this.x + 100;

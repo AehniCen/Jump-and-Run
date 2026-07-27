@@ -36,38 +36,20 @@
         <img onclick="fullscreen()" id="expand-icon" src="assets/icons/expand.png" alt="fullscreen-icon">
 
         <div id="start-div" class="overlay-divs">
-            <div class="tooltip-container">
-                <button class="controls-btn" onclick="openControls()">
-                    <img src="assets/icons/game-controls-colored.png" alt="">
-                </button>
-                <span class="tooltip-text">Controls</span>
-            </div>
+            <button id="settings-btn" onclick="openSettings()">
+                <img src="assets/icons/setting-btn.png" alt="">
+            </button>
             <button id="start-btn" onclick="startGame()">
                 <p>Start Game</p>
             </button>
-            <div class="tooltip-container">
-                <button class="mute-btn" onclick="toggleSound(this)">
-                    <img src="assets/icons/sound.png" alt="sound-on-icon">
-                </button>
-                <span class="tooltip-text" id="tool-text-sound">Sound off</span>
-            </div>
         </div>
 
         <div id="pause-div" class="overlay-divs" style="display: none;">
             <div id="pause-div-header">
-                <div class="tooltip-container">
-                    <button class="controls-btn" onclick="openControls()">
-                        <img src="assets/icons/game-controls-colored.png" alt="">
-                    </button>
-                    <span class="tooltip-text">Controls</span>
-                </div>
+                <button id="settings-btn" onclick="openSettings()">
+                    <img src="assets/icons/setting-btn.png" alt="">
+                </button>
                 <p>Pause</p>
-                <div class="tooltip-container">
-                    <button class="mute-btn" onclick="toggleSound(this)">
-                        <img src="assets/icons/sound.png" alt="sound-on-icon">
-                    </button>
-                    <span class="tooltip-text" id="tool-text-sound">Sound off</span>
-                </div>
             </div>
             <div class="pause-btns">
                 <button class="menu-btns" onclick="backToGame()">Back To Game</button>
@@ -90,6 +72,27 @@
             </button>
         </div>
 
+        <div class="overlay-divs" id="settings-div-overlay" style="display: none;">
+            <button id="return-to-start-btn" onclick="closeSettings()">
+                <img src="assets/icons/back-arrow-red.png" alt="">
+            </button>
+            <div class="tooltip-container">
+                <div id="control-menu-div" class="menu-divs">
+                    <button class="controls-btn" onclick="openControls()">
+                        <img src="assets/icons/game-controls-colored.png" alt="">
+                    </button>
+                    <p class="control-text">Controls</p>
+                </div>
+                
+                <div id="sound-menu-div" class="menu-divs">
+                    <button class="mute-btn" onclick="toggleSound(this)">
+                        <img src="assets/icons/sound.png" alt="sound-on-icon">
+                    </button>
+                    <p class="sound-text" id="tool-text-sound">Sound on</p>
+                </div>
+            </div>
+        </div>
+
         <div id="controls-div-overlay" onclick="closeControls()" style="display: none;">
             <div id="controls-div" class="overlay-divs">
                 <div id="control-icons-div">
@@ -104,20 +107,28 @@
                     <p>throw bottles</p>
                     <p>pause game</p>
                 </div>
-                <button id="close-btn" onclick="closeControls()">
-                    <img src="assets/icons/close.png" alt="close-png">
+                <button id="return-to-start-btn" onclick="closeControls()">
+                    <img src="assets/icons/back-arrow-red.png" alt="">
                 </button>
             </div>
         </div>
 
         <div id="mobile-controls">
             <div class="mobile-movement">
-                <img src="assets/icons/right-arrow.png" alt="" id="left-arrow">
-                <img src="assets/icons/right-arrow.png" alt="" id="right-arrow">
+                <button id="left-arrow-mobile" class="controls-mobile-btn">
+                    <img src="assets/icons/right-arrow.png" alt="">
+                </button>
+                <button id="right-arrow-mobile" class="controls-mobile-btn">
+                    <img src="assets/icons/right-arrow.png" alt="" id="right-arrow">
+                </button>
             </div>
             <div class="mobile-actions">
-                <img src="assets/icons/arrow-up.png" alt="" id="jump-arrow">
-                <img src="assets/icons/arrow.png" alt="" id="throw-arrow">
+                <button id="jump-arrow-mobile" class="controls-mobile-btn">
+                    <img src="assets/icons/arrow-up.png" alt="" id="jump-arrow">
+                </button>
+                <button id="throw-arrow-mobile" class="controls-mobile-btn">
+                    <img src="assets/icons/arrow.png" alt="" id="throw-arrow">
+                </button> 
             </div>
         </div>
 

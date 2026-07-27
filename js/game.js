@@ -5,6 +5,7 @@ let startMenu;
 let pauseMenu;
 let endscreenDiv;
 let controlsDiv;
+let settingsDiv;
 let mobileControls;
 let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
@@ -78,8 +79,19 @@ function toggleSound(button) {
     localStorage.setItem('isMuted', isMuted);
     world.setMute(isMuted);
     updateMuteButtons();
-    let tooltip = button.parentElement.querySelector('.tooltip-text');
-    tooltip.innerText = isMuted ? 'Sound on' : 'Sound off';
+    let tooltip = button.parentElement.querySelector('.sound-text');
+    tooltip.innerText = isMuted ? 'Sound off' : 'Sound on';
+}
+
+function openSettings() {
+    settingsDiv = document.getElementById('settings-div-overlay');
+    settingsDiv.style.display = 'flex';
+}
+
+function closeSettings() {
+    settingsDiv = document.getElementById('settings-div-overlay');
+    settingsDiv.style.display = 'none';
+    closeControls();
 }
 
 function openControls() {

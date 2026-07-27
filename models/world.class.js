@@ -17,6 +17,7 @@ class World {
     gameOver = false;
     winner;
     endscreenDiv = document.getElementById('endscreen-div');
+    mobileControls = document.getElementById('mobile-controls');
     sounds;
     gameOverSound = new Audio('assets/audio/game-over.mp3');
     winnerSound = new Audio('assets/audio/winner.mp3');
@@ -59,16 +60,13 @@ class World {
 
     collectSounds() {
         this.sounds = [];
-        this.level.enemies.forEach(enemy => {
-            if (enemy.walkingSound) this.sounds.push(enemy.walkingSound);
-            if (enemy.dyingSound) this.sounds.push(enemy.dyingSound);
-        });
         if (this.endbossSound) this.sounds.push(this.endbossSound);
         if (this.level.boss.attackingSound) this.sounds.push(this.level.boss.attackingSound);
         if (this.character.walkingSound) this.sounds.push(this.character.walkingSound);
         if (this.character.hurtingSound) this.sounds.push(this.character.hurtingSound);
         if (this.character.landingSound) this.sounds.push(this.character.landingSound);
         if (this.character.jumpingSound) this.sounds.push(this.character.jumpingSound);
+        if (this.character.snoringSound) this.sounds.push(this.character.snoringSound);
         this.sounds.push(this.worldMusic);
         this.sounds.push(this.winnerSound);
         this.sounds.push(this.gameOverSound);
@@ -207,6 +205,7 @@ class World {
             this.gameOver = true;
             this.endscreen.getStartTime();
             this.endscreen.started = true;
+            this.mobileControls.style.display = 'none';
         };
         if (this.character.state === 'gameover' && this.endscreen.animationFinished && !this.paused) {
             this.paused = true;
@@ -231,6 +230,7 @@ class World {
             this.pauseEndbossMusic();
             this.endscreen.getStartTime();
             this.endscreen.started = true;
+            this.mobileControls.style.display = 'none';
             setTimeout(() => {
                 this.gameOver = true;
             }, 100);
@@ -293,7 +293,7 @@ class World {
     checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead() && !this.character.isHurt()) {
-                this.character.damage = 20;
+                this.character.damage = 0;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character hp', this.character.energy); 
