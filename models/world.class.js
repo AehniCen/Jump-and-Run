@@ -67,9 +67,25 @@ class World {
         if (this.character.landingSound) this.sounds.push(this.character.landingSound);
         if (this.character.jumpingSound) this.sounds.push(this.character.jumpingSound);
         if (this.character.snoringSound) this.sounds.push(this.character.snoringSound);
+        this.sounds.push(Chicken.walkingSound);
         this.sounds.push(this.worldMusic);
         this.sounds.push(this.winnerSound);
         this.sounds.push(this.gameOverSound);
+        this.level.coins.forEach(coin => {
+            if (coin.collectingSound) {
+                    this.sounds.push(coin.collectingSound);
+                }
+            });
+        this.level.enemies.forEach(enemy => {
+            if (enemy.dyingSound) {
+                    this.sounds.push(enemy.dyingSound);
+                }
+            });
+        this.level.bottles.forEach(bottle => {
+            if (bottle.collectingSound) {
+                    this.sounds.push(bottle.collectingSound);
+                }
+            });
     };
 
     draw(){;
@@ -111,25 +127,25 @@ class World {
     };
 
     restart() {
+        this.worldMusicPaused = false;
+        this.endbossSoundPaused = false;
+        this.worldMusic.pause();
+        this.worldMusic.currentTime = 0;
+        this.endbossSound.pause();
+        this.endbossSound.currentTime = 0;
         console.log("NEW COINS", this.coins);
         this.character.stopIntervals(); 
         this.character = new Character();
+        this.level = createLevel1();
         this.endscreen = new Endscreen();
         this.gameOver = false;
         this.winner = false;
-        this.level.restartLevel();
         this.throwableObjects = [];
         this.statusBar.setPercentage(100);
         this.coinDisplay.value = 0;
-        this.bottleDisplay.value = 20;
+        this.bottleDisplay.value = 20; 
         this.setWorld();
         this.collectSounds();
-        this.level.coins.forEach(c => c.world = this);
-        this.level.bottles.forEach(b => b.world = this);
-        this.level.enemies.forEach(e => e.world = this);
-        this.enemies = this.level.enemies;
-        this.coins = this.level.coins;
-        this.bottles = this.level.bottles;
     }
 
     addObjectsToMap(objects){
@@ -199,6 +215,7 @@ class World {
                 this.character.state = 'gameover'
                 this.pauseWorldMusic();
                 this.getGameOverSound();
+                this.pauseEndbossMusic();
             }
         };
         if (this.character.state === 'gameover' && !this.endscreen.started && !this.paused) {
@@ -265,12 +282,19 @@ class World {
         }
     }
 
-    playEndbossMusic(){
+    playEndbossMusic() {
         let boss = this.level.boss;
         let distance = Math.abs(this.character.x - boss.x);
-        if (distance < 600 && !this.paused && !this.winner) {
+
+        if (
+            distance < 600 &&
+            !this.paused &&
+            !this.winner &&
+            !this.endbossSoundPaused &&
+            this.endbossSound.paused
+        ) {
             this.endbossSound.play();
-            this.endbossSound.volume = 0.3;  
+            this.endbossSound.volume = 0.3;
         }
     }
 

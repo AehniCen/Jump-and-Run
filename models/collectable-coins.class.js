@@ -14,8 +14,13 @@ class CollectableCoins extends MovableObjects {
     ]
 
     constructor(x, y){
+
+        console.log("constructor", x, y);
+        
         super().loadImage('assets/img/8_coin/coin_2.png');
         this.loadImages(this.IMAGES);
+        this.startX = x;
+        this.startY = y;
         this.x = x;
         this.y = y;
         this.baseY = y;
@@ -61,5 +66,27 @@ class CollectableCoins extends MovableObjects {
                 this.height -= this.speed / 2;
             }
         }
+    }
+
+    reset() {
+
+        console.log(this);
+
+    console.log(
+        "startX:", this.startX,
+        "startY:", this.startY,
+        "x:", this.x,
+        "y:", this.y
+    );
+        
+        this.x = this.startX;
+        this.y = this.startY;
+        this.baseY = this.startY;
+
+        this.width = 180;
+        this.height = 180;
+
+        this.isCollected = false;
+        this.isAttracted = false;
     }
 }

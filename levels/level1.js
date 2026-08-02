@@ -8,19 +8,21 @@ function createCoinArc(startX, baseY, amount) {
         return coins;
     }
 
-    const level1 = new Level(
-    [
-        new BackgroundObjects('assets/img/5_background/complete_background.png', -1440),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 0),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 1440),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 2880),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 4320),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 5760),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 7200),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 8640),
-        new BackgroundObjects('assets/img/5_background/complete_background.png', 10080)
-    ],
-    [
+function createCoins() {
+    return [
+        ...createCoinArc(220, 100, 3),
+        ...createCoinArc(1000, 100, 5),
+        ...createCoinArc(2200, 100, 5),
+        ...createCoinArc(3000, 100, 3),
+        ...createCoinArc(4500, 100, 3),
+        ...createCoinArc(6400, 100, 5),
+        ...createCoinArc(8700, 100, 5),
+        ...createCoinArc(9500, 100, 3)
+    ];
+};
+
+function createEnemies() {
+    return [
         new Chicken(),
         new Chicken(),
         new Chicken(),
@@ -62,19 +64,11 @@ function createCoinArc(startX, baseY, amount) {
         new BabyChicken(),
         new BabyChicken(),
         new BabyChicken()
-    ],
-        new Endboss(),
-    [
-        ...createCoinArc(220, 100, 3),
-        ...createCoinArc(1000, 100, 5),
-        ...createCoinArc(2200, 100, 5),
-        ...createCoinArc(3000, 100, 3),
-        ...createCoinArc(4500, 100, 3),
-        ...createCoinArc(6400, 100, 5),
-        ...createCoinArc(8700, 100, 5),
-        ...createCoinArc(9500, 100, 3)
-    ],
-    [
+    ]
+};
+
+function createBottles() {
+    return [
         new CollectableBottles(),
         new CollectableBottles(),
         new CollectableBottles(),
@@ -86,4 +80,26 @@ function createCoinArc(startX, baseY, amount) {
         new CollectableBottles(),
         new CollectableBottles()
     ]
-);
+};
+
+function createLevel1() {
+    return new Level(
+        [
+            new BackgroundObjects('assets/img/5_background/complete_background.png', -1440),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 0),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 1440),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 2880),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 4320),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 5760),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 7200),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 8640),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 10080)
+        ],
+        createEnemies(),
+        new Endboss(),
+        createCoins(),
+        createBottles()
+        );
+};
+
+let level1 = createLevel1();

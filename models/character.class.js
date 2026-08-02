@@ -138,6 +138,7 @@ class Character extends MovableObjects {
     };
 
     playHurtingSound() {
+    this.lastActionTime = Date.now();
     let now = new Date().getTime();
 
     if (!this.lastSoundPlayed || now - this.lastSoundPlayed > 1000) {
@@ -232,10 +233,10 @@ class Character extends MovableObjects {
             if(this.idleMode && !this.world.paused && !this.isDead() && !this.isHurt()){
                 this.loadImage('assets/img/2_character_pepe/1_idle/idle/I-1.png');
             }
-            if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead()){
+            if(this.idleMode && timePassed > 1  && !this.world.paused && !this.isDead() && !this.isHurt()){
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            if(this.idleMode && timePassed > 10 && !this.world.paused &&!this.world.winner && !this.isDead()){
+            if(this.idleMode && timePassed > 10 && !this.world.paused &&!this.world.winner && !this.isDead() && !this.isHurt()){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
                 this.getSnoringSound();
             } else {

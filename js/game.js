@@ -78,6 +78,7 @@ function toggleSound(button) {
     isMuted = !isMuted;
     localStorage.setItem('isMuted', isMuted);
     world.setMute(isMuted);
+    btnSound.muted = isMuted;
     updateMuteButtons();
     let tooltip = button.parentElement.querySelector('.sound-text');
     tooltip.innerText = isMuted ? 'Sound off' : 'Sound on';
@@ -120,38 +121,46 @@ function getButtonSound() {
 }
 
 function bindBtnsPressEvents() {
-    const leftArrow = document.getElementById('left-arrow');
-    const rightArrow = document.getElementById('right-arrow');
-    const jumpArrow = document.getElementById('jump-arrow');
-    const throwArrow = document.getElementById('throw-arrow');
+    const leftArrow = document.getElementById('left-arrow-mobile');
+    const rightArrow = document.getElementById('right-arrow-mobile');
+    const jumpArrow = document.getElementById('jump-arrow-mobile');
+    const throwArrow = document.getElementById('throw-arrow-mobile');
 
-    leftArrow.addEventListener('pointerdown', () => {
+    leftArrow.addEventListener('touchstart', (e) => {
+        e.preventDefault();
         keyboard.LEFT = true;
     });
-    leftArrow.addEventListener('pointerup', () => {
+    leftArrow.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.LEFT = false;
     });
-    rightArrow.addEventListener('pointerdown', () => {
+    rightArrow.addEventListener('touchstart', (e) => {
+        e.preventDefault();
         keyboard.RIGHT = true;
     });
-    rightArrow.addEventListener('pointerup', () => {
+    rightArrow.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.RIGHT = false;
     });
-    jumpArrow.addEventListener('pointerdown', () => {
+    jumpArrow.addEventListener('touchstart', (e) => {
+        e.preventDefault();
         keyboard.SPACE = true;
     });
-    jumpArrow.addEventListener('pointerup', () => {
+    jumpArrow.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.SPACE = false;
     });
-    throwArrow.addEventListener('pointerup', () => {
+    throwArrow.addEventListener('touchstart', (e) => {
+        e.preventDefault();
         keyboard.KEYD = false;
     });
-    throwArrow.addEventListener('pointerdown', () => {
+    throwArrow.addEventListener('touchend', (e) => {
+        e.preventDefault();
         keyboard.KEYD = true;
     });
 
-
 }
+
 
 window.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowRight') {
@@ -208,18 +217,12 @@ window.addEventListener('keyup', (e) => {
     };
 })
 
-async function fullscreen() {
-    let element = document.getElementById('fullscreen');
-
-    await element.requestFullscreen();
-
-    console.log(
-    document.getElementById('fullscreen').getBoundingClientRect()
-);
-
-console.log(
-    document.getElementById('start-div').getBoundingClientRect()
-);
+async function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        await document.getElementById("fullscreen").requestFullscreen();
+    } else {
+        await document.exitFullscreen();
+    }
 }
 
 function enterFullscreen(element) {
@@ -235,6 +238,8 @@ function enterFullscreen(element) {
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
+        console.log("exit");
+        
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }

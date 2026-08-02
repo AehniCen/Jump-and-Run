@@ -33,7 +33,7 @@
 
     <div class="game-div" id="fullscreen">
 
-        <img onclick="fullscreen()" id="expand-icon" src="assets/icons/expand.png" alt="fullscreen-icon">
+        <img onclick="toggleFullscreen()" id="expand-icon" src="assets/icons/expand.png" alt="fullscreen-icon">
 
         <div id="start-div" class="overlay-divs">
             <button id="settings-btn" onclick="openSettings()">
@@ -116,18 +116,18 @@
         <div id="mobile-controls">
             <div class="mobile-movement">
                 <button id="left-arrow-mobile" class="controls-mobile-btn">
-                    <img src="assets/icons/right-arrow.png" alt="">
+                    <img src="assets/icons/right-arrow.png" alt="" id="left-arrow" draggable="false">
                 </button>
                 <button id="right-arrow-mobile" class="controls-mobile-btn">
-                    <img src="assets/icons/right-arrow.png" alt="" id="right-arrow">
+                    <img src="assets/icons/right-arrow.png" alt="" id="right-arrow" draggable="false">
                 </button>
             </div>
             <div class="mobile-actions">
                 <button id="jump-arrow-mobile" class="controls-mobile-btn">
-                    <img src="assets/icons/arrow-up.png" alt="" id="jump-arrow">
+                    <img src="assets/icons/arrow-up.png" alt="" id="jump-arrow" draggable="false">
                 </button>
                 <button id="throw-arrow-mobile" class="controls-mobile-btn">
-                    <img src="assets/icons/arrow.png" alt="" id="throw-arrow">
+                    <img src="assets/icons/arrow.png" alt="" id="throw-arrow" draggable="false">
                 </button> 
             </div>
         </div>
