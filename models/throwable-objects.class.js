@@ -36,7 +36,7 @@ class ThrowableObjects extends MovableObjects {
 
     throw(){
         if (!this.world.gameOver) {
-            this.speedY = 30;
+            this.speedY = 15;
             this.applyGravity();
             this.rotationInterval = setInterval(() => {
                 if (!this.splashed) {

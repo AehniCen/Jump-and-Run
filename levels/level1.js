@@ -10,14 +10,14 @@ function createCoinArc(startX, baseY, amount) {
 
 function createCoins() {
     return [
-        ...createCoinArc(220, 100, 3),
-        ...createCoinArc(1000, 100, 5),
-        ...createCoinArc(2200, 100, 5),
-        ...createCoinArc(3000, 100, 3),
-        ...createCoinArc(4500, 100, 3),
-        ...createCoinArc(6400, 100, 5),
-        ...createCoinArc(8700, 100, 5),
-        ...createCoinArc(9500, 100, 3)
+        ...createCoinArc(220, 110, 3),
+        ...createCoinArc(1000, 110, 5),
+        ...createCoinArc(2200, 110, 5),
+        ...createCoinArc(3000, 110, 3),
+        ...createCoinArc(4500, 110, 3),
+        ...createCoinArc(6400, 110, 5),
+        ...createCoinArc(8700, 110, 5),
+        ...createCoinArc(9500, 110, 3)
     ];
 };
 

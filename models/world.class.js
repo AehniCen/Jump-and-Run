@@ -22,6 +22,7 @@ class World {
     gameOverSound = new Audio('assets/audio/game-over.mp3');
     winnerSound = new Audio('assets/audio/winner.mp3');
     endbossSound = new Audio('assets/audio/endboss-music-entrance.mp3');
+    noBottleSound = new Audio('assets/audio/empty-bag.mp3');
     endbossSoundPaused;
     canThrow = true;
 
@@ -395,16 +396,27 @@ class World {
     };
 
     checkThrowableObjects() {
-        if(this.keyboard.KEYD && this.bottleDisplay.value > 0 && this.canThrow) {
+    if (this.keyboard.KEYD && this.canThrow) {
+        if (this.bottleDisplay.value > 0) {
             let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
             bottle.world = this;
             bottle.throw();
             this.throwableObjects.push(bottle);
             this.bottleDisplay.reduceNumber();
-            this.canThrow = false;
-        }   
-        if (!this.keyboard.KEYD) {
-            this.canThrow = true;
+        } else {
+            this.playNoBottleSound();
         }
-    };
+        this.canThrow = false;
+    }
+    if (!this.keyboard.KEYD) {
+        this.canThrow = true;
+    }
+}
+
+    playNoBottleSound() {
+        this.noBottleSound.currentTime = 0;
+        this.noBottleSound.volume = 1;
+        this.noBottleSound.play();
+    }
+
 };

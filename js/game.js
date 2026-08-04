@@ -176,6 +176,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.DOWN = true;    
     };
     if (e.key == ' ') {
+        e.preventDefault();
         keyboard.SPACE = true;    
     };
     if (e.key.toLowerCase() === 'd') {
@@ -186,12 +187,10 @@ window.addEventListener('keydown', (e) => {
         world.paused = true;
         world.endbossSound.pause();
         pauseMenu.style.display = 'block';
-        mobileControls.style.display = 'none';
     } else if (e.key == 'Escape' && keyboard.ESC == true && startMenu.style.display == 'none') {
         keyboard.ESC = false; 
         world.paused = false;
         pauseMenu.style.display = 'none';
-        mobileControls.style.display = 'flex';
     };    
     
 })
@@ -218,10 +217,17 @@ window.addEventListener('keyup', (e) => {
 })
 
 async function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        await document.getElementById("fullscreen").requestFullscreen();
-    } else {
-        await document.exitFullscreen();
+    document.activeElement.blur();
+    const element = document.getElementById('fullscreen');
+
+    try {
+        if (!document.fullscreenElement) {
+            await element.requestFullscreen();
+        } else {
+            await document.exitFullscreen();
+        }
+    } catch (error) {
+        console.log("Fullscreen error:", error);
     }
 }
 
@@ -244,3 +250,12 @@ function exitFullscreen() {
         document.webkitExitFullscreen();
     }
 }
+
+window.addEventListener("resize", () => {
+    let mobileControls = document.getElementById('mobile-controls')
+    if (window.matchMedia("(pointer: coarse)").matches) {
+        mobileControls.style.display = "flex";
+    } else {
+        mobileControls.style.display = "none";
+    }
+});
