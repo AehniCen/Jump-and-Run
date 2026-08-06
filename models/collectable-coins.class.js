@@ -13,10 +13,7 @@ class CollectableCoins extends MovableObjects {
         'assets/img/8_coin/coin_2.png'
     ]
 
-    constructor(x, y){
-
-        console.log("constructor", x, y);
-        
+    constructor(x, y){      
         super().loadImage('assets/img/8_coin/coin_2.png');
         this.loadImages(this.IMAGES);
         this.startX = x;

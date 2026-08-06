@@ -54,9 +54,13 @@ class Endboss extends MovableObjects {
     currentImage;
     isAlerted = false;
     state = 'rest';
-    damage = 34;
+    damage = 0;
     attackingSound = new Audio('assets/audio/rooster_alarm.mp3');
     alertSound = new Audio('assets/audio/rooster_alarm.mp3');
+    attackCooldown = 2000;
+    lastAttackTime = 0;
+    reinforcements50 = false;
+    reinforcements20 = false;
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
@@ -173,9 +177,14 @@ class Endboss extends MovableObjects {
         }
     };
 
+    canAttack(){
+        return Date.now() - this.lastAttackTime >= this.attackCooldown;
+    }
+
     getAttackAnimation(){
         this.playAnimationOnce(this.IMAGES_ATTACKING_BEGIN, 'attackingBeginAnimationFinished');
         if (this.attackingBeginAnimationFinished) {
+            this.lastAttackTime = Date.now();
             this.getAttackUpSound();
             this.setState('jump-up');
         }
@@ -303,4 +312,14 @@ class Endboss extends MovableObjects {
             this.setState('attack-end');
         }
     };
+
+    isInvulnerable() {
+        return [
+            'attack-begin',
+            'jump-up',
+            'hover',
+            'jump-down',
+            'attack-end'
+        ].includes(this.state);
+    }
 }

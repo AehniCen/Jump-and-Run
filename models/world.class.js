@@ -24,6 +24,8 @@ class World {
     endbossSound = new Audio('assets/audio/endboss-music-entrance.mp3');
     noBottleSound = new Audio('assets/audio/empty-bag.mp3');
     endbossSoundPaused;
+    throwCooldown = 1000;
+    lastThrowTime = 0;
     canThrow = true;
 
     constructor(canvas, keyboard){
@@ -134,7 +136,6 @@ class World {
         this.worldMusic.currentTime = 0;
         this.endbossSound.pause();
         this.endbossSound.currentTime = 0;
-        console.log("NEW COINS", this.coins);
         this.character.stopIntervals(); 
         this.character = new Character();
         this.level = createLevel1();
@@ -193,7 +194,6 @@ class World {
                 bottle.update();
             });
          }, 1000 / 60);
-         console.log(this.level.coins.map(c => c.isCollected));
     };
 
     checkCharacterState(){
@@ -318,10 +318,9 @@ class World {
     checkCharacterEnemyCollision(){
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isAttacking(enemy) && !this.character.isDead() && !this.character.isHurt()) {
-                this.character.damage = 0;
+                this.character.damage = enemy.damage;
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                console.log('character hp', this.character.energy); 
             } else if (this.character.isAttacking(enemy) && !this.character.isHurt()) {
                 enemy.damage = 100;
                 enemy.hit();
@@ -331,7 +330,6 @@ class World {
                         this.level.enemies = this.level.enemies.filter(e => e !== enemy);
                     }, 500);
                 };
-                console.log('enemy hp',enemy.energy);
             };
         })
     };
@@ -339,7 +337,7 @@ class World {
     checkCharacterBossCollision(){
         const boss = this.level.boss;
         if (this.character.isColliding(boss) && !this.character.isHurt() && !boss.isDead()) {
-            this.character.damage = 40;
+            this.character.damage = 0;
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
         }
@@ -349,7 +347,7 @@ class World {
             boss.setState('alert'); 
             this.playEndbossMusic();
         }
-        if (distance < 350 && boss.state === 'walk') {       
+        if (distance < 350 && boss.state === 'walk' && boss.canAttack()) {       
             boss.setState('attack-begin'); 
         }
     }
@@ -386,37 +384,90 @@ class World {
                     throwBottle.getSplashAnimation();
                 }
             })
-            if (throwBottle.isColliding(boss) && !throwBottle.splashAnimationFinished && !throwBottle.splashed && !boss.isHurt() && !boss.isDead()) {
+            if (throwBottle.isColliding(boss) && !throwBottle.splashAnimationFinished && !throwBottle.splashed && !boss.isHurt() && !boss.isDead() && !boss.isInvulnerable()) {
                 boss.hit();
-                console.log(boss.energy);
+                boss.damage = 20; 
+                if (boss.energy <= 50 && !boss.reinforcements50) {
+                    boss.reinforcements50 = true;
+                    this.spawnReinforcements50();
+                }
+                if (boss.energy <= 20 && !boss.reinforcements20) {
+                    boss.reinforcements20 = true;
+                    this.spawnReinforcements20();
+                }
                 boss.setState('hurt');
                 throwBottle.getSplashAnimation();
             }
         })
     };
 
+    spawnReinforcements50(){
+        let b1 = new BabyChicken();
+        let b2 = new BabyChicken();
+        let b3 = new BabyChicken();
+        b1.x = this.character.x + 800;
+        b2.x = this.character.x + 1200;
+        b3.x = this.character.x + 1600;
+        b1.world = this;
+        b2.world = this;
+        b3.world = this;
+        b1.animate();
+        b2.animate();
+        b3.animate();
+        this.level.enemies.push(b1, b2, b3);
+    }
+
+    spawnReinforcements20(){
+        let b1 = new BabyChicken();
+        let b2 = new BabyChicken();
+        let b3 = new BabyChicken();
+        let c1 = new Chicken();
+        let c2 = new Chicken();
+        b1.world = this;
+        b2.world = this;
+        b3.world = this;
+        c1.world = this;
+        c2.world = this;
+        b1.x = this.character.x + 800;
+        b2.x = this.character.x + 1200;
+        b3.x = this.character.x + 1600;
+        c1.x = this.character.x + 850;
+        c2.x = this.character.x + 950;
+        b1.animate();
+        b2.animate();
+        b3.animate();
+        c1.animate();
+        c2.animate();
+        this.level.enemies.push(b1, b2, b3, c1, c2);
+    }
+
+    canThrowBottle(){
+        return Date.now() - this.lastThrowTime >= this.throwCooldown;
+    };
+
     checkThrowableObjects() {
-    if (this.keyboard.KEYD && this.canThrow) {
-        if (this.bottleDisplay.value > 0) {
-            let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
-            bottle.world = this;
-            bottle.throw();
-            this.throwableObjects.push(bottle);
-            this.bottleDisplay.reduceNumber();
-        } else {
-            this.playNoBottleSound();
+        if (this.keyboard.KEYD && this.canThrow && this.canThrowBottle()) {
+            if (this.bottleDisplay.value > 0) {
+                let bottle = new ThrowableObjects(this.character.x + 100, this.character.y + 100);
+                bottle.world = this;
+                bottle.throw();
+                this.throwableObjects.push(bottle);
+                this.bottleDisplay.reduceNumber();
+            } else {
+                this.playNoBottleSound();
+            }
+            this.lastThrowTime = Date.now();
+            this.canThrow = false;
         }
-        this.canThrow = false;
-    }
-    if (!this.keyboard.KEYD) {
-        this.canThrow = true;
-    }
-}
+        if (!this.keyboard.KEYD) {
+            this.canThrow = true;
+        }
+    };
 
     playNoBottleSound() {
         this.noBottleSound.currentTime = 0;
         this.noBottleSound.volume = 1;
         this.noBottleSound.play();
-    }
+    };
 
 };

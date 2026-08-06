@@ -10,12 +10,18 @@ class BabyChicken extends Chicken {
         'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ]
 
+    height = 80;
+    width = 80;
+    y = 350;
+
     constructor(){
         super().loadImage('assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png');
         this.loadImage('assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png');
         this.loadImages(this.IMAGES_WALKING);
         this.speed = 0.5;
         this.energy = 50;
+        this.x = 600 + Math.random() * 17500;
         this.speed = 2 + Math.random() * 0.55;
+        this.damage = 0;
     }
 }

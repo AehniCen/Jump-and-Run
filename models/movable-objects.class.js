@@ -120,8 +120,6 @@ class MovableObjects extends DrawableObjects {
     };
 
     isColliding(mo){
-        console.log(this.offset, mo.offset);
-        
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
          this.y + this.height - this.offset.bottom > mo.y &&
          this.x + this.offset.left < mo.x &&
