@@ -20,7 +20,7 @@ class BabyChicken extends Chicken {
         this.loadImages(this.IMAGES_WALKING);
         this.speed = 0.5;
         this.energy = 50;
-        this.x = 600 + Math.random() * 17500;
+        this.x = 1000 + Math.random() * 2000;
         this.speed = 2 + Math.random() * 0.55;
         this.damage = 0;
     }

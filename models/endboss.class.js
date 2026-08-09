@@ -48,7 +48,7 @@ class Endboss extends MovableObjects {
     width = 400;
     height = 400;
     y = 50;
-    x = 9700;
+    x = 10700;
     speed = 15;
     world;
     currentImage;
@@ -57,10 +57,11 @@ class Endboss extends MovableObjects {
     damage = 0;
     attackingSound = new Audio('assets/audio/rooster_alarm.mp3');
     alertSound = new Audio('assets/audio/rooster_alarm.mp3');
-    attackCooldown = 2000;
+    attackCooldown = 3000;
     lastAttackTime = 0;
+    reinforcements75 = false;
     reinforcements50 = false;
-    reinforcements20 = false;
+    reinforcements25 = false;
 
     constructor() {
         super().loadImage('assets/img/4_enemie_boss_chicken/2_alert/G5.png');
