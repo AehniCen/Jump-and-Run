@@ -22,6 +22,6 @@ class BabyChicken extends Chicken {
         this.energy = 50;
         this.x = 1000 + Math.random() * 2000;
         this.speed = 2 + Math.random() * 0.55;
-        this.damage = 0;
+        this.damage = 5;
     }
 }
