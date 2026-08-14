@@ -48,6 +48,32 @@ img {
     overflow: hidden;
 }
 
+.game-div:fullscreen #tutorial-div {
+    width: 85%;
+    left: 7%;
+}
+
+.game-div:fullscreen #tutorial-headline {
+    top: -15%;
+    left: 40%;
+}
+
+.game-div:fullscreen #tutorial-headline h2{
+    font-size: 160px;
+}
+
+.game-div:fullscreen #tutorial-content {
+    margin-top: 40px;
+}
+
+.game-div:fullscreen #skip-tutorial-btn {
+    margin-top: 20px;
+}
+
+.game-div:fullscreen #skip-tutorial-btn h3 {
+    font-size: 80px;
+}
+
 .overlay-divs {
     position: absolute;
     display: flex;
@@ -85,6 +111,27 @@ h1 {
     letter-spacing: 12px;
     margin-top: 40px;
     margin-bottom: 40px;
+}
+
+h2 {
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 70px;
+    letter-spacing: 6px;
+    background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #9A3A17;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+h3 {
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 canvas {
@@ -186,16 +233,6 @@ canvas {
     transition: transform 125ms ease;
 }
 
-#start-btn p {
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 70px;
-    letter-spacing: 6px;
-    background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 3px #9A3A17;
-}
-
 #pause-div {
     flex-direction: column;
     align-items: center;
@@ -232,6 +269,74 @@ canvas {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#tutorial-div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    top: 15%;
+    left: 3%;
+    width: 90%;
+    height: 75%;
+    background-color: #F9C769;
+    border-width: 12px;
+    border: 12px solid #A0220A;
+    border-radius: 22px;
+    z-index: 2;
+}
+
+#tutorial-content {
+    width: 100%;
+    height: 90%;
+}
+
+#tutorial-btns {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+}
+
+#tutorial-headline {
+    position: absolute;
+    top: -20%;
+    left: 30%;
+}
+
+.tutorial-pages {
+    width: 95%;
+    height: 95%;
+}
+
+.tutorial-imgs {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#skip-tutorial-btn {
+    grid-column: 2;
+    width: 100%;
+    border: 8px solid #A0220A;
+}
+
+#skip-tutorial-btn h3{
+    font-size: 40px;
+    padding: 2px;
+}
+
+#tutorial-foward-btn {
+    grid-column: 3;
+    margin-left: 60px;
+}
+
+#tutorial-back-btn {
+    grid-column: 1;
+    margin-right: 60px;
+}
+
+.tutorial-arrows img{
+    width: 40%;
 }
 
 .menu-btns {

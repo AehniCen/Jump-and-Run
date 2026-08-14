@@ -2,7 +2,9 @@ let world;
 let canvas;
 let keyboard = new Keyboard();
 let startMenu;
+let startBtn;
 let pauseMenu;
+let tutorial;
 let endscreenDiv;
 let controlsDiv;
 let settingsDiv;
@@ -15,7 +17,9 @@ function init() {
     world = new World(canvas, keyboard);
     world.paused = true;
     startMenu = document.getElementById('start-div');
+    startBtn = document.getElementById('start-btn');
     pauseMenu = document.getElementById('pause-div');
+    tutorial = document.getElementById('tutorial-div')
     mobileControls = document.getElementById('mobile-controls');
     endscreenDiv = document.getElementById('endscreen-div');
     showViewportSize();
@@ -42,8 +46,16 @@ function showViewportSize() {
     update();
 }
 
+function showTutorial() {
+    startBtn.style.display = 'none';
+    tutorial.style.display = 'flex';
+    getButtonSound();
+}
+
 function startGame() {
+    startBtn.style.display = 'block';
     startMenu.style.display = 'none';
+    tutorial.style.display = 'none';
     world.paused = false;
     world.character.lastActionTime = Date.now();
     getButtonSound();
