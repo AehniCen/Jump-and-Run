@@ -5,6 +5,9 @@ let startMenu;
 let startBtn;
 let pauseMenu;
 let tutorial;
+let firstPage;
+let secondPage;
+let thirdPage;
 let endscreenDiv;
 let controlsDiv;
 let settingsDiv;
@@ -19,7 +22,10 @@ function init() {
     startMenu = document.getElementById('start-div');
     startBtn = document.getElementById('start-btn');
     pauseMenu = document.getElementById('pause-div');
-    tutorial = document.getElementById('tutorial-div')
+    tutorial = document.getElementById('tutorial-div');
+    firstPage = document.getElementById('tutorial-first-page');
+    secondPage = document.getElementById('tutorial-second-page');
+    thirdPage = document.getElementById('tutorial-third-page');
     mobileControls = document.getElementById('mobile-controls');
     endscreenDiv = document.getElementById('endscreen-div');
     showViewportSize();
@@ -50,6 +56,11 @@ function showTutorial() {
     startBtn.style.display = 'none';
     tutorial.style.display = 'flex';
     getButtonSound();
+}
+
+function enterTutorial() {
+    firstPage.style.display = 'none';
+    secondPage.style.display = 'grid';
 }
 
 function startGame() {

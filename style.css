@@ -287,6 +287,8 @@ canvas {
 }
 
 #tutorial-content {
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 90%;
 }
@@ -294,7 +296,7 @@ canvas {
 #tutorial-btns {
     width: 100%;
     display: grid;
-    grid-template-columns: 30% 40% 30%;
+    grid-template-columns: 3fr 2fr 3fr;
 }
 
 #tutorial-headline {
@@ -304,19 +306,103 @@ canvas {
 }
 
 .tutorial-pages {
+    display: flex;
     width: 95%;
     height: 95%;
 }
+ 
+#first-page-img img{
+    width: 250px;
+    margin-top: -170px;
+}
 
-.tutorial-imgs {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.enemies {
+    display: flex;
+}
+
+.tutorial-pepe {
+    width: 160px;
+    margin-top: -120px;
+    margin-left: -20px;
+}
+
+.chicken {
+    width: 100px;
+}
+
+#tutorial-second-page {
+    grid-template-columns: 1fr 1fr;
+}
+
+#second-page-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    width: 80%;
+}
+
+#first-part-second-page {
+    display: flex;
+    align-items: center;
+}
+
+#second-page-text span{
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 26px;
+}
+
+#second-page-text img{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#space-gif-tutorial {
+    width: 80px;
+    height: 50px;
+}
+
+#arrow-up-tutorial {
+    width: 40px;
+    height: 40px;
+}
+
+.tutorial-text {
+    margin-top: 10px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.tutorial-text::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tutorial-text::-webkit-scrollbar-track {
+    background: #a0230a56;
+}
+
+.tutorial-text::-webkit-scrollbar-thumb {
+    background: #A0220A;
+    border-radius: 0;
+}
+
+.tutorial-text::-webkit-scrollbar-button {
+    display: none;
+}
+
+.tutorial-text p{
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 26px;
+}
+
+.caps {
+    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
+    color: #A0220A;
 }
 
 #skip-tutorial-btn {
     grid-column: 2;
-    width: 100%;
+    width: 80%;
     border: 8px solid #A0220A;
 }
 
@@ -327,16 +413,28 @@ canvas {
 
 #tutorial-foward-btn {
     grid-column: 3;
-    margin-left: 60px;
+    width: fit-content;
+    border: 8px solid #A0220A;
+}
+
+.enter-tutorial {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.enter-tutorial p{
+    font-size: 30px;
 }
 
 #tutorial-back-btn {
     grid-column: 1;
     margin-right: 60px;
+    border: 8px solid #A0220A;
 }
 
 .tutorial-arrows img{
-    width: 40%;
+    width: 30%;
 }
 
 .menu-btns {

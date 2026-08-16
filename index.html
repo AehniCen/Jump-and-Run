@@ -52,25 +52,52 @@
             </div>
             <div id="tutorial-content">
                 <div id="tutorial-first-page" class="tutorial-pages">
-                    <img class="tutorial-imgs" src="assets/img/tutorial/pepe-game-story.png" alt="pepe-story-img">
+                    <div id="first-page-img" class="tutorial-imgs">
+                        <img src="assets/img/2_character_pepe/1_idle/idle/I-1.png" alt="pepe-idle">
+                    </div>
+                    <div class="tutorial-text">
+                        <p>That's Pepe. <br>Pepe is good at two things in life: <br> His famous salsa sauce, "Pepe's Burn to Hell" - so hot, no chicken has ever survived it... 
+                            <br> ...and <span class="caps">KILLING CHICKENS!</span>
+                            <br>So when a gigantic chicken epedemic starts terrorizing his village, there's only one man everyone can turn to. Pepe. <br>Armed with his trusty salsa bottles and his powerful jumping skills, Pepe sets out to fight his way through hordes of tiny and not-so-tiny chickens. 
+                            <br>But beware... <br>At the end of his journey, something much bigger is waiting for him. <br><span class="caps">EL POLLO GIGANTE!</span></p>
+                    </div>
                 </div>
-                <div id="tutorial-second-page" style="display: none;">
-                    
+                <div id="tutorial-second-page" class="tutorial-pages" style="display: none;">
+                    <div id="second-page-img" class="tutorial-imgs">
+                        <div class="pepe">
+                            <img id="pepe-juming" class="tutorial-pepe" src="assets/img/2_character_pepe/3_jump/J-35.png" alt="pepe-jump">
+                        </div>
+                        <div class="enemies">
+                            <img class="chicken" id="dead-chicken" src="assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png" alt="dead-chicken">
+                            <img class="chicken" src="assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png" alt="" id="chicken-alive">
+                        </div>
+                    </div>
+                    <div id="second-page-text" class="tutorial-text">
+                        <div id="first-part-second-page"><span>Press</span> <img id="space-gif-tutorial" src="assets/icons/icons8-space-key-50.gif" alt="space-key-gif">
+                            <span>or</span> <img id="arrow-up-tutorial" src="assets/icons/arrow-up.png" alt="jump-arrow">
+                        </div>
+                        <div id="second-part-second-page">
+                            <span>to let Pepe jump. Jump directly onto a chicken from above, and Pepe's magnificent physique will unleash its full power, sending the poor chicken straight to its knees!</span>
+                        </div>
+                    </div>
                 </div>
-                <div id="tutorial-third-page" style="display: none;"></div>
+                <div id="tutorial-third-page" class="tutorial-pages" style="display: none;"></div>
             </div>
             <div id="tutorial-btns">
                 <button id="tutorial-back-btn" class="tutorial-arrows" style="display: none;">
                     <img src="assets/icons/back-arrow-red.png" alt="">
                 </button>
                 <button id="skip-tutorial-btn" onclick="startGame()">
-                    <h3>skip tutorial</h3>
+                    <h3>Start</h3>
                 </button>
                 <button id="finish-tutorial-btn" style="display: none;">
                     <p>finish tutorial</p>
                 </button>
                 <button id="tutorial-foward-btn" class="tutorial-arrows" onclick="enterTutorial()">
-                    <img src="assets/icons/foward-arrow-red.png" alt="">
+                    <div class="enter-tutorial">
+                        <p>Enter Tutorial</p>
+                        <img src="assets/icons/foward-arrow-red.png" alt="">
+                    </div>
                 </button>
             </div>
         </div>
