@@ -306,7 +306,8 @@ canvas {
 }
 
 .tutorial-pages {
-    display: flex;
+    display: grid;
+    grid-template-columns: 45% 55%;
     width: 95%;
     height: 95%;
 }
@@ -316,8 +317,15 @@ canvas {
     margin-top: -170px;
 }
 
+#tutorial-second-page #pepe-walking {
+    width: 240px;
+    margin-top: -150px;
+}
+
 .enemies {
     display: flex;
+    justify-content: space-between;
+    margin-right: 60px;
 }
 
 .tutorial-pepe {
@@ -330,31 +338,19 @@ canvas {
     width: 100px;
 }
 
-#tutorial-second-page {
-    grid-template-columns: 1fr 1fr;
-}
-
-#second-page-text{
-    display: flex;
-    flex-direction: column;
+#second-page-text, #third-page-text, #fourth-page-text, #fifth-page-text, #seventh-page-text, #eighth-page-text, #ninth-page-text {
     justify-content: center;
-    overflow: hidden;
-    width: 80%;
+    overflow-y: hidden;
 }
 
-#first-part-second-page {
+.first-part-tutorial-page {
     display: flex;
     align-items: center;
 }
 
-#second-page-text span{
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 26px;
-}
-
-#second-page-text img{
-    padding-left: 12px;
-    padding-right: 12px;
+#third-page-img {
+    display: flex;
+    align-items: end;
 }
 
 #space-gif-tutorial {
@@ -362,15 +358,118 @@ canvas {
     height: 50px;
 }
 
+#status-bar-tutorial-img {
+    width: 260px;
+}
+
+#fourth-page-img {
+    display: flex;
+    align-items: center;
+}
+
+#sixth-page-img {
+    display: flex;
+    align-items: center;
+    margin-right: 60px;
+    padding-top: 80px;
+}
+
+#sixth-page-img .enemies {
+    display: grid;
+    grid-template-columns: 3rem 3rem;
+    grid-template-rows: 1fr 1fr;
+}
+
+#sixth-page-img .chicken {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#sixth-page-img #splash-bottle {
+    grid-column: 2;
+    grid-row: 2;
+    padding-top: 2rem;
+}
+
+#sixth-page-text {
+    width: 90%;
+    padding-left: 40px;
+    overflow-y: hidden;
+    justify-content: center;
+}
+
+#seventh-page-img {
+    display: flex;
+    align-items: end;
+}
+
+#eighth-page-img {
+    display: grid;
+    grid-template-rows: 30% 30%;
+}
+
+#eighth-page-img .pepe {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-top: -10px;
+}
+
+#pepe-top-img {
+    width: 105%;
+}
+
+#pepe-top-img img {
+    width: 100%;
+}
+
+.coins {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+    margin-top: -30px;
+}
+
+.coin {
+    width: 160px;
+    height: 160px;
+}
+
+.bottles {
+    width: 80px;
+}
+
 #arrow-up-tutorial {
     width: 40px;
     height: 40px;
 }
 
+#arrow-throw-tutorial {
+    width: 40px;
+    height: 40px;
+}
+
+#arrow-sides-tutorial {
+    width: 80px;
+    height: 40px;
+}
+
+.tutorial-icons {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
 .tutorial-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
     margin-top: 10px;
+    padding-right: 10px;
     overflow-y: scroll;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth;  
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    font-size: 26px;
 }
 
 .tutorial-text::-webkit-scrollbar {
@@ -413,7 +512,7 @@ canvas {
 
 #tutorial-foward-btn {
     grid-column: 3;
-    width: fit-content;
+    margin-left: 60px;
     border: 8px solid #A0220A;
 }
 
@@ -434,7 +533,7 @@ canvas {
 }
 
 .tutorial-arrows img{
-    width: 30%;
+    width: 4rem;
 }
 
 .menu-btns {

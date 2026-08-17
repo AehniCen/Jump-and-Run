@@ -8,12 +8,21 @@ let tutorial;
 let firstPage;
 let secondPage;
 let thirdPage;
+let fourthPage;
+let fifthPage;
+let sixthPage;
+let seventhPage;
+let eighthPage;
+let ninthPage;
+let forwardBtn;
+let backBtn;
 let endscreenDiv;
 let controlsDiv;
 let settingsDiv;
 let mobileControls;
 let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
+let currentPage = 1;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -26,6 +35,14 @@ function init() {
     firstPage = document.getElementById('tutorial-first-page');
     secondPage = document.getElementById('tutorial-second-page');
     thirdPage = document.getElementById('tutorial-third-page');
+    fourthPage = document.getElementById('tutorial-fourth-page');
+    fifthPage = document.getElementById('tutorial-fifth-page');
+    sixthPage = document.getElementById('tutorial-sixth-page');
+    seventhPage = document.getElementById('tutorial-seventh-page');
+    eighthPage = document.getElementById('tutorial-eighth-page');
+    ninthPage = document.getElementById('tutorial-ninth-page');
+    forwardBtn = document.getElementById('tutorial-foward-btn');
+    backBtn = document.getElementById('tutorial-back-btn');
     mobileControls = document.getElementById('mobile-controls');
     endscreenDiv = document.getElementById('endscreen-div');
     showViewportSize();
@@ -59,14 +76,71 @@ function showTutorial() {
 }
 
 function enterTutorial() {
-    firstPage.style.display = 'none';
-    secondPage.style.display = 'grid';
+    console.log(currentPage);
+    if (currentPage === 1) {
+        firstPage.style.display = 'none';
+        secondPage.style.display = 'grid';
+        currentPage = 2;
+        forwardBtn.querySelector('.enter-tutorial').style.justifyContent = 'center';
+        console.log(currentPage);
+    } else if (currentPage === 2) {
+        secondPage.style.display = 'none';
+        thirdPage.style.display = 'grid';
+        currentPage = 3;
+        console.log(currentPage);
+    } else if (currentPage === 3) {
+        thirdPage.style.display = 'none';
+        fourthPage.style.display = 'grid';
+        currentPage = 4;
+        console.log(currentPage);
+    } else if (currentPage === 4) {
+        fourthPage.style.display = 'none';
+        fifthPage.style.display = 'grid';
+        currentPage = 5;
+        console.log(currentPage);
+    } else if (currentPage === 5) {
+        fifthPage.style.display = 'none';
+        sixthPage.style.display = 'grid';
+        currentPage = 6;
+        console.log(currentPage);
+    } else if (currentPage === 6) {
+        sixthPage.style.display = 'none';
+        seventhPage.style.display = 'grid';
+        currentPage = 7;
+        console.log(currentPage);
+    } else if (currentPage === 7) {
+        seventhPage.style.display = 'none';
+        eighthPage.style.display = 'grid';
+        currentPage = 8;
+        console.log(currentPage);
+    } else if (currentPage === 8) {
+        eighthPage.style.display = 'none';
+        ninthPage.style.display = 'grid';
+        currentPage = 9;
+        console.log(currentPage);
+    }
+    document.querySelector('.enter-tutorial p').style.display = 'none';
+    backBtn.style.display = 'block';
+    getButtonSound();
 }
 
 function startGame() {
     startBtn.style.display = 'block';
     startMenu.style.display = 'none';
     tutorial.style.display = 'none';
+    firstPage.style.display = 'flex';
+    secondPage.style.display = 'none';
+    thirdPage.style.display = 'none';
+    fourthPage.style.display = 'none';
+    fifthPage.style.display = 'none';
+    sixthPage.style.display = 'none';
+    seventhPage.style.display = 'none';
+    eighthPage.style.display = 'none';
+    ninthPage.style.display = 'none';
+    backBtn.style.display = 'none';
+    forwardBtn.querySelector('.enter-tutorial').style.justifyContent = 'space-between';
+    currentPage = 1;
+    document.querySelector('.enter-tutorial p').style.display = 'flex';
     world.paused = false;
     world.character.lastActionTime = Date.now();
     getButtonSound();
