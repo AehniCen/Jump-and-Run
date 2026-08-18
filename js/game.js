@@ -5,6 +5,9 @@ let startMenu;
 let startBtn;
 let pauseMenu;
 let tutorial;
+let tutorialHeadline;
+let tutorialBtns;
+let finishTutorialBtn;
 let firstPage;
 let secondPage;
 let thirdPage;
@@ -32,6 +35,9 @@ function init() {
     startBtn = document.getElementById('start-btn');
     pauseMenu = document.getElementById('pause-div');
     tutorial = document.getElementById('tutorial-div');
+    tutorialHeadline = document.querySelector('#tutorial-headline h2');
+    tutorialBtns = document.querySelector('#tutorial-btns');
+    finishTutorialBtn = document.getElementById('skip-tutorial-btn');
     firstPage = document.getElementById('tutorial-first-page');
     secondPage = document.getElementById('tutorial-second-page');
     thirdPage = document.getElementById('tutorial-third-page');
@@ -75,11 +81,17 @@ function showTutorial() {
     getButtonSound();
 }
 
-function enterTutorial() {
+function nextPage() {
     console.log(currentPage);
     if (currentPage === 1) {
         firstPage.style.display = 'none';
         secondPage.style.display = 'grid';
+        tutorialHeadline.textContent = 'Tutorial';
+        tutorialBtns.style.gridTemplateColumns = '1fr 2fr 1fr';
+        backBtn.style.gridColumn = '1';
+        finishTutorialBtn.style.gridColumn = '2';
+        forwardBtn.style.gridColumn = '3';
+        finishTutorialBtn.style.justifySelf = 'center';
         currentPage = 2;
         forwardBtn.querySelector('.enter-tutorial').style.justifyContent = 'center';
         console.log(currentPage);
@@ -117,10 +129,60 @@ function enterTutorial() {
         eighthPage.style.display = 'none';
         ninthPage.style.display = 'grid';
         currentPage = 9;
-        console.log(currentPage);
+        if (forwardBtn.style.display !== 'none') {
+            forwardBtn.style.display = 'none';
+        }
     }
     document.querySelector('.enter-tutorial p').style.display = 'none';
     backBtn.style.display = 'block';
+    getButtonSound();
+}
+
+function previousPage(){
+    if (currentPage === 9) {
+        ninthPage.style.display = 'none';
+        eighthPage.style.display = 'grid';
+        currentPage = 8;
+        if (forwardBtn.style.display == 'none') {
+            forwardBtn.style.display = 'block';
+        }
+    } else if (currentPage === 8) {
+        eighthPage.style.display = 'none';
+        seventhPage.style.display = 'grid';
+        currentPage = 7;
+    } else if (currentPage === 7) {
+        seventhPage.style.display = 'none';
+        sixthPage.style.display = 'grid';
+        currentPage = 6;
+    } else if (currentPage === 6) {
+        sixthPage.style.display = 'none';
+        fifthPage.style.display = 'grid';
+        currentPage = 5;
+    } else if (currentPage === 5) {
+        fifthPage.style.display = 'none';
+        fourthPage.style.display = 'grid';
+        currentPage = 4;
+    } else if (currentPage === 4) {
+        fourthPage.style.display = 'none';
+        thirdPage.style.display = 'grid';
+        currentPage = 3;
+    } else if (currentPage === 3) {
+        thirdPage.style.display = 'none';
+        secondPage.style.display = 'grid';
+        currentPage = 2;
+    } else if (currentPage === 2) {
+        secondPage.style.display = 'none';
+        firstPage.style.display = 'grid';
+        tutorialHeadline.textContent = 'El Pollo Loco';
+        tutorialBtns.style.gridTemplateColumns = '1fr 1fr';
+        backBtn.style.gridColumn = '0';
+        finishTutorialBtn.style.gridColumn = '1';
+        forwardBtn.style.gridColumn = '2';
+        finishTutorialBtn.style.justifySelf = 'start';
+        currentPage = 1;
+        document.querySelector('.enter-tutorial p').style.display = 'block';
+        backBtn.style.display = 'none';   
+    }
     getButtonSound();
 }
 

@@ -22,16 +22,13 @@ body {
     height: 100vh;
     width: 100%;
     margin: 0;
-
 }
 
 img {
     -webkit-user-select: none;
     user-select: none;
-
     -webkit-user-drag: none;
     user-drag: none;
-
     -webkit-touch-callout: none;
 }
 
@@ -42,38 +39,6 @@ img {
     cursor: url('assets/icons/comic-cursor-48.png'), auto;
 }
 
-.game-div:fullscreen {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.game-div:fullscreen #tutorial-div {
-    width: 85%;
-    left: 7%;
-}
-
-.game-div:fullscreen #tutorial-headline {
-    top: -15%;
-    left: 40%;
-}
-
-.game-div:fullscreen #tutorial-headline h2{
-    font-size: 160px;
-}
-
-.game-div:fullscreen #tutorial-content {
-    margin-top: 40px;
-}
-
-.game-div:fullscreen #skip-tutorial-btn {
-    margin-top: 20px;
-}
-
-.game-div:fullscreen #skip-tutorial-btn h3 {
-    font-size: 80px;
-}
-
 .overlay-divs {
     position: absolute;
     display: flex;
@@ -81,10 +46,9 @@ img {
     height: 100%;
     top: 0;
     left: 0;
-
 }
 
-p, h1 {
+p, h1, h2, h3 {
     margin-block-start: 0;
     margin-block-end: 0;
     caret-color: transparent;
@@ -121,8 +85,6 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 2px #9A3A17;
-    margin-block-start: 0;
-    margin-block-end: 0;
 }
 
 h3 {
@@ -130,8 +92,6 @@ h3 {
     font-size: 60px;
     letter-spacing: 3px;
     font-weight: 600;
-    margin-block-start: 0;
-    margin-block-end: 0;
 }
 
 canvas {
@@ -150,17 +110,6 @@ canvas {
     justify-content: space-evenly;
     align-items: start;
     z-index: 2;
-}
-
-.game-div:fullscreen #start-div {
-    width: 100%;
-    height: 100vh;
-    background-position: 0;
-}
-
-.game-div:fullscreen #expand-icon {
-    top: 40px;
-    right: 40px;
 }
 
 #settings-btn {
@@ -202,8 +151,7 @@ canvas {
 }
 
 .controls-btn {
-    width: 100px;
-    height: 90px;
+    width: fit-content;
     border: none;
     background-color: transparent;
 }
@@ -221,14 +169,14 @@ canvas {
 
 
 .mute-btn img{
-    height: 60px;
+    height: auto;
     width: 50px;
     transition: transform 125ms ease;
 }
 
 #start-btn {
     width: 340px;
-    height: 100px;
+    height: fit-content;
     margin-top: 20px;
     transition: transform 125ms ease;
 }
@@ -295,8 +243,11 @@ canvas {
 
 #tutorial-btns {
     width: 100%;
+    margin-top: 6px;
+    position: absolute;
+    bottom: -7%;
     display: grid;
-    grid-template-columns: 3fr 2fr 3fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 #tutorial-headline {
@@ -315,6 +266,10 @@ canvas {
 #first-page-img img{
     width: 250px;
     margin-top: -170px;
+}
+
+#first-page-text {
+    margin-bottom: 12px;
 }
 
 #tutorial-second-page #pepe-walking {
@@ -415,6 +370,10 @@ canvas {
     margin-top: -10px;
 }
 
+#ninth-page-text {
+    margin-bottom: 80px;
+}
+
 #pepe-top-img {
     width: 105%;
 }
@@ -478,11 +437,12 @@ canvas {
 
 .tutorial-text::-webkit-scrollbar-track {
     background: #a0230a56;
+    border-radius: 8px;
 }
 
 .tutorial-text::-webkit-scrollbar-thumb {
     background: #A0220A;
-    border-radius: 0;
+    border-radius: 8px;
 }
 
 .tutorial-text::-webkit-scrollbar-button {
@@ -500,20 +460,23 @@ canvas {
 }
 
 #skip-tutorial-btn {
-    grid-column: 2;
-    width: 80%;
+    grid-column: 1;
+    width: 70%;
+    margin-left: 1rem;
     border: 8px solid #A0220A;
 }
 
-#skip-tutorial-btn h3{
-    font-size: 40px;
-    padding: 2px;
+#skip-tutorial-btn h2{
+    font-size: 50px;
+    margin-left: 12px;
 }
 
 #tutorial-foward-btn {
-    grid-column: 3;
-    margin-left: 60px;
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
     border: 8px solid #A0220A;
+    margin-right: 12px;
 }
 
 .enter-tutorial {
@@ -523,17 +486,18 @@ canvas {
     justify-content: space-between;
 }
 .enter-tutorial p{
-    font-size: 30px;
+    font-size: 45px;
 }
 
 #tutorial-back-btn {
     grid-column: 1;
-    margin-right: 60px;
     border: 8px solid #A0220A;
+    margin-left: 12px;
 }
 
 .tutorial-arrows img{
-    width: 4rem;
+    width: 3rem;
+    padding-left: 12px;
 }
 
 .menu-btns {
@@ -728,6 +692,204 @@ canvas {
 #mobile-controls {
     display: none;
 }
+
+/*fullscreen - options*/
+
+.game-div:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-div:fullscreen #start-div {
+    width: 100%;
+    height: 100vh;
+    background-position: 0;
+}
+
+.game-div:fullscreen #start-div {
+    width: 100%;
+    height: 100vh;
+    background-position: 0;
+}
+
+.game-div:fullscreen #start-btn {
+    width: fit-content;
+    height: fit-content;
+    margin-top: 4rem;
+}
+
+.game-div:fullscreen #start-btn h2 {
+    font-size: 180px;
+    padding: 1rem;
+}
+
+.game-div:fullscreen #start-btn h2 {
+    font-size: 180px;
+    padding: 1rem;
+}
+
+.game-div:fullscreen .controls-btn img{
+    width: 60%;
+}
+
+.game-div:fullscreen .tooltip-container p {
+    font-size: 120px;
+}
+
+.game-div:fullscreen .mute-btn img {
+    width: 60%;
+}
+
+.game-div:fullscreen #tutorial-div {
+    width: 85%;
+    left: 7%;
+}
+
+.game-div:fullscreen #tutorial-headline {
+    top: -15%;
+    left: 40%;
+}
+
+.game-div:fullscreen #tutorial-headline h2{
+    font-size: 160px;
+}
+
+.game-div:fullscreen .tutorial-text p{
+    font-size: 70px;
+}
+
+.game-div:fullscreen #first-page-img img {
+    width: 700px;
+    margin-top: -480px;
+}
+
+.game-div:fullscreen #skip-tutorial-btn h2 {
+    font-size: 100px;
+    margin-left: 12px;
+}
+
+.game-div:fullscreen .enter-tutorial p {
+    font-size: 100px;
+}
+
+.game-div:fullscreen .tutorial-arrows img {
+    width: 8rem;
+    padding-left: 3rem;
+}
+
+.game-div:fullscreen  #tutorial-second-page #pepe-walking {
+    width: 700px;
+    margin-top: -480px;
+}
+
+.game-div:fullscreen .tutorial-text {
+    font-size: 70px;
+}
+
+.game-div:fullscreen #second-page-text {
+    align-items: center;
+}
+
+.game-div:fullscreen .tutorial-icons {
+    width: 12rem;
+    padding: 2rem;
+}
+
+.game-div:fullscreen #arrow-sides-tutorial {
+    width: 12rem;
+    height: 6rem;
+    padding: 2rem;
+}
+
+.game-div:fullscreen .tutorial-pepe {
+    width: 100%;
+    margin-top: -120px;
+    margin-left: -15%;
+}
+
+.game-div:fullscreen .chicken {
+    width: 90%;
+    margin-left: -40%;
+}
+
+.game-div:fullscreen #status-bar-tutorial-img {
+    width: 100%;
+    margin-left: -5%;
+}
+
+.game-div:fullscreen #fifth-page-img .tutorial-pepe {
+    width: 50%;
+    margin-top: -200px;
+    margin-left: 5%;
+}
+
+.game-div:fullscreen #fifth-page-img .chicken {
+    width: 30%;
+}
+
+.game-div:fullscreen #fifth-page-img .enemies {
+    justify-content: space-around;
+    margin-right: 0;
+    margin-left: 6%;
+}
+
+.game-div:fullscreen #sixth-page-img .enemies {
+    width: 100%;
+    grid-template-columns: 9rem 9rem;
+    grid-template-rows: 12rem 12rem;
+}
+
+.game-div:fullscreen #sixth-page-img #dead-chicken {
+    width: 100%;
+    align-self: end;
+    justify-self: end;
+}
+
+.game-div:fullscreen #sixth-page-img #splash-bottle {
+    width: 100%;
+    align-self: end;
+    justify-self: end;
+}
+
+.game-div:fullscreen #sixth-page-img .bottles {
+    width: 90%;
+}
+
+.game-div:fullscreen #sixth-page-text .game-div:fullscreen .tutorial-icons {
+    width: 5rem;
+    padding: 2rem;
+}
+
+.game-div:fullscreen #sixth-page-text #arrow-throw-tutorial {
+    width: 6rem;
+    height: 6rem;
+}
+
+.game-div:fullscreen #seventh-page-img .tutorial-pepe {
+    width: 120%;
+}
+
+.game-div:fullscreen #seventh-page-img .bottles {
+    width: 50%;
+}
+
+.game-div:fullscreen #eighth-page-img .coin {
+    width: 18rem;
+    height: 18rem;
+}
+
+.game-div:fullscreen #eighth-page-img .coins {
+    align-items: start;
+    justify-content: flex-end;
+}
+
+.game-div:fullscreen #eighth-page-img .tutorial-pepe {
+    width: 70%;
+    margin-top: -60%;
+}
+
+/*responsive options*/
 
 @media (pointer: coarse) {
     #mobile-controls {
@@ -1229,3 +1391,125 @@ canvas {
         padding-top: 25px;
     }
 }
+
+
+/*fullscreen - responsive options*/
+
+
+@media only screen and (max-height: 1245px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 120px;
+    }
+}
+
+@media only screen and (max-height: 890px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 100px;
+    }
+}
+
+@media only screen and (max-height: 755px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 80px;
+    }
+}
+
+@media only screen and (max-height: 640px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 60px;
+    }
+}
+
+@media only screen and (max-width: 1775px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 140px;
+    }
+}
+
+@media only screen and (max-width: 1450px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 120px;
+    }
+    .game-div:fullscreen .controls-btn img{
+        width: 50%;
+    }
+
+    .game-div:fullscreen .mute-btn img {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 1275px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 100px;
+    }
+    .game-div:fullscreen .controls-btn img{
+        width: 40%;
+    }
+
+    .game-div:fullscreen .tooltip-container p {
+        font-size: 100px;
+    }
+
+    .game-div:fullscreen .mute-btn img {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 1075px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 80px;
+    }
+
+    .game-div:fullscreen .controls-btn img{
+        width: 30%;
+    }
+
+    .game-div:fullscreen .tooltip-container p {
+        font-size: 80px;
+        margin-right: 15%;
+    }
+
+    .game-div:fullscreen .mute-btn img {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 60px;
+    }
+
+    .game-div:fullscreen .controls-btn img{
+        width: 20%;
+    }
+
+    .game-div:fullscreen .tooltip-container {
+        width: 90%;
+    }
+
+    .game-div:fullscreen .menu-divs {
+        width: fit-content;
+    }
+
+    .game-div:fullscreen .tooltip-container p {
+        font-size: 60px;
+    }
+
+    .game-div:fullscreen .mute-btn img {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 740px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 50px;
+    }
+}
+
+@media only screen and (max-width: 635px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 40px;
+    }
+
+}       

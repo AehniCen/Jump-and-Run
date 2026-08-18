@@ -59,7 +59,7 @@
                         <p>That's Pepe. <br>Pepe is good at two things in life: <br> His famous salsa sauce, "Pepe's Burn to Hell" - so hot, no chicken has ever survived it... 
                             <br> ...and <span class="caps">KILLING CHICKENS!</span>
                             <br>So when a gigantic chicken epedemic starts terrorizing his village, there's only one man everyone can turn to. Pepe. <br>Armed with his trusty salsa bottles and his powerful jumping skills, Pepe sets out to fight his way through hordes of tiny and not-so-tiny chickens. 
-                            <br>But beware... <br>At the end of his journey, something much bigger is waiting for him. <br><span class="caps">EL POLLO GIGANTE!</span></p>
+                            <br>But beware... <br>At the end of his journey, something much bigger is waiting for him. <br><span class="caps">EL POLLO GIGANTE!</span><br></p>
                     </div>
                 </div>
                 <div id="tutorial-second-page" class="tutorial-pages" style="display: none;">
@@ -187,19 +187,19 @@
                 </div>
             </div>
             <div id="tutorial-btns">
-                <button id="tutorial-back-btn" class="tutorial-arrows" style="display: none;">
-                    <img src="assets/icons/back-arrow-red.png" alt="">
+                <button id="tutorial-back-btn" class="tutorial-arrows" style="display: none;" onclick="previousPage()"> 
+                    <img src="assets/icons/back-arrow-red.png" alt="back-arrow">
                 </button>
                 <button id="skip-tutorial-btn" onclick="startGame()">
-                    <h3>Start</h3>
+                    <h2>Ready</h2>
                 </button>
                 <button id="finish-tutorial-btn" style="display: none;">
                     <p>finish tutorial</p>
                 </button>
-                <button id="tutorial-foward-btn" class="tutorial-arrows" onclick="enterTutorial()">
+                <button id="tutorial-foward-btn" class="tutorial-arrows" onclick="nextPage()">
                     <div class="enter-tutorial">
                         <p>Enter Tutorial</p>
-                        <img src="assets/icons/foward-arrow-red.png" alt="">
+                        <img src="assets/icons/foward-arrow-red.png" alt="foward-arrow">
                     </div>
                 </button>
             </div>
