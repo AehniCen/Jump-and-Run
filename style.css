@@ -151,7 +151,8 @@ canvas {
 }
 
 .controls-btn {
-    width: fit-content;
+    display: flex;
+    justify-content: center;
     border: none;
     background-color: transparent;
 }
@@ -164,7 +165,7 @@ canvas {
 .mute-btn {
     border: none;
     background-color: transparent;
-    padding-left: 20px;
+    padding-right: 20px;
 }
 
 
@@ -253,7 +254,6 @@ canvas {
 #tutorial-headline {
     position: absolute;
     top: -20%;
-    left: 30%;
 }
 
 .tutorial-pages {
@@ -586,6 +586,10 @@ canvas {
     border-right: transparent;
 }
 
+.mobile-control-text {
+    display: none;
+}
+
 #close-btn{
     position: absolute;
     left: 20px;
@@ -612,11 +616,14 @@ canvas {
 }
 
 .menu-divs {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding-top: 20px;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
     font-family: 'Zabars';
     font-size: 60px;
 }
@@ -741,14 +748,32 @@ canvas {
     width: 60%;
 }
 
+.game-div:fullscreen #controls-div {
+    grid-template-columns: 30% 30%;
+    font-size: 70px;
+}
+
+.game-div:fullscreen #control-icons-div {
+    justify-content: space-evenly;
+}
+
+.game-div:fullscreen #control-text-div {
+    justify-content: space-evenly;
+}
+
+.game-div:fullscreen .control-icons {
+    height: 110px;
+}
+
 .game-div:fullscreen #tutorial-div {
     width: 85%;
     left: 7%;
 }
 
 .game-div:fullscreen #tutorial-headline {
-    top: -15%;
-    left: 40%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .game-div:fullscreen #tutorial-headline h2{
@@ -908,10 +933,7 @@ canvas {
         width: 100% !important;
         height: 100% !important;
     }
-    #controls-div{
-        width: 50% !important;
-        height: 80% !important;
-    }
+
     .menu-btns {
         width: 70%;
         height: 30%;
@@ -949,9 +971,6 @@ canvas {
         border: 8px solid #A0220A;
     }
 
-    #controls-div{
-        width: 60% !important;
-    }
 }
 
 @media only screen and (max-width: 690px) {
@@ -973,18 +992,8 @@ canvas {
 @media only screen and (max-width: 650px) {
     #controls-div{
         font-size: 24px;
-        width: 70% !important;
         padding-bottom: 5px;
     }
-
-    #control-icons-div img {
-        height: 40px;
-    }
-
-    #controls-div-overlay{
-        left: 10%;
-    }
-
 }
 
 
@@ -1038,9 +1047,6 @@ canvas {
 @media only screen and (max-width: 590px) {
     #start-btn p {
         font-size: 50px;
-    }
-    #controls-div {
-        padding: 10px;
     }
     #close-btn img{
         width: 30px;
@@ -1150,7 +1156,6 @@ canvas {
 
     #controls-div{
         font-size: 22px;
-        width: 80% !important;
     }
 
     #control-icons-div img {
@@ -1158,7 +1163,6 @@ canvas {
     }
 
     #controls-div-overlay{
-        left: 5%;
         top: 5px;
     }
 
@@ -1243,7 +1247,6 @@ canvas {
 
     #controls-div{
         font-size: 20px;
-        height: 70% !important;
     }
 
     #controls-div-overlay{
@@ -1395,28 +1398,13 @@ canvas {
 
 /*fullscreen - responsive options*/
 
-
-@media only screen and (max-height: 1245px) {
-    .game-div:fullscreen #start-btn h2 {
-        font-size: 120px;
-    }
-}
-
-@media only screen and (max-height: 890px) {
-    .game-div:fullscreen #start-btn h2 {
-        font-size: 100px;
-    }
-}
-
-@media only screen and (max-height: 755px) {
-    .game-div:fullscreen #start-btn h2 {
-        font-size: 80px;
-    }
-}
-
-@media only screen and (max-height: 640px) {
-    .game-div:fullscreen #start-btn h2 {
+ 
+@media only screen and (max-width: 1830px) {
+    .game-div:fullscreen #controls-div {
         font-size: 60px;
+    }
+    .game-div:fullscreen .control-icons {
+        height: 100px;
     }
 }
 
@@ -1424,18 +1412,88 @@ canvas {
     .game-div:fullscreen #start-btn h2 {
         font-size: 140px;
     }
+
+    .game-div:fullscreen #first-page-img img {
+        width: 600px;
+        margin-top: -300px;
+    }
+
+    .game-div:fullscreen .tutorial-text p {
+        font-size: 60px;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    .game-div:fullscreen #first-page-img img {
+        width: 500px;
+        margin-top: -180px;
+    }
+
+    .game-div:fullscreen .tutorial-text p {
+        font-size: 50px;
+    }
+
+    .game-div:fullscreen .enter-tutorial p {
+        font-size: 80px;
+    }
+
+    .game-div:fullscreen #skip-tutorial-btn h2 {
+        font-size: 80px;
+    }
 }
 
 @media only screen and (max-width: 1450px) {
     .game-div:fullscreen #start-btn h2 {
         font-size: 120px;
     }
+
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 10%;
+    }
+
     .game-div:fullscreen .controls-btn img{
         width: 50%;
     }
 
     .game-div:fullscreen .mute-btn img {
         width: 50%;
+    }
+
+    .game-div:fullscreen #controls-div {
+        font-size: 50px;
+    }
+    .game-div:fullscreen .control-icons {
+        height: 80px;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .game-div:fullscreen #controls-div {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+
+    .game-div:fullscreen #tutorial-DIV {
+        height: 50%;
+    }
+
+    .game-div:fullscreen #first-page-img img {
+        width: 400px;
+        margin-top: 0px;
+    }
+
+    .game-div:fullscreen .tutorial-text p {
+        font-size: 40px;
+    }
+
+    .game-div:fullscreen .enter-tutorial p {
+        font-size: 70px;
+    }
+
+    .game-div:fullscreen #skip-tutorial-btn h2 {
+        font-size: 70px;
     }
 }
 
@@ -1454,6 +1512,10 @@ canvas {
     .game-div:fullscreen .mute-btn img {
         width: 40%;
     }
+
+    .game-div:fullscreen .control-icons {
+        height: 60px;
+    }
 }
 
 @media only screen and (max-width: 1075px) {
@@ -1461,8 +1523,8 @@ canvas {
         font-size: 80px;
     }
 
-    .game-div:fullscreen .controls-btn img{
-        width: 30%;
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 15%;
     }
 
     .game-div:fullscreen .tooltip-container p {
@@ -1470,8 +1532,48 @@ canvas {
         margin-right: 15%;
     }
 
-    .game-div:fullscreen .mute-btn img {
-        width: 30%;
+}
+
+@media only screen and (max-width: 980px) {
+    .game-div:fullscreen #controls-div{
+        grid-template-columns: 60%;
+    }
+
+    .game-div:fullscreen #control-icons-div {
+        padding-right: 0px;
+        border-radius: 12px;
+        border: 4px solid #A0220A;
+        border-right: 4px solid #A0220A;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+        height: 80%;
+    }
+
+    .game-div:fullscreen #control-icons-div::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .game-div:fullscreen #control-icons-div::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .game-div:fullscreen #control-icons-div::-webkit-scrollbar-thumb {
+        background: #A0220A;
+        border-radius: 8px;
+    }
+
+    .game-div:fullscreen .control-icons {
+        padding-bottom: 2rem;
+    }
+
+    .game-div:fullscreen #control-text-div {
+        display: none;
+    }
+
+    .game-div:fullscreen .mobile-control-text {
+        display: block;
+        padding-bottom: 2rem;
+        margin-top: -2rem;
     }
 }
 
@@ -1480,36 +1582,182 @@ canvas {
         font-size: 60px;
     }
 
-    .game-div:fullscreen .controls-btn img{
-        width: 20%;
-    }
-
-    .game-div:fullscreen .tooltip-container {
-        width: 90%;
-    }
-
-    .game-div:fullscreen .menu-divs {
-        width: fit-content;
-    }
-
     .game-div:fullscreen .tooltip-container p {
         font-size: 60px;
     }
 
-    .game-div:fullscreen .mute-btn img {
-        width: 20%;
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 20%;
     }
+}
+
+@media only screen and (max-width: 790px) {
+    .game-div:fullscreen .tooltip-container p {
+        font-size: 50px;
+    }
+
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 20%;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 50px;
+    }
+
+    .game-div:fullscreen .controls-btn img{
+        width: 30%;
+    }
+
+    .game-div:fullscreen .mute-btn img{
+        width: 30%;
+        height: 30%;
+    }
+
 }
 
 @media only screen and (max-width: 740px) {
     .game-div:fullscreen #start-btn h2 {
         font-size: 50px;
     }
+
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 35%;
+    }
+
 }
 
 @media only screen and (max-width: 635px) {
+    .game-div:fullscreen .menu-divs {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 0.5fr;
+    }
+
+    .game-div:fullscreen #control-icons-div {
+        margin-top: 30%;
+    }
+
+    .game-div:fullscreen .tooltip-container p {
+        margin-right: 0;
+        text-align: center;
+    }
+
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 25%;
+    }
+
+    .game-div:fullscreen .control-icons {
+        height: 6%;
+    }
+
+    .game-div:fullscreen #controls-div {
+        font-size: 30px;
+    }
+
+    .game-div:fullscreen .mobile-control-text {
+        padding-bottom: 1rem;
+    }
+}     
+
+@media only screen and (max-width: 435px) {
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 35%;
+    }
+
+} 
+
+@media only screen and (max-width: 376px) {
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 55%;
+    }
+} 
+
+@media only screen and (max-width: 376px) {
+    .game-div:fullscreen #controls-div {
+        font-size: 20px;
+    }
+} 
+
+@media only screen and (max-height: 1245px) {
     .game-div:fullscreen #start-btn h2 {
+        font-size: 120px;
+    }
+}
+
+@media only screen and (max-height: 960px) {
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 4rem;
+    }
+
+}
+
+@media only screen and (max-height: 890px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 100px;
+    }
+
+    .game-div:fullscreen #control-text-div p{
+        padding-top: 20px;
+    }
+}
+
+@media only screen and (max-height: 755px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 80px;
+    }
+
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 15%;
+    }
+
+    .game-div:fullscreen #control-text-div p{
         font-size: 40px;
     }
 
-}       
+    .game-div:fullscreen .control-icons {
+        height: 60px;
+    }
+
+    .game-div:fullscreen .controls-btn img {
+        width: 20%;
+    }
+
+    .game-div:fullscreen .mute-btn img {
+        width: 20%;
+        height: 20%;
+    }
+
+}
+
+@media only screen and (max-height: 730px) {
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 2rem;
+    }
+
+}
+
+
+@media only screen and (max-height: 640px) {
+    .game-div:fullscreen #start-btn h2 {
+        font-size: 60px;
+    }
+
+}
+
+@media only screen and (max-height: 640px) {
+
+    .game-div:fullscreen #control-text-div p{
+        font-size: 30px;
+    }
+
+    .game-div:fullscreen .control-icons {
+        height: 40px;
+    }
+}
+
+@media only screen and (max-height: 5px) {
+    .game-div:fullscreen .tooltip-container {
+        padding-top: 10%;
+    }
+}
