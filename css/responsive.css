@@ -1,0 +1,475 @@
+/*responsive options*/
+
+@media (pointer: coarse) {
+    #mobile-controls {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .game-div {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 720 / 480;
+    }
+
+    .menu-btns {
+        width: 70%;
+        height: 30%;
+        font-size: 50px;
+    }
+    #endscreen-div .menu-btns {
+        margin-top: 20px;
+        height: 15%;
+    }
+    #pause-div p {
+        font-size: 90px;
+        margin-top: 10px;
+    }
+
+    .mute-btn {
+        margin-top: 0;
+    }
+    
+    .controls-btn {
+        margin-top: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .mute-btn img{
+        height: 50px;
+        width: 40px;
+    }
+
+    .controls-btn img {
+        width: 50px;
+    }
+
+    button {
+        border: 8px solid #A0220A;
+    }
+
+}
+
+@media only screen and (max-width: 690px) {
+    #start-btn {
+        width: 50%;
+        height: 20%;
+    }
+
+    #start-btn p {
+        font-size: 55px;
+    }
+
+    #mobile-controls img{
+        width: 40px;
+    }
+
+}
+
+@media only screen and (max-width: 650px) {
+    #controls-div{
+        font-size: 24px;
+        padding-bottom: 5px;
+    }
+}
+
+
+@media only screen and (max-width: 645px) {
+    .menu-btns {
+        font-size: 40px;
+        margin-top: 20px;
+    }   
+
+    .pause-btns {
+        margin-top: 0;
+    }
+
+    .restart-arrow {
+        width: 40px;
+    }
+
+    #start-menu-arrow {
+        width: 50px;
+    }
+
+    body {
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    #settings-btn img {
+        width: 40px;
+        padding-top: 15px;
+    }
+
+    #expand-btn img {
+        width: 35px;
+        padding-top: 15px;
+    }
+
+    #return-to-start-btn img {
+        width: 70px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    #game-over-img {
+        width: 300px;    
+    }
+}
+
+@media only screen and (max-width: 590px) {
+    #start-btn p {
+        font-size: 50px;
+    }
+    #close-btn img{
+        width: 30px;
+    }
+}
+
+@media only screen and (max-width: 550px) {  
+    .restart-arrow {
+        width: 30px;
+    }
+
+    #start-menu-arrow {
+        width: 40px;
+    }
+
+    #pause-div p {
+        font-size: 80px;
+    } 
+
+    #return-to-start-btn img {
+        width: 60px;
+        padding-top: 10px;
+    }
+
+    #mobile-controls img{
+        width: 30px;
+    }
+}
+
+@media only screen and (max-width: 545px) {
+    #start-btn {
+        width: 60%;
+    }
+
+    #game-over-img {
+        width: 250px;    
+    }
+
+    #endscreen-div .menu-btns {
+        font-size: 30px;
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (max-width: 500px) {  
+    .menu-btns {
+        font-size: 30px;
+        margin-top: 10px;
+    }  
+
+    #start-btn {
+        margin-top: 10px;
+    }
+
+    #start-btn p {
+        font-size: 45px;
+    }
+
+    #endscreen-div .menu-btns {
+        height: 20%;
+        margin-top: 10px;
+    }
+
+    #settings-btn img {
+        width: 30px;
+        padding-top: 5px;
+    }
+
+    #expand-btn img {
+        width: 25px;
+        padding-top: 5px;
+    }
+
+    #return-to-start-btn img {
+        width: 50px;
+        padding-top: 5px;
+    }
+
+    .controls-btn img{
+        width: 40px;
+    }
+
+    .mute-btn img{
+        height: 40px;
+        width: 30px;
+    }
+
+    .tooltip-container p{
+        font-size: 50px;
+    }
+}
+
+@media only screen and (max-width: 475px) {  
+    #pause-div p {
+        font-size: 80px;
+        margin-top: 5px;
+    }
+
+    .controls-btn img {
+        width: 40px;
+    }
+
+    .mute-btn img{
+        height: 40px;
+        width: 30px;
+    }
+
+    #controls-div{
+        font-size: 22px;
+    }
+
+    #control-icons-div img {
+        height: 35px;
+    }
+
+    #controls-div-overlay{
+        top: 5px;
+    }
+
+    #game-over-img {
+        width: 200px;    
+    }
+
+    .controls-btn img{
+        width: 30px;
+    }
+
+    .mute-btn img{
+        height: 30px;
+        width: 20px;
+    }
+
+    .tooltip-container p{
+        font-size: 40px;
+        padding-left: 30px;
+    }
+    
+    #mobile-controls img{
+        width: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 440px) {  
+
+    #start-btn {
+        width: 65%;
+    }
+
+    #start-btn p {
+        font-size: 40px;
+    }
+
+    .mute-btn {
+        margin-right: 10px;
+    }
+
+    .controls-btn {
+        margin-left: 5px;
+    }
+
+    #controls-div-overlay{
+        top: 2px;
+    }
+
+}
+
+@media only screen and (max-width: 420px) { 
+    #pause-div p {
+        font-size: 70px;
+    }
+    
+    .menu-btns {
+        font-size: 25px;
+    }  
+
+    #settings-btn img {
+        width: 25px;
+        padding-top: 5px;
+    }
+
+    #expand-btn img {
+        width: 20px;
+        padding-top: 5px;
+    }
+
+    .restart-arrow {
+        width: 30px;
+    }
+
+    #start-menu-arrow {
+        width: 30px;
+    }
+
+    button {
+        border: 6px solid #A0220A;
+    }
+
+    #controls-div{
+        font-size: 20px;
+    }
+
+    #controls-div-overlay{
+        top: 10px;
+    }
+
+    #control-icons-div img {
+        height: 30px;
+    }
+
+    #return-to-start-btn img {
+        width: 40px;
+        padding-top: 5px;
+    }
+
+    #mobile-controls img{
+        width: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    #controls-div-overlay{
+        left: 3%;
+    }
+    #endscreen-div .menu-btns {
+        font-size: 25px;
+        height: 15%;
+    }
+    #endscreen-div .restart-arrow {
+        width: 20px;
+    }
+    .controls-btn img{
+        width: 30px;
+    }
+
+    .mute-btn img{
+        height: 30px;
+        width: 20px;
+    }
+
+    .tooltip-container{
+        padding-top: 40px;
+    }
+
+    .tooltip-container p{
+        font-size: 40px;
+        padding-left: 20px;
+    }
+
+    .tooltip-container .menu-divs{
+        padding-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 385px) { 
+    #pause-div p {
+        font-size: 60px;
+    }
+    
+    .menu-btns {
+        font-size: 20px;
+        margin-top: 5px;
+    }  
+
+    #settings-btn {
+        left: 10px;
+    }
+
+    #expand-btn {
+        right: 10px;
+    }
+
+    .restart-arrow {
+        width: 20px;
+    }
+
+    #start-menu-arrow {
+        width: 20px;
+    }
+
+    #start-btn p {
+        font-size: 35px;
+    }
+
+    #start-btn {
+        height: 25%;
+        margin-top: 5px;
+    }
+
+    .mute-btn {
+        margin-right: 0px;
+    }
+
+    .controls-btn {
+        margin-left: 0px;
+    }
+    #endscreen-div .menu-btns {
+        font-size: 20px;
+        height: 15%;
+        margin-top: 5px;
+    }
+    #endscreen-div .restart-arrow {
+        width: 15px;
+    }
+    #return-to-start-btn img {
+        width: 30px;
+        padding-top: 0;
+    }
+
+    #mobile-controls img{
+        width: 15px;
+    }
+}
+
+@media only screen and (max-width: 340px) { 
+    #start-btn p {
+        font-size: 30px;
+    }
+
+    #controls-div{
+        font-size: 18px;
+    }
+
+    #control-icons-div img {
+        height: 25px;
+    }
+
+    #controls-div-overlay{
+        left: 2%;
+    }
+
+    #game-over-img {
+        width: 150px;
+    }
+
+    #settings-btn {
+        top: 10px;
+    }
+
+    #expand-btn {
+        top: 10px;
+    }
+
+    .tooltip-container {
+        padding-top: 25px;
+    }
+}
