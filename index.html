@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/fullscreen-responsive.css">
     <link rel="icon" type="image/png" href="assets/flavicon/sombrero-hut.png">
     <title>El Pollo Loco</title>
     <script src="models/level.class.js"></script>
@@ -35,12 +34,12 @@
 
     <div class="game-div" id="fullscreen">
 
-        <button id="expand-btn" onclick="toggleFullscreen()">
+        <button id="expand-btn" class="main-settings-btns" onclick="toggleFullscreen()">
             <img id="expand-icon" src="assets/icons/expand.png">
         </button>
 
         <div id="start-div" class="overlay-divs">
-            <button id="settings-btn" onclick="openSettings()">
+            <button id="settings-menu-btn" class="main-settings-btns" onclick="openSettings()">
                 <img src="assets/icons/setting-btn.png" alt="">
             </button>
             <button id="start-btn" onclick="showTutorial()">
@@ -53,144 +52,138 @@
                 <h2>El Pollo Loco</h2>
             </div>
             <div id="tutorial-content">
+
                 <div id="tutorial-first-page" class="tutorial-pages">
                     <div id="first-page-img" class="tutorial-imgs">
-                        <img src="assets/img/2_character_pepe/pepe-tutorial-1.png" alt="pepe-idle">
+                        <img id="tutorial-img-first-page" src="assets/img/2_character_pepe/pepe-tutorial-1.png" alt="pepe-idle">
                     </div>
-                    <div id="first-page-text" class="tutorial-text">
+                    <div id="first-page-text" class="tutorial-texts">
                         <p>That's Pepe. <br>Pepe is good at two things in life: <br> His famous salsa sauce, "Pepe's Burn to Hell" - so hot, no chicken has ever survived it... 
                             <br> ...and <span class="caps">KILLING CHICKENS!</span>
                             <br>So when a gigantic chicken epedemic starts terrorizing his village, there's only one man everyone can turn to. Pepe. <br>Armed with his trusty salsa bottles and his powerful jumping skills, Pepe sets out to fight his way through hordes of tiny and not-so-tiny chickens. 
                             <br>But beware... <br>At the end of his journey, something much bigger is waiting for him. <br><span class="caps">EL POLLO GIGANTE!</span><br></p>
                     </div>
                 </div>
+
                 <div id="tutorial-second-page" class="tutorial-pages" style="display: none;">
                     <div id="second-page-img" class="tutorial-imgs">
-                        <div class="pepe">
-                            <img id="pepe-walking" class="tutorial-pepe" src="assets/img/2_character_pepe/2_walk/W-24.png" alt="pepe-walk">
-                        </div>
+                        <img id="tutorial-img-second-page" src="assets/img/2_character_pepe/pepe-tutorial-2.png" alt="pepe-walk">
                     </div>
-                    <div id="second-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page"><span>Press</span> <img id="arrow-gif-tutorial" class="tutorial-icons" src="assets/icons/left-right-arrow-key-icon12.gif" alt="arrow-key-gif">
+                    <div id="second-page-text" class="tutorial-texts">
+                        <div id="first-part-second-page" class="first-part-texts">
+                            <span>Press</span> <img id="arrow-gif-tutorial" class="tutorial-icons" src="assets/icons/left-right-arrow-key-icon12.gif" alt="arrow-key-gif">
                             <span>or</span> <img id="arrow-sides-tutorial" class="tutorial-icons" src="assets/icons/left-right-arrow.png" alt="walk-arrow">
                         </div>
-                        <div id="second-part-second-page">
+                        <div id="second-part-second-page" class="second-part-texts">
                             <span>to walk with Pepe. <br> 
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-third-page" class="tutorial-pages" style="display: none;">
                     <div id="third-page-img" class="tutorial-imgs">
-                        <div class="pepe">
-                            <img id="pepe-hurt" class="tutorial-pepe" src="assets/img/2_character_pepe/4_hurt/H-41.png" alt="pepe-hurt">
-                        </div>
-                        <div class="enemies">
-                            <img class="chicken" src="assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png" alt="" id="chicken-alive">
-                        </div>
+                        <img id="tutorial-img-third-page" src="assets/img/2_character_pepe/pepe-tutorial-3.png" alt="pepe-hurt">
                     </div>
-                    <div id="third-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page">
-                            <span>But watch your step, amigo! Those feathered troublemakers are not here to play. One wrong move and... PECK!</span> 
+                    <div id="third-page-text" class="tutorial-texts">
+                        <div id="first-part-third-page" class="first-part-texts">
+                            <span>But watch your step, amigo! Those feathered troublemakers are not here to play.</span> 
+                        </div>
+                        <div id="second-part-third-page" class="second-part-texts">
+                            <span>One wrong move and... PECK!</span>
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-fourth-page" class="tutorial-pages" style="display: none;">
                     <div id="fourth-page-img" class="tutorial-imgs">
-                        <div class="status-bar-tutorial">
-                            <img id="status-bar-tutorial-img" class="tutorial-bar" src="assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/65.png" alt="status-bar">
-                        </div>
+                        <img id="tutorial-img-fourth-page" src="assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/65.png" alt="status-bar">
                     </div>
-                    <div id="fourth-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page">
-                            <span>And always keep an eye on that health bar above your head! If your life points hit zero... IT'S GAME OVER, AMIGO! Your name will be forgotten, your chickens will celebrate, and Pepe's legendary salsa will be left without a hero to serve it!</span> 
+                    <div id="fourth-page-text" class="tutorial-texts">
+                        <div id="first-part-fourth-page" class="first-part-texts">
+                            <span>And always keep an eye on that health bar above your head! If your life points hit zero... IT'S GAME OVER, AMIGO!</span> 
+                        </div>
+                        <div id="second-part-fourth-page" class="second-part-texts">
+                            <span>Your name will be forgotten, your chickens will celebrate, and Pepe's legendary salsa will be left without a hero to serve it!</span> 
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-fifth-page" class="tutorial-pages" style="display: none;">
                     <div id="fifth-page-img" class="tutorial-imgs">
-                        <div class="pepe">
-                            <img id="pepe-juming" class="tutorial-pepe" src="assets/img/2_character_pepe/3_jump/J-35.png" alt="pepe-jump">
-                        </div>
-                        <div class="enemies">
-                            <img class="chicken" id="dead-chicken" src="assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png" alt="dead-chicken">
-                            <img class="chicken" src="assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png" alt="" id="chicken-alive">
-                        </div>
+                        <img id="tutorial-img-fifth-page" src="assets/img/2_character_pepe/pepe-tutorial-5.png" alt="pepe-jump">
                     </div>
-                    <div id="fifth-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page"><span>Press</span> <img id="space-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-space-key-50.gif" alt="space-key-gif">
+                    <div id="fifth-page-text" class="tutorial-texts">
+                        <div id="first-part-fifth-page" class="first-part-texts">
+                            <span>Press</span> <img id="space-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-space-key-50.gif" alt="space-key-gif">
                             <span>or</span> <img id="arrow-up-tutorial" class="tutorial-icons" src="assets/icons/arrow-up.png" alt="jump-arrow">
                         </div>
-                        <div id="second-part-fifth-page">
+                        <div id="second-part-fifth-page" class="second-part-texts">
                             <span>to let Pepe jump. <br> <br> Jump directly onto a chicken from above, and Pepe's magnificent physique will unleash its full power, sending the poor chicken straight to its knees!</span>
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-sixth-page" class="tutorial-pages" style="display: none;">
                     <div id="sixth-page-img" class="tutorial-imgs">
-                        <div class="pepe">
-                            <img src="assets/img/2_character_pepe/2_walk/W-21.png" alt="" id="pepe-throwing" class="tutorial-pepe">
-                        </div>
-                        <div class="enemies">
-                            <img class="chicken" id="dead-chicken" src="assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png" alt="dead-chicken">
-                            <img src="assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png" alt="throwed-bottle" class="bottles" id="throw-bottle">
-                            <img src="assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png" alt="splashed-bottle" class="bottles" id="splash-bottle">
-                        </div>
+                        <img id="tutorial-img-sixth-page" src="assets/img/2_character_pepe/pepe-tutorial-6.png" alt="pepe-walk">
                     </div>
-                    <div id="sixth-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page"><span>Press</span> <img id="d-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-d-key-50.gif" alt="space-key-gif">
+                    <div id="sixth-page-text" class="tutorial-texts">
+                        <div id="first-part-sixth-page" class="first-part-texts">
+                            <span>Press</span> <img id="d-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-d-key-50.gif" alt="space-key-gif">
                             <span>or</span> <img id="arrow-throw-tutorial" class="tutorial-icons" src="assets/icons/arrow.png" alt="throw-arrow">
                         </div>
-                        <div id="second-part-sixth-page">
+                        <div id="second-part-sixth-page" class="second-part-texts">
                             <span>to let Pepe throw his famous salsa bottles. <br> <br> The heat of this sauce is even the worst nightmare of the toughest roosters. One single touch is enough to send them to eternal sleep!</span>
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-seventh-page" class="tutorial-pages" style="display: none;">
                     <div id="seventh-page-img" class="tutorial-imgs">
-                        <div class="pepe">
-                            <img id="pepe-walk-bottle" class="tutorial-pepe" src="assets/img/2_character_pepe/2_walk/W-22.png" alt="pepe-walk">
-                        </div>
-                        <div class="enemies">
-                            <img src="assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png" alt="bottle-collect" class="bottles" id="bottle-collect">
-                        </div>
+                        <img id="tutorial-img-seventh-page" src="assets/img/2_character_pepe/pepe-tutorial-7.png" alt="pepe-walk">
                     </div>
-                    <div id="seventh-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page">
-                            <span>See those bottles lying around? Grab 'em! Every salsa bottle you pick up adds another bottle to your inventory. Because let's be honest... you can never have too much of Pepe's legendary hot sauce!</span> 
+                    <div id="seventh-page-text" class="tutorial-texts">
+                        <div id="first-part-seventh-page" class="first-part-texts">
+                            <span>See those bottles lying around? Grab 'em! Every salsa bottle you pick up adds another bottle to your inventory.</span> 
+                        </div>
+                        <div id="second-part-seventh-page" class="second-part-texts">
+                            <span>Because let's be honest... you can never have too much of Pepe's legendary hot sauce!</span> 
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-eighth-page" class="tutorial-pages" style="display: none;">
                     <div id="eighth-page-img" class="tutorial-imgs">
-                        <div class="coins">
-                            <img class="coin" src="assets/img/8_coin/coin_2.png" alt="coin" id="coins-collect">
-                        </div>
-                        <div class="pepe">
-                            <img id="pepe-jump" class="tutorial-pepe" src="assets/img/2_character_pepe/3_jump/J-34.png" alt="pepe-jump">
-                        </div>
+                        <img id="tutorial-img-eighth-page" src="assets/img/2_character_pepe/pepe-tutorial-8.png" alt="pepe-jump">
                     </div>
-                    <div id="eighth-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page">
-                            <span>Shiny coins! Jump through the golden arc to collect them all. Grab as many as you can, amigo — Pepe's salsa may be legendary, but being rich doesn't hurt either!</span> 
+                    <div id="eighth-page-text" class="tutorial-texts">
+                        <div id="first-part-eighth-page" class="first-part-texts">
+                            <span>Shiny coins! Jump through the golden arc to collect them all.</span> 
+                        </div>
+                        <div id="second-part-eighth-page" class="second-part-texts">
+                            <span>Grab as many as you can, amigo — Pepe's salsa may be legendary, but being rich doesn't hurt either!</span> 
                         </div>
                     </div>
                 </div>
+
                 <div id="tutorial-ninth-page" class="tutorial-pages" style="display: none;">
-                    <div id="ninth-page-text" class="tutorial-text">
-                        <div class="first-part-tutorial-page">
-                            <span>Now it's your turn, brave Muchacho! Help Pepe defeat these deli— I mean, TERRIFYING feathered monsters and fight your way to the final boss! Save your salsa bottles wisely... because when the big guy shows up, you're gonna need all the heat you can get!</span>
+                    <div id="ninth-page-text" class="tutorial-texts">
+                        <div id="first-part-ninth-page" class="first-part-texts">
+                            <span>Now it's your turn, brave Muchacho! Help Pepe defeat these deli— I mean, TERRIFYING feathered monsters and fight your way to the final boss!</span>
+                        </div>
+                        <div id="second-part-ninth-page" class="second-part-texts">
+                            <span>Save your salsa bottles wisely... because when the big guy shows up, you're gonna need all the heat you can get!</span>
                         </div>
                     </div>
                     <div id="ninth-page-img" class="tutorial-imgs">
-                        <div id="pepe-top-img">
-                            <img src="assets/img/2_character_pepe/pepe-top.png" alt="pepe-top">
-                        </div>
+                        <img id="tutorial-img-ninth-page" src="assets/img/2_character_pepe/pepe-top.png" alt="pepe-top">
                     </div>
                 </div>
             </div>
+
             <div id="tutorial-btns">
-                <button id="tutorial-back-btn" class="tutorial-arrows" style="display: none;" onclick="previousPage()"> 
-                    <img src="assets/icons/back-arrow-red.png" alt="back-arrow">
+                <button id="tutorial-back-btn" style="display: none;" onclick="previousPage()"> 
+                    <img id="left-arrow-tutorial" class="tutorial-arrows" src="assets/icons/back-arrow-red.png" alt="back-arrow">
                 </button>
                 <button id="skip-tutorial-btn" onclick="startGame()">
                     <h2>Ready</h2>
@@ -198,10 +191,10 @@
                 <button id="finish-tutorial-btn" style="display: none;">
                     <p>finish tutorial</p>
                 </button>
-                <button id="tutorial-foward-btn" class="tutorial-arrows" onclick="nextPage()">
-                    <div class="enter-tutorial">
+                <button id="tutorial-foward-btn" onclick="nextPage()">
+                    <div id="foward-btn">
                         <p>Enter Tutorial</p>
-                        <img src="assets/icons/foward-arrow-red.png" alt="foward-arrow">
+                        <img id="right-arrow-tutorial" class="tutorial-arrows" src="assets/icons/foward-arrow-red.png" alt="foward-arrow">
                     </div>
                 </button>
             </div>
@@ -239,20 +232,20 @@
             </button>
         </div>
 
-        <div class="overlay-divs" id="settings-div-overlay" style="display: none;">
+        <div class="overlay-divs" id="settings-div" style="display: none;">
             <button id="return-to-start-btn" onclick="closeSettings()">
                 <img src="assets/icons/back-arrow-red.png" alt="">
             </button>
-            <div class="tooltip-container">
-                <div id="control-menu-div" class="menu-divs">
-                    <button class="controls-btn" onclick="openControls()">
+            <div id="settings-menu">
+                <div id="control-menu-div" class="settings-menu-divs">
+                    <button id="controls-btn" class="settings-btn" onclick="openControls()">
                         <img src="assets/icons/game-controls-colored.png" alt="">
                     </button>
-                    <p class="control-text">Controls</p>
+                    <p id="control-text">Controls</p>
                 </div>
                 
-                <div id="sound-menu-div" class="menu-divs">
-                    <button class="mute-btn" onclick="toggleSound(this)">
+                <div id="sound-menu-div" class="settings-menu-divs">
+                    <button id="mute-btn" class="settings-btn" onclick="toggleSound(this)">
                         <img src="assets/icons/sound.png" alt="sound-on-icon">
                     </button>
                     <p class="sound-text" id="tool-text-sound">Sound on</p>
@@ -260,9 +253,9 @@
             </div>
         </div>
 
-        <div id="controls-div-overlay" onclick="closeControls()" style="display: none;">
-            <div id="controls-div" class="overlay-divs">
-                <div id="control-icons-div">
+        <div class="overlay-divs" id="controls-div-overlay" onclick="closeControls()" style="display: none;">
+            <div id="controls-div">
+                <div id="control-icons-div" class="controls-div-column">
                     <img class="control-icons" id="arrows-icon" src="assets/icons/arrow-keys.png" alt="arrow-icon">
                     <p class="mobile-control-text">walk</p>
                     <img class="control-icons" id="space-icon" src="assets/icons/space-key.png" alt="space-icon">
@@ -272,16 +265,16 @@
                     <img class="control-icons" id="espace-icon" src="assets/icons/pause-key.png" alt="">
                     <p class="mobile-control-text">pause game</p>
                 </div>
-                <div id="control-text-div">
+                <div id="control-text-div" class="controls-div-column">
                     <p class="control-text">walk</p>
                     <p class="control-text">jump</p>
                     <p class="control-text">throw bottles</p>
                     <p class="control-text">pause game</p>
                 </div>
-                <button id="return-to-start-btn" onclick="closeControls()">
-                    <img src="assets/icons/back-arrow-red.png" alt="">
-                </button>
             </div>
+            <button id="return-to-start-btn" onclick="closeControls()">
+                <img src="assets/icons/back-arrow-red.png" alt="">
+            </button>
         </div>
 
         <div id="mobile-controls">
