@@ -19,10 +19,10 @@ let eighthPage;
 let ninthPage;
 let forwardBtn;
 let backBtn;
+let skipTutorialBtn;
 let endscreenDiv;
 let controlsDiv;
 let settingsDiv;
-let mobileControls;
 let btnSound = new Audio('assets/audio/btn-sound.mp3');
 let isMuted = false;
 let currentPage = 1;
@@ -49,7 +49,7 @@ function init() {
     ninthPage = document.getElementById('tutorial-ninth-page');
     forwardBtn = document.getElementById('tutorial-foward-btn');
     backBtn = document.getElementById('tutorial-back-btn');
-    mobileControls = document.getElementById('mobile-controls');
+    skipTutorialBtn = document.getElementById('skip-tutorial-btn');
     endscreenDiv = document.getElementById('endscreen-div');
     showViewportSize();
     bindBtnsPressEvents();
@@ -89,11 +89,16 @@ function nextPage() {
         tutorialHeadline.textContent = 'Tutorial';
         tutorialBtns.style.gridTemplateColumns = '1fr 2fr 1fr';
         backBtn.style.gridColumn = '1';
+        backBtn.style.display = 'flex';
+        backBtn.style.justifyContent = 'center';
         finishTutorialBtn.style.gridColumn = '2';
         forwardBtn.style.gridColumn = '3';
         finishTutorialBtn.style.justifySelf = 'center';
         currentPage = 2;
-        forwardBtn.querySelector('.enter-tutorial').style.justifyContent = 'center';
+        forwardBtn.querySelector('#foward-btn').style.justifyContent = 'center';
+        forwardBtn.querySelector('#foward-btn').style.paddingLeft = '0px';
+        forwardBtn.querySelector('#foward-btn p').style.display = 'none';
+        skipTutorialBtn.style.marginLeft = '0px';
         console.log(currentPage);
     } else if (currentPage === 2) {
         secondPage.style.display = 'none';
@@ -133,8 +138,6 @@ function nextPage() {
             forwardBtn.style.display = 'none';
         }
     }
-    document.querySelector('.enter-tutorial p').style.display = 'none';
-    backBtn.style.display = 'block';
     getButtonSound();
 }
 
@@ -174,14 +177,17 @@ function previousPage(){
         secondPage.style.display = 'none';
         firstPage.style.display = 'flex';
         tutorialHeadline.textContent = 'El Pollo Loco';
-        tutorialBtns.style.gridTemplateColumns = '1fr 1fr';
+        tutorialBtns.style.gridTemplateColumns = 'auto auto';
         backBtn.style.gridColumn = '0';
         finishTutorialBtn.style.gridColumn = '1';
         forwardBtn.style.gridColumn = '2';
         finishTutorialBtn.style.justifySelf = 'start';
         currentPage = 1;
-        document.querySelector('.enter-tutorial p').style.display = 'block';
+        forwardBtn.querySelector('#foward-btn p').style.display = 'block';
+        forwardBtn.querySelector('#foward-btn').style.justifyContent = 'space-between';
+        forwardBtn.querySelector('#foward-btn').style.paddingLeft = '12px';
         backBtn.style.display = 'none';   
+        skipTutorialBtn.style.marginLeft = '1rem';
     }
     getButtonSound();
 }
@@ -200,7 +206,6 @@ function startGame() {
     eighthPage.style.display = 'none';
     ninthPage.style.display = 'none';
     backBtn.style.display = 'none';
-    forwardBtn.querySelector('.enter-tutorial').style.justifyContent = 'space-between';
     currentPage = 1;
     document.querySelector('.enter-tutorial p').style.display = 'flex';
     world.paused = false;
@@ -409,12 +414,3 @@ function exitFullscreen() {
         document.webkitExitFullscreen();
     }
 }
-
-window.addEventListener("resize", () => {
-    let mobileControls = document.getElementById('mobile-controls')
-    if (window.matchMedia("(pointer: coarse)").matches) {
-        mobileControls.style.display = "flex";
-    } else {
-        mobileControls.style.display = "none";
-    }
-});

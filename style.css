@@ -89,7 +89,7 @@ h3 {
     font-family: 'Zabars', Arial, Helvetica, sans-serif;
     font-size: 60px;
     letter-spacing: 3px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 canvas {
@@ -97,7 +97,7 @@ canvas {
     overflow: hidden;
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 #start-div {
@@ -116,26 +116,33 @@ canvas {
     height: fit-content;
     margin-top: 20px;
     transition: transform 125ms ease;
+    display: flex;
+    justify-content: center;
+}
+
+#start-btn h2{
+    margin-left: 6px;
 }
 
 .main-settings-btns {
     border: none;
     background-color: transparent;
     position: absolute;
-    top: 20px;
+    top: 10px;
+    width: 65px;
 }
 
 .main-settings-btns img {
-    width: 50px;
+    width: 100%;
 }
 
 #settings-menu-btn {
-    left: 20px;
+    left: 10px;
 }
 
 #expand-btn {
     z-index: 12000;
-    right: 20px;
+    right: 10px;
 }
 
 #settings-div {
@@ -220,6 +227,7 @@ canvas {
     justify-content: space-between;
     background-color: #131313a4;
     z-index: 2;
+    width: 100%;
 }
 
 #pause-div p {
@@ -250,6 +258,10 @@ canvas {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#pause-menu-settings-btn {
+    left: 20px;
 }
 
 #tutorial-div {
@@ -285,7 +297,7 @@ canvas {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: start;
+    align-items: end;
     justify-content: center;
 }
 
@@ -293,11 +305,15 @@ canvas {
     width: 85%;
 }
 
-#tutorial-img-second-page{
-    width: 70%;
+#second-page-img {
+    width: 90%;
 }
 
-#third-page-img {
+#tutorial-img-second-page{
+    width: 60%;
+}
+
+#third-page-img, #fifth-page-img {
     align-items: end;
 }
 
@@ -305,12 +321,25 @@ canvas {
     align-items: center;
 }
 
+#fifth-page-img img {
+    width: 80%;
+}
+
+#tutorial-img-eighth-page{
+    width: 70%;
+}
+
+#ninth-page-img {
+    align-items: end;
+    justify-content: end;
+}
+
 #tutorial-btns {
     width: 100%;
     position: absolute;
     bottom: -2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 3fr;
 }
 
 #tutorial-headline {
@@ -364,6 +393,39 @@ canvas {
     font-size: 26px;
 }
 
+#second-page-text, #third-page-text, #fourth-page-text, #fifth-page-text, #sixth-page-text, #seventh-page-text, #eighth-page-text, #ninth-page-text {
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    padding-right: 0px;
+    font-size: 40px;
+}
+
+#fourth-page-text, #fifth-page-text, #sixth-page-text, #seventh-page-text, #eighth-page-text, #ninth-page-text {
+    font-size: 30px;
+}
+
+#fifth-page-text, #sixth-page-text {
+    align-items: start;
+}
+
+#first-part-fifth-page, #first-part-sixth-page {
+    display: flex;
+    align-items: center;
+}
+
+#first-part-second-page{
+    display: flex;
+    align-items: center;
+}
+
+#second-part-second-page{
+    display: flex;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+
 .tutorial-texts::-webkit-scrollbar {
     width: 10px;
 }
@@ -393,10 +455,10 @@ canvas {
 }
 
 #skip-tutorial-btn {
-    grid-column: 1;
-    width: 70%;
-    margin-left: 1rem;
+    margin-left: 12px;
+    margin-right: 12px;
     border: 8px solid #A0220A;
+    justify-self: center;
 }
 
 #skip-tutorial-btn h2{
@@ -405,9 +467,9 @@ canvas {
 }
 
 #tutorial-foward-btn {
-    grid-column: 2;
     display: flex;
     justify-content: center;
+    align-items: center;
     border: 8px solid #A0220A;
     margin-right: 12px;
 }
@@ -415,12 +477,13 @@ canvas {
 #foward-btn {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    padding-left: 12px;
 }
 
 #foward-btn p{
     font-size: 45px;
+    padding-right: 5px;
 }
 
 #tutorial-back-btn {
@@ -431,21 +494,21 @@ canvas {
 
 .tutorial-arrows {
     width: 3rem;
-    padding-left: 12px;
+    align-items: center;
+    object-fit: contain;
 }
 
 .menu-btns {
     font-size: 60px;
     margin-top: 30px;
-    width: 500px;
+    width: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .menu-btns:hover {
-    width: 510px;
-    height: 96px;
+    width: 600px;
 }
 
 #endscreen-div {
@@ -596,177 +659,4 @@ canvas {
     width: fit-content;
     height: fit-content;
     margin-top: 4rem;
-}
-
-.game-div:fullscreen #start-btn h2 {
-    font-size: 180px;
-    padding: 1rem;
-}
-
-.game-div:fullscreen #start-btn h2 {
-    font-size: 180px;
-    padding: 1rem;
-}
-
-.game-div:fullscreen .controls-btn img{
-    width: 60%;
-}
-
-.game-div:fullscreen .tooltip-container p {
-    font-size: 120px;
-}
-
-.game-div:fullscreen .mute-btn img {
-    width: 60%;
-}
-
-.game-div:fullscreen #controls-div {
-    grid-template-columns: 30% 30%;
-    font-size: 70px;
-}
-
-.game-div:fullscreen #control-icons-div {
-    justify-content: space-evenly;
-}
-
-.game-div:fullscreen #control-text-div {
-    justify-content: space-evenly;
-}
-
-.game-div:fullscreen .control-icons {
-    height: 110px;
-}
-
-.game-div:fullscreen #tutorial-div {
-    width: 85%;
-    left: 7%;
-}
-
-.game-div:fullscreen #tutorial-headline {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.game-div:fullscreen #tutorial-headline h2{
-    font-size: 160px;
-}
-
-.game-div:fullscreen .tutorial-texts p{
-    font-size: 70px;
-}
-
-
-
-.game-div:fullscreen #skip-tutorial-btn h2 {
-    font-size: 100px;
-    margin-left: 12px;
-}
-
-.game-div:fullscreen .enter-tutorial p {
-    font-size: 100px;
-}
-
-.game-div:fullscreen .tutorial-arrows img {
-    width: 8rem;
-    padding-left: 3rem;
-}
-
-.game-div:fullscreen #pepe-walking {
-    width: 80%;
-}
-
-.game-div:fullscreen .tutorial-texts {
-    font-size: 70px;
-}
-
-.game-div:fullscreen #second-page-text {
-    align-items: center;
-}
-
-.game-div:fullscreen .tutorial-icons {
-    width: 12rem;
-    padding: 2rem;
-}
-
-.game-div:fullscreen #arrow-sides-tutorial {
-    width: 12rem;
-    height: 6rem;
-    padding: 2rem;
-}
-
-.game-div:fullscreen #status-bar-tutorial-img {
-    width: 100%;
-    margin-left: -5%;
-}
-
-.game-div:fullscreen #fifth-page-img .tutorial-pepe {
-    width: 50%;
-    margin-top: -200px;
-    margin-left: 5%;
-}
-
-.game-div:fullscreen #fifth-page-img .chicken {
-    width: 30%;
-}
-
-.game-div:fullscreen #fifth-page-img .enemies {
-    justify-content: space-around;
-    margin-right: 0;
-    margin-left: 6%;
-}
-
-.game-div:fullscreen #sixth-page-img .enemies {
-    width: 100%;
-    grid-template-columns: 9rem 9rem;
-    grid-template-rows: 12rem 12rem;
-}
-
-.game-div:fullscreen #sixth-page-img #dead-chicken {
-    width: 100%;
-    align-self: end;
-    justify-self: end;
-}
-
-.game-div:fullscreen #sixth-page-img #splash-bottle {
-    width: 100%;
-    align-self: end;
-    justify-self: end;
-}
-
-.game-div:fullscreen #sixth-page-img .bottles {
-    width: 90%;
-}
-
-.game-div:fullscreen #sixth-page-text .game-div:fullscreen .tutorial-icons {
-    width: 5rem;
-    padding: 2rem;
-}
-
-.game-div:fullscreen #sixth-page-text #arrow-throw-tutorial {
-    width: 6rem;
-    height: 6rem;
-}
-
-.game-div:fullscreen #seventh-page-img .tutorial-pepe {
-    width: 120%;
-}
-
-.game-div:fullscreen #seventh-page-img .bottles {
-    width: 50%;
-}
-
-.game-div:fullscreen #eighth-page-img .coin {
-    width: 18rem;
-    height: 18rem;
-}
-
-.game-div:fullscreen #eighth-page-img .coins {
-    align-items: start;
-    justify-content: flex-end;
-}
-
-.game-div:fullscreen #eighth-page-img .tutorial-pepe {
-    width: 70%;
-    margin-top: -60%;
 }

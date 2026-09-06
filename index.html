@@ -30,7 +30,7 @@
 </head>
 <body onload="init()">
 
-    <h1>El Pollo Loco</h1>
+    <h1 id="game-headline">El Pollo Loco</h1>
 
     <div class="game-div" id="fullscreen">
 
@@ -66,7 +66,7 @@
                 </div>
 
                 <div id="tutorial-second-page" class="tutorial-pages" style="display: none;">
-                    <div id="second-page-img" class="tutorial-imgs">
+                    <div id="second-page-img" class="tutorial-imgs second-page-img">
                         <img id="tutorial-img-second-page" src="assets/img/2_character_pepe/pepe-tutorial-2.png" alt="pepe-walk">
                     </div>
                     <div id="second-page-text" class="tutorial-texts">
@@ -182,7 +182,7 @@
             </div>
 
             <div id="tutorial-btns">
-                <button id="tutorial-back-btn" style="display: none;" onclick="previousPage()"> 
+                <button id="tutorial-back-btn" onclick="previousPage()"> 
                     <img id="left-arrow-tutorial" class="tutorial-arrows" src="assets/icons/back-arrow-red.png" alt="back-arrow">
                 </button>
                 <button id="skip-tutorial-btn" onclick="startGame()">
@@ -193,7 +193,7 @@
                 </button>
                 <button id="tutorial-foward-btn" onclick="nextPage()">
                     <div id="foward-btn">
-                        <p>Enter Tutorial</p>
+                        <p id="enter-tutorial-btn-text">Enter Tutorial</p>
                         <img id="right-arrow-tutorial" class="tutorial-arrows" src="assets/icons/foward-arrow-red.png" alt="foward-arrow">
                     </div>
                 </button>
@@ -202,7 +202,7 @@
 
         <div id="pause-div" class="overlay-divs" style="display: none;">
             <div id="pause-div-header">
-                <button id="settings-btn" onclick="openSettings()">
+                <button id="pause-menu-settings-btn" class="main-settings-btns" onclick="openSettings()">
                     <img src="assets/icons/setting-btn.png" alt="">
                 </button>
                 <p>Pause</p>

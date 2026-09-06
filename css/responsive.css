@@ -1,87 +1,43 @@
-/*responsive options*/
 
-@media (pointer: coarse) {
-    #mobile-controls {
-        display: flex;
+@media only screen and (max-width: 730px) {
+    body {
+        background-position: center;
     }
-}
 
+    h1 {
+        font-size: 100px;
+        margin-bottom: 10px;
+    }
 
-/*----------- height-responsive -----------*/
+    .main-settings-btns img {
+        width: 80%;
+    }
 
-@media only screen and (max-height: 660px),
-                        (max-width: 570px),
-                        (max-height: 660px) and (max-width: 660px) {
+    #expand-btn {
+        right: 0px;
+    }
+
+    #settings-menu-btn {
+        left: 0px;
+    }
+
+    #return-to-start-btn {
+        top: 10px;
+        left: 10px; 
+    }
+
     #return-to-start-btn img {
         width: 60px;
     }
 
-    .settings-menu-divs {
-        grid-template-columns: 0.5fr 2fr;
-        font-size: 40px;
-    }
-
-    .settings-btn {
-        width: 4rem;
-    }
-
-}
-
-@media only screen and (max-height: 660px) {
-    h1 {
-        font-size: 100px;
-        margin-bottom: 30px;
-    }
-
-    canvas {
-        width: 90%;
-    } 
-    
-    #start-btn {
-        width: 300px;
-    }
-
-    #start-btn h2{
-        font-size: 60px;
-    }
-
-    .main-settings-btns img {
-        width: 40px;
-    }
-
-    #tutorial-div {
-        height: 70%;
-    }
-
-    #tutorial-headline {
-        top: -25%;
-    }
-
-    #foward-btn p{
-        font-size: 35px;
-    }
-
-    #skip-tutorial-btn h2 {
-        font-size: 35px;
-        margin-left: 12px;
-        -webkit-text-stroke: 1px #9A3A17;
-    }
-}
-
-@media only screen and (max-height: 590px) {
-    canvas {
-        width: 80%;
-    } 
-
-    #start-btn {
-        width: 300px;
+    #settings-menu {
+        padding-top: 40px;
     }
 
     #controls-div {
-        height: 50%;
-    }
-    
-    .control-text {
+        width: 40%;
+        height: 85%;
+        grid-template-columns: 100%;
         font-size: 24px;
     }
 
@@ -89,148 +45,116 @@
         height: 40px;
     }
 
-    .main-settings-btns img {
-        width: 30px;
+    .mobile-control-text {
+        display: flex;
     }
-
-    #tutorial-headline h2 {
-        font-size: 60px;
+    
+    #control-text-div {
+        display: none;
     }
 }
 
-@media only screen and (max-height: 530px) {
-    h1 {
-        margin-bottom: 10px;
-    }
-    
-    #start-btn {
-        width: 300px;
-        margin-top: 10px;
-        border-width: 10px;
+@media only screen and (max-width: 650px) {
+    #tutorial-btns {
+        bottom: -1.5rem;
     }
 
-    #start-btn h2{
-        font-size: 50px;
+    #skip-tutorial-btn h2 {
+        font-size: 40px;
+    }
+
+    #tutorial-foward-btn {
+        justify-content: start;
+    }
+
+    #foward-btn {
+        width: 100%;
+    }
+
+    #foward-btn p {
+        font-size: 35px;
+        padding-left: 0.5rem;
+    }
+
+    .tutorial-arrows {
+        width: 2.5rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 60px;
         -webkit-text-stroke: 1px #9A3A17;
     }
 }
-@media only screen and (max-height: 500px),
-                        (max-width: 570px) {
+
+@media only screen and (max-width: 630px) {
+    h1 {
+        font-size: 80px;
+    }
+
     .main-settings-btns {
         top: 10px;
     }
 
-    #settings-menu-btn {
-        left: 10px;
+    .main-settings-btns img {
+        width: 60%;
     }
 
     #expand-btn {
-        right: 10px;
+        right: -5px;
     }
 
-    #tutorial-headline h2 {
-        font-size: 50px;
+    #settings-menu-btn {
+        left: -5px;
     }
-
-    #foward-btn p {
-        font-size: 30px;
-    }
-
-    #skip-tutorial-btn h2 {
-        font-size: 30px;
-    }
-
-    .tutorial-arrows {
-        width: 2rem;
-    }
-}
-
-@media only screen and (max-height: 500px) {
-    canvas {
-        width: 70%;
-    }
-
-    #settings-menu {
-        padding-top: 30px;
-    }
-
-    .control-text {
-        font-size: 20px;
-    }
-
-    .control-icons {
-        height: 30px;
-    }
-}
-
-@media only screen and (max-height: 470px) {
-    canvas {
-        width: 65%;
-    } 
-
+    
     #start-btn {
-        width: 240px;
-        border-width: 8px;
+        width: 260px;
+        border-width: 6px;
+        margin-top: 15px;
     }
 
     #start-btn h2 {
-        font-size: 40px;
+        font-size: 50px;
+        -webkit-text-stroke: 1px #9A3A17;
+    }
+
+    .settings-menu-divs {
+        padding-top: 10px;
+    }
+
+    .settings-btn {
+        width: 5rem;
     }
 
     #return-to-start-btn img {
         width: 50px;
     }
 
-    #tutorial-foward-btn {
-        width: 100%;
-    }
-
-    .tutorial-imgs img {
-        width: 80%;
-    }
-    
 }
 
-@media only screen and (max-height: 430px) {
+@media only screen and (max-width: 560px) {
+    #skip-tutorial-btn h2 {
+        font-size: 35px;
+    }
+
+    #foward-btn p {
+        font-size: 30px;
+    }
+
+    .tutorial-arrows {
+        width: 2rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 50px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
     h1 {
         font-size: 60px;
-    }
-    
-}
-
-@media only screen and (max-height: 390px),
-                        (max-width: 595px),
-                        (max-height: 590px) and (max-width: 670px) {
-    #controls-div {
-        grid-template-columns: 100%;
-        height: 75%;
-        width: 40%;
-    }
-
-    .mobile-control-text {
-        display: flex;
-        font-size: 20px;
-    }
-
-    #control-text-div {
-        display: none;
-    }
-
-    .control-icons {
-        height: 20px;
-    }   
-}
-
-@media only screen and (max-height: 390px),
-                        (max-width: 460px),
-                        (max-height: 660px) and (max-width: 480px),
-                        (max-height: 590px) and (max-width: 560px) {
-    #settings-menu {
-        padding-top: 20px;
-    }
-
-    .settings-menu-divs {
-        font-size: 30px;
+        margin-bottom: 5px;
+        letter-spacing: 8px;
     }
 
     #return-to-start-btn img {
@@ -238,617 +162,439 @@
     }
 
     .settings-btn {
-        width: 3rem;
+        width: 4rem;
     }
-    
-}
 
-@media only screen and (max-height: 390px) {
-    h1 {
+    .settings-menu-divs {
         font-size: 50px;
-    }
-
-    canvas {
-        width: 60%;
-    } 
-
-    #tutorial-headline h2 {
-        font-size: 40px;
-    }
-
-    #foward-btn p {
-        font-size: 20px;
-    }
-
-    #skip-tutorial-btn h2 {
-        font-size: 20px;
-    }
-    
-}
-
-
-/*----------- width-responsive -----------*/
-
-@media only screen and (max-width: 730px) {
-    .main-settings-btns img {
-        width: 40px;
-    }
-
-    #tutorial-headline {
-        top: -24%;
-    }
-
-    #tutorial-headline h2 {
-        font-size: 60px;
-    }
-}
-
-@media only screen and (max-width: 660px) {
-    .settings-btn {
-        width: 5rem;
-    }
-
-    #tutorial-div {
-        height: 70%;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    #foward-btn p {
-        font-size: 35px;
-    }
-
-    #skip-tutorial-btn h2 {
-        font-size: 35px;
-        -webkit-text-stroke: 1px #9A3A17;
-    }
-}
-
-@media only screen and (max-width: 630px) {
-    #controls-div {
-        font-size: 24px;
-        height: 55%;
-        width: 55%;
-    }
-
-    .control-icons {
-        height: 40px;
-    }
-}
-
-@media only screen and (max-width: 620px) {
-    h1 {
-        font-size: 100px;
-    }
-
-    #start-btn {
-        width: 300px;
-    }
-
-    #start-btn h2{
-        font-size: 60px;
-    }
-
-    .main-settings-btns img {
-        width: 30px;
-    }
-}
-
-@media only screen and (max-width: 600px),
-                        (max-height: 590px) and (max-width: 630px) {
-    #controls-div {
-        overflow: hidden;
-        overflow-y: scroll;
-        height: 60%;
-        width: 45%;
-    }
-
-    #controls-div::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    #controls-div::-webkit-scrollbar-track {
-        background: #a0230a56;
-        border-radius: 8px;
-    }
-
-    #controls-div::-webkit-scrollbar-thumb {
-        background: #A0220A;
-        border-radius: 8px;
-    }
-
-    #controls-div::-webkit-scrollbar-button {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 570px) {
-    h1 {
-        font-size: 80px;
-        margin-bottom: 30px;
-    }
-
-    #start-btn h2 {
-        font-size: 50px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    #start-btn {
-        width: 280px;
-        border-width: 8px;
-    }
-
-    #start-btn h2 {
-        font-size: 40px;
-        -webkit-text-stroke: 1px #9A3A17;
-    }
-
-    #settings-menu {
-        padding-top: 30px;
-    }
-
-    #tutorial-headline h2 {
-        font-size: 40px;
-    }
-    
-}
-
-@media only screen and (max-width: 460px) {
-    canvas {
-        width: 95%;
-    }
-
-    h1 {
-        font-size: 60px;
-        margin-bottom: 20px;
-    }
-
-    #start-btn {
-        width: 240px;
-    }
-
-}
-
-@media only screen and (max-width: 430px),
-                        (max-height: 590px) and (max-width: 500px),
-                        (max-height: 500px) and (max-width: 560px),
-                        (max-height: 470px) and (max-width: 610px) {
-    #controls-div {
-        overflow: hidden;
-        overflow-y: scroll;
-        height: 60%;
-    }
-
-    #controls-div::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    #controls-div::-webkit-scrollbar-track {
-        background: #a0230a56;
-        border-radius: 8px;
-    }
-
-    #controls-div::-webkit-scrollbar-thumb {
-        background: #A0220A;
-        border-radius: 8px;
-    }
-
-    #controls-div::-webkit-scrollbar-button {
-        display: none;
-    }
-
-    .mobile-control-text {
-        font-size: 16px;
-    }
-
-    .control-icons {
-        height: 15px;
-    }
-}
-
-@media only screen and (max-width: 390px) {   
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-    }
-
-    #start-btn {
-        width: 220px;
-    }
-
-    #start-btn h2{
-        font-size: 30px;
-    }
-
-    .main-settings-btns img {
-        width: 30px;
-    }
-
-}
-
-@media only screen and (max-width: 360px),
-                        (max-height: 660px) and (max-width: 390px),
-                        (max-height: 590px) and (max-width: 470px),
-                        (max-height: 530px) and (max-width: 510px),
-                        (max-height: 470px) and (max-width: 570px) {
-    #start-btn {
-        width: 200px;
-    }
-
-    #start-btn h2{
-        font-size: 20px;
-    }
-
-    .main-settings-btns img {
-        width: 20px;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-
-    #start-div {
-        width: 95%;
-        background-position: -50px;
-    }
-
-    #return-to-start-btn {
-        left: 5px;
-        top: 5px;
-    }
-
-    #return-to-start-btn img {
-        width: 30px;
-    }
-
-    .settings-menu-divs {
-        padding-top: 10px;
-    }
-}
-
-
-/*----------- height-width-responsive -----------*/
-
-@media only screen and (max-height: 660px) and (max-width: 620px),
-                    (max-height: 590px) and (max-width: 720px) {
-    #start-btn {
-        width: 280px;
-        border-width: 8px;
-    }
-
-    #start-btn h2 {
-        font-size: 40px;
-        -webkit-text-stroke: 1px #9A3A17;
-    }
-
-    .main-settings-btns {
-        top: 10px;
-    }
-
-    .main-settings-btns img {
-        width: 30px;
-    }
-
-    #return-to-start-btn {
-        top: 5px;
-        left: 5px;
-    }
-
-    #return-to-start-btn img {
-        width: 40px;
-    }
-}
-
-@media only screen and (max-height: 660px) and (max-width: 570px) {
-    #settings-menu {
-        padding-top: 30px;
-    }
-    
-}
-
-@media only screen and (max-height: 660px) and (max-width: 460px),
-                        (max-height: 590px) and (max-width: 560px),
-                        (max-height: 530px) and (max-width: 610px) {
-
-    #start-btn {
-        width: 240px;
-        border-width: 6px;
-    }
-
-    #start-btn h2 {
-        font-size: 30px;
-    }
-
-    .main-settings-btns img {
-        width: 30px;
-    }
-}
-
-@media only screen and (max-height: 660px) and (max-width: 390px) {
-
-    #start-btn {
-        margin-top: 10px;
-    }
-}
-
-@media only screen and (max-height: 660px) and (max-width: 360px) {
-
-    #start-btn {
-        width: 180px;
-    }
-
-    #settings-btn {
-        left: 5px;
-    }
-
-    .main-settings-btns img {
-        width: 20px;
-    }
-
-    #expand-btn {
-        right: 20px;
-    }
-
-    #return-to-start-btn {
-        left: 10px;
-    }
-
-    #return-to-start-btn img {
-        width: 30px;
-    }
-
-    .settings-menu-divs {
-        padding-top: 10px;
-    }
-}
-
-@media only screen and (max-height: 590px) and (max-width: 720px) {
-    #settings-menu-btn {
-        left: 10px;
-    }
-
-    #expand-btn {
-        right: 10px;
-    }
-}
-
-@media only screen and (max-height: 590px) and (max-width: 630px) {
-    #settings-menu {
-        padding-top: 30px;
-    }
-    
-}
-
-@media only screen and (max-height: 590px) and (max-width: 470px) {
-
-    #return-to-start-btn img {
-        width: 30px;
-    }
-}
-
-@media only screen and (max-height: 590px) and (max-width: 450px) {
-    #return-to-start-btn {
-        left: 10px;
-    }
-
-    #return-to-start-btn img {
-        width: 30px;
-    }
-
-    .settings-menu-divs {
-        padding-top: 10px;
-    }
-
-}
-
-@media only screen and (max-height: 590px) and (max-width: 400px) {
-
-    #start-btn {
-        width: 180px;
-        margin-top: 10px;
-    }
-
-    #settings-btn {
-        left: 5px;
-    }
-}
-
-@media only screen and (max-height: 590px) and (max-width: 380px) {
-    #start-div {
-        width: 95%;
-    }
-
-    #start-btn {
-        width: 160px;
-        margin-right: 1rem;
-    }
-
-    #start-btn h2 {
-        letter-spacing: 3px;
+        grid-template-columns: 0.5fr 2fr;
     }
 
     #settings-menu p {
         padding-left: 20px;
     }
-  
-}
 
-@media only screen and (max-height: 590px) and (max-width: 340px) {
-    .main-settings-btns img {
-        width: 15px;
+    #controls-div {
+        height: 80%;
+        padding: 0.5rem;
+        font-size: 20px;
     }
 
-    #return-to-start-btn img {
-        width: 20px;
-    }
-}
-
-@media only screen and (max-height: 530px) and (max-width: 440px) {
-    #start-btn {
-        width: 180px;
-        margin-right: 1rem;
-        margin-top: 10px;
+    .control-icons {
+        height: 30px;
     }
 
-    #settings-btn {
-        left: 5px;
-    }
-}
-
-@media only screen and (max-height: 530px) and (max-width: 400px) {
-    #start-div {
-        width: 95%;
+    .controls-div-column {
+        justify-content: center;
     }
 
-    #start-btn {
-        width: 160px;
-    }
-}
-
-@media only screen and (max-height: 530px) and (max-width: 370px) {
-
-    #settings-btn {
-        left: 1px;
-    }
-
-    .main-settings-btns img {
-        width: 15px;
-    }
-}
-
-@media only screen and (max-height: 500px) and (max-width: 350px) {
-    #start-btn {
-        width: 140px;
-    }
     
-}
+    .tutorial-imgs {
+        width: 80%;
+    }
 
-@media only screen and (max-height: 470px) and (max-width: 570px) {
-
-    #start-btn {
-        margin-right: 1rem;
+    .tutorial-texts p {
+        font-size: 22px;
     }
 }
 
-@media only screen and (max-height: 470px) and (max-width: 475px) {
+@media only screen and (max-width: 510px) {
+    #tutorial-btns {
+        bottom: -1rem;
+    }
 
-    #start-btn {
-        width: 180px;
-        margin-right: 1rem;
-        margin-top: 10px;
+    #skip-tutorial-btn, #tutorial-foward-btn, #tutorial-back-btn {
+        border-radius: 16px;
+    }
+
+    #skip-tutorial-btn h2 {
+        font-size: 30px;
+        -webkit-text-stroke: 0.5px #9A3A17;
+    }
+
+    #foward-btn p {
+        font-size: 25px;
+        padding-left: 0;
+    }
+
+    .tutorial-arrows {
+        width: 1.5rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    #controls-div {
+        overflow-y: scroll;
+    }
+
+    #controls-div::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    #controls-div::-webkit-scrollbar-track {
+        background: #a0230a56;
+        border-radius: 8px;
+    }
+
+    #controls-div::-webkit-scrollbar-thumb {
+        background: #A0220A;
+        border-radius: 8px;
+    }
+
+    #controls-div::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    #tutorial-back-btn {
+        margin-left: 3px;
+    }
+
+    #skip-tutorial-btn {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+
+    #tutorial-foward-btn {
+        margin-right: 3px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .main-settings-btns {
+        top: 5px;
+    }
+
+    .main-settings-btns img {
+        width: 50%;
+    }
+
+    #expand-btn {
+        right: -10px;
     }
 
     #settings-menu-btn {
-        left: 5px;
+        left: -10px;
     }
 
-}
-
-@media only screen and (max-height: 470px) and (max-width: 430px) {
-
-    #start-btn {
-        width: 160px;
-    }
-
-    #settings-btn {
-        left: 1px;
-    }
-
-    .main-settings-btns img {
-        width: 15px;
-    }
-}
-
-@media only screen and (max-height: 470px) and (max-width: 380px) {
-    #start-btn {
-        width: 130px;
-        margin-top: 5px;
-    }
-}
-
-@media only screen and (max-height: 470px) and (max-width: 340px) {
-    #start-btn {
-        margin-right: 1.5rem;
-        border-width: 4px;
-    }
-
-    .main-settings-btns img {
-        width: 10px;
-    }
-}
-
-@media only screen and (max-height: 390px) and (max-width: 720px) {
     #start-btn {
         width: 240px;
-    }
-
-    #settings-btn {
-        left: 1px;
-    }
-
-    #settings-btn img {
-        width: 30px;
-    }
-
-    #expand-btn img {
-        width: 30px;
-    }
-}
-
-@media only screen and (max-height: 390px) and (max-width: 700px) {
-    h1 {
-        font-size: 50px;
+        margin-top: 10px;
     }
 
     #start-btn h2 {
+        font-size: 40px;
+    }
+
+    #settings-menu {
+        padding-top: 30px;
+    }
+
+    #foward-btn {
+        padding-left: 3px;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+    #skip-tutorial-btn h2 {
         font-size: 30px;
+        -webkit-text-stroke: 0.5px #9A3A17;
+    }
+
+    #foward-btn p {
+        font-size: 25px;
+        padding-left: 0;
+    }
+
+    .tutorial-arrows {
+        width: 1.5rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .main-settings-btns img {
+        width: 40%;
+    }
+
+    #expand-btn {
+        right: -15px;
+    }
+
+    #settings-menu-btn {
+        left: -15px;
     }
 
     #start-btn {
         width: 200px;
-        margin-right: 1rem;
+        border-width: 4px;
+        border-radius: 12px;
     }
 
-    #expand-btn {
-        right: 15px;
+    #start-btn h2 {
+        font-size: 30px;
+        -webkit-text-stroke: 0.5px #9A3A17;
+    }
+
+    .settings-btn {
+        width: 3rem;
+    }
+
+    #return-to-start-btn {
+        top: 5px;
+        left: 5px;
+    }
+
+    .settings-menu-divs {
+        font-size: 40px;
+    }
+
+    #tutorial-btns {
+        grid-template-columns: 1fr 1.5fr 3.5fr;
+    }
+
+    #skip-tutorial-btn h2 {
+        font-size: 25px;
+        letter-spacing: 3px;
+    }
+
+    .tutorial-imgs {
+        align-items: center;
+    }
+
+    .tutorial-texts p {
+        font-size: 18px;
     }
 }
 
-@media only screen and (max-height: 390px) and (max-width: 600px) {
-    #start-btn h2 {
+@media only screen and (max-width: 360px) {
+    h1 {
+        font-size: 50px;
+        letter-spacing: 6px;
+    }
+
+    #foward-btn p {
         font-size: 20px;
     }
 
-    #start-btn {
-        width: 160px;
+    .tutorial-arrows {
+        width: 1rem;
+    }
+}
+
+@media only screen and (max-height: 660px) {
+    body {
+        background-position: center;
     }
 
-    #settings-btn img {
-        width: 20px;
+    h1 {
+        font-size: 100px;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-height: 660px) {
+    h1 {
+    display: none;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    canvas {
+        height: 100vh;
+    }
+
+    .main-settings-btns img {
+        width: 80%;
+    }
+
+    #settings-menu {
+        padding-top: 40px;
+    }
+
+    #tutorial-headline {
+        top: -22%;
+    }
+}
+
+@media only screen and (max-height: 430px) {
+    .main-settings-btns {
+        top: 10px;
+    }
+
+    .main-settings-btns img {
+        width: 60%;
     }
 
     #expand-btn {
-        right: 25px;
+        right: 0px;
+    }
+
+    #settings-menu-btn {
+        left: 0px;
+    }
+
+    #start-btn {
+        width: 320px;
+        border-width: 8px;
+        margin-top: 20px;
+    }
+
+    #start-btn h2 {
+        font-size: 60px;
+        -webkit-text-stroke: 1px #9A3A17;
+    }
+
+    .settings-menu-divs {
+        padding-top: 10px;
+    }
+
+    .settings-btn {
+        width: 5rem;
     }
     
-    #expand-btn img {
-        width: 20px;
+    #return-to-start-btn {
+        top: 10px;
+        left: 10px; 
     }
-}
 
-@media only screen and (max-height: 390px) and (max-width: 430px) {
-
-    canvas {
-        width: 80%;
+    #return-to-start-btn img {
+        width: 60px;
     }
-}
 
-@media only screen and (max-height: 390px) and (max-width: 360px) {
+    #controls-div {
+        width: 40%;
+        height: 85%;
+        grid-template-columns: 100%;
+        font-size: 24px;
+    }
 
-    h1 {
+    .control-icons {
+        height: 40px;
+    }
+
+    .mobile-control-text {
+        display: flex;
+    }
+    
+    #control-text-div {
+        display: none;
+    }
+
+    #tutorial-btns {
+        bottom: -1.5rem;
+    }
+
+    #skip-tutorial-btn h2 {
         font-size: 40px;
-        letter-spacing: 6px;
-        padding-right: 1rem;
+    }
+
+    #tutorial-foward-btn {
+        justify-content: start;
+    }
+
+    #foward-btn {
+        width: 100%;
+    }
+
+    #foward-btn p {
+        font-size: 35px;
+        padding-left: 0.5rem;
+    }
+
+    .tutorial-arrows {
+        width: 2.5rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 60px;
+        -webkit-text-stroke: 1px #9A3A17;
     }
 }
 
+@media only screen and (max-height: 380px) {
+    #skip-tutorial-btn h2 {
+        font-size: 35px;
+    }
+
+    #foward-btn p {
+        font-size: 30px;
+    }
+
+    .tutorial-arrows {
+        width: 2rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 50px;
+    }
+
+}
+
+@media only screen and (max-height: 360px) {
+    #start-btn {
+        width: 260px;
+        border-width: 6px;
+        margin-top: 15px;
+    }
+
+    #start-btn h2 {
+        font-size: 50px;
+        -webkit-text-stroke: 1px #9A3A17;
+    }
+
+    .settings-menu-divs {
+        font-size: 50px;
+    }
+
+    .settings-btn {
+        width: 4rem;
+    }
+
+    #return-to-start-btn img {
+        width: 50px;
+    }
+
+    #controls-div {
+        height: 80%;
+        padding: 0.5rem;
+        font-size: 20px;
+    }
+
+    .control-icons {
+        height: 30px;
+    }
+
+    .controls-div-column {
+        justify-content: center;
+    }
+
+    #tutorial-btns {
+        bottom: -1rem;
+    }
+}
+
+@media only screen and (max-height: 350px) {
+    #skip-tutorial-btn h2 {
+        font-size: 30px;
+        -webkit-text-stroke: 0.5px #9A3A17;
+    }
+
+    #foward-btn p {
+        font-size: 25px;
+    }
+
+    .tutorial-arrows {
+        width: 1.5rem;
+    }
+
+    #tutorial-headline h2{
+        font-size: 40px;
+    }
+}
