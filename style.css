@@ -12,6 +12,14 @@
     font-style: normal;
 }
 
+:root {
+    --headline-color: linear-gradient(-180deg, #FF9900, #FFDE00, #FF9900);
+    --border: 3px solid #701d0c;
+    --border-fullscreen: 6px solid #701d0c;
+    --btn-background: url('assets/icons/start-btn-bkgrd.png');
+    --div-background: linear-gradient(#F9C86A, #D4792F);
+}
+
 body {
     background-image: url(./assets/img/5_background/body-background.png);
     background-size: cover;
@@ -24,12 +32,32 @@ body {
     margin: 0;
 }
 
+button {
+    background: var(--btn-background);
+    background-position: center;
+    border: var(--border);
+    border-radius: 22px;
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
+    cursor: url('assets/icons/comic-cursor-48.png'), auto;
+    caret-color: transparent;
+}
+
+button:hover {
+    transform: scale(1.15);
+    filter: brightness(1.5);
+}
+
 img {
     -webkit-user-select: none;
     user-select: none;
     -webkit-user-drag: none;
     user-drag: none;
     -webkit-touch-callout: none;
+}
+
+.btn-transparent {
+    background: transparent;
+    border: none;
 }
 
 .game-div {
@@ -53,20 +81,6 @@ p, h1, h2, h3 {
     caret-color: transparent;
 }
 
-button {
-    background-color: #F9C769;
-    border-width: 12px;
-    border: 12px solid #A0220A;
-    border-radius: 22px;
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    cursor: url('assets/icons/comic-cursor-48.png'), auto;
-    caret-color: transparent;
-}
-
-button:hover {
-    transform: scale(1.15);
-    filter: brightness(1.5);
-}
 
 h1 {
     font-family: 'Zabars', Arial, Helvetica, sans-serif;
@@ -78,17 +92,16 @@ h1 {
 h2 {
     font-family: 'Zabars', Arial, Helvetica, sans-serif;
     font-size: 70px;
-    letter-spacing: 6px;
-    background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
+    letter-spacing: 1cqw;
+    background: var(--headline-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #9A3A17;
+    -webkit-text-stroke: 0.1px #801e0a;
 }
 
 h3 {
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 60px;
-    letter-spacing: 3px;
+    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
+    font-size: 10cqh;
     font-weight: 400;
 }
 
@@ -109,40 +122,46 @@ canvas {
     align-items: start;
     z-index: 2;
     width: 100%;
+    container-type: size;
 }
 
 #start-btn {
-    width: 340px;
-    height: fit-content;
+    background: var(--btn-background);
+    background-position: center;
+    width: 60cqw;
+    height: 20cqh;
     margin-top: 20px;
     transition: transform 125ms ease;
     display: flex;
     justify-content: center;
+    box-shadow: rgba(48, 15, 4, 0.5) 0 5px 12px;
+    z-index: 2;
+    container-type: size;
 }
 
 #start-btn h2{
+    font-size: min(100cqw, 100cqh);
     margin-left: 6px;
+    text-align: center;
+}
+
+#options-btns {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .main-settings-btns {
-    border: none;
-    background-color: transparent;
-    position: absolute;
-    top: 10px;
-    width: 65px;
+    margin: 10px;
+    z-index: 3;
 }
 
-.main-settings-btns img {
-    width: 100%;
-}
-
-#settings-menu-btn {
-    left: 10px;
-}
-
-#expand-btn {
-    z-index: 12000;
-    right: 10px;
+.main-settings-btns img{
+    height: 100%;
 }
 
 #settings-div {
@@ -151,6 +170,7 @@ canvas {
     background-position: -75px;
     z-index: 2;
     justify-content: center;
+    container-type: size;
 }
 
 #return-to-start-btn {
@@ -159,14 +179,14 @@ canvas {
     align-items: start;
     background-color: transparent;
     border: none;
-    filter: brightness(0.7);
-    top: 20px;
-    left: 20px;
+    top: 2cqh;
+    left: 2cqw;
     z-index: 5;
+    width: 15cqw;
 }
 
 #return-to-start-btn img{
-    width: 80px;
+    width: 100%;
 }
 
 #settings-menu {
@@ -175,9 +195,9 @@ canvas {
     grid-template-rows: 1fr 1fr;
     align-items: start;
     justify-content: center;
-    padding-top: 50px;
-    width: 80%;
-    height: 40%;
+    padding-top: 15cqh;
+    width: 70cqw;
+    height: fit-content;
 }
 
 #settings-menu p {
@@ -191,34 +211,92 @@ canvas {
 
 .settings-menu-divs {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: auto auto;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 5cqh;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    height: fit-content;
     font-family: 'Zabars';
-    font-size: 60px;
+    font-size: 11cqh;
 }
 
 .settings-btn {
     display: flex;
     justify-content: center;
-    border: none;
-    background-color: transparent;
-    width: 6rem;
     justify-self: center;
+    width: 11cqw;
 }
 
-#controls-btn img {
+#controls-btn img, #mute-btn img {
     width: 100%;
     transition: transform 125ms ease; 
 }
 
-#mute-btn img {
-    width: 100%;
-    transition: transform 125ms ease;
+#controls-div-overlay{
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    background-image: url('assets/img/5_background/complete_background_mirrored.png');
+    background-size: cover;
+    background-position: -75px;
+    container-type: size;
+}
+
+#controls-div{
+    width: 60%;
+    height: 60%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 50% 50%;
+    padding: 1rem;
+    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
+    border-radius: 12px;
+    background: var(--div-background);
+    border: 3px solid #701d0c;
+    overflow: hidden;
+}
+
+.controls-div-column {
+    min-height: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+#control-icons-div {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.control-icons{
+    max-width: 100%;
+    max-height: 20%;
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+}
+
+#control-text-div {
+    container-type: size;
+}
+
+.control-text {
+    font-size: min(15cqw, 15cqh);
+    white-space: nowrap;
+}
+
+.mobile-control-text {
+    display: none;
+    font-size: min(5cqw, 5cqh);
+    white-space: nowrap;
 }
 
 #pause-div {
@@ -228,16 +306,11 @@ canvas {
     background-color: #131313a4;
     z-index: 2;
     width: 100%;
+    container-type: size;
 }
 
-#pause-div p {
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 100px;
-    text-align: center;
-    background: linear-gradient(to bottom, #FF9900, #ffde00, #FF9900);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 3px #9A3A17;
+#pause-div h2 {
+    font-size: 20cqh;
 }
 
 #pause-div-header{
@@ -272,84 +345,135 @@ canvas {
     left: 3%;
     width: 90%;
     height: 75%;
-    background-color: #F9C769;
+    background: var(--div-background);
     border-width: 12px;
-    border: 12px solid #A0220A;
+    border: var(--border);
     border-radius: 22px;
     z-index: 2;
+    container-type: size;
 }
 
 #tutorial-content {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 85%;
+    height: 90cqh;
 }
 
 .tutorial-pages {
     width: 95%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 35cqw 60cqw;
 }
 
 .tutorial-imgs {
-    width: 100%;
-    height: 100%;
+    height: 85cqh;
+    width: auto;
     display: flex;
     align-items: end;
-    justify-content: center;
+    justify-content: start;
 }
 
 .tutorial-imgs img {
-    width: 85%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
-#second-page-img {
-    width: 90%;
-}
-
-#tutorial-img-second-page{
-    width: 60%;
-}
-
-#third-page-img, #fifth-page-img {
-    align-items: end;
-}
-
-#fourth-page-img {
+.tutorial-texts {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    width: auto;
+    height: 85cqh;
+    margin-top: 10px;
+    padding-right: 10px;
+    margin-bottom: 5cqh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;  
+    font-family: 'Zabars', Arial, Helvetica, sans-serif;
 }
 
-#fifth-page-img img {
-    width: 80%;
+.tutorial-texts p {
+    font-size: 10cqh;
 }
 
-#tutorial-img-eighth-page{
-    width: 70%;
+.tutorial-texts span {
+    font-size: 10cqh;
 }
 
-#ninth-page-img {
-    align-items: end;
-    justify-content: end;
+.caps {
+    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
+    color: #A0220A;
+    font-size: 10cqh;
 }
 
 #tutorial-btns {
     width: 100%;
     position: absolute;
-    bottom: -2rem;
+    bottom: -7cqh;
     display: grid;
-    grid-template-columns: 1fr 1.5fr 3fr;
+    grid-template-columns: auto auto auto;
+    
+}
+
+#skip-tutorial-btn {
+    margin-left: 12px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#skip-tutorial-btn h2{
+    font-size: 12cqh;
+    margin-left: 2cqw;
+    letter-spacing: 1cqw;
+}
+
+#tutorial-foward-btn {
+    display: flex;
+    align-items: center;
+    margin-right: 2cqw;
+}
+
+#foward-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2cqw;
+}
+
+#foward-btn img{
+    padding-right: 2cqw;
+}
+
+#foward-btn p{
+    font-size: 10cqh;
+}
+
+#tutorial-back-btn {
+    grid-column: 1;
+    margin-left: 2cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-arrows {
+    width: 7cqw;
+    align-self: center;
+    object-fit: contain;
 }
 
 #tutorial-headline {
     position: absolute;
-    top: -20%;
+    top: -20cqh;
 }
 
-#space-gif-tutorial {
-    width: 80px;
-    height: 50px;
+#tutorial-headline h2 {
+    font-size: 20cqh;
 }
 
 #pepe-top-img {
@@ -361,70 +485,18 @@ canvas {
 }
 
 #arrow-up-tutorial {
-    width: 40px;
-    height: 40px;
-}
-
-#arrow-throw-tutorial {
-    width: 40px;
-    height: 40px;
-}
-
-#arrow-sides-tutorial {
-    width: 80px;
-    height: 40px;
+    width: 7cqw;
 }
 
 .tutorial-icons {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 2cqw;
+    padding-right: 2cqw;
+    width: 15cqw;
 }
 
-.tutorial-texts {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 10px;
-    padding-right: 10px;
-    overflow-y: scroll;
-    scroll-behavior: smooth;  
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 26px;
+.fs-large-tutorial {
+    font-size: 13cqh;
 }
-
-#second-page-text, #third-page-text, #fourth-page-text, #fifth-page-text, #sixth-page-text, #seventh-page-text, #eighth-page-text, #ninth-page-text {
-    justify-content: center;
-    align-items: center;
-    overflow-y: hidden;
-    padding-right: 0px;
-    font-size: 40px;
-}
-
-#fourth-page-text, #fifth-page-text, #sixth-page-text, #seventh-page-text, #eighth-page-text, #ninth-page-text {
-    font-size: 30px;
-}
-
-#fifth-page-text, #sixth-page-text {
-    align-items: start;
-}
-
-#first-part-fifth-page, #first-part-sixth-page {
-    display: flex;
-    align-items: center;
-}
-
-#first-part-second-page{
-    display: flex;
-    align-items: center;
-}
-
-#second-part-second-page{
-    display: flex;
-    align-items: center;
-    padding-top: 2rem;
-}
-
 
 .tutorial-texts::-webkit-scrollbar {
     width: 10px;
@@ -444,71 +516,66 @@ canvas {
     display: none;
 }
 
-.tutorial-texts p{
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    font-size: 26px;
+#tutorial-second-page, #tutorial-third-page {
+    align-items: center;
 }
 
-.caps {
-    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
-    color: #A0220A;
-}
-
-#skip-tutorial-btn {
-    margin-left: 12px;
-    margin-right: 12px;
-    border: 8px solid #A0220A;
-    justify-self: center;
-}
-
-#skip-tutorial-btn h2{
-    font-size: 50px;
-    margin-left: 12px;
-}
-
-#tutorial-foward-btn {
-    display: flex;
+#second-page-text, #third-page-text , #eighth-page-text {
     justify-content: center;
+    overflow-y: hidden;
+}
+
+#first-part-second-page {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+
+#first-part-third-page {
+    text-align: center;
+}
+
+#fourth-page-img {
     align-items: center;
-    border: 8px solid #A0220A;
-    margin-right: 12px;
+    height: 100cqh;
+    padding-right: 3cqw;
 }
 
-#foward-btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-left: 12px;
+#fifth-page-text, #seventh-page-text, #eighth-page-text {
+    text-align: center;
 }
 
-#foward-btn p{
-    font-size: 45px;
-    padding-right: 5px;
+#sixth-page-text{
+    align-items: start;
 }
 
-#tutorial-back-btn {
-    grid-column: 1;
-    border: 8px solid #A0220A;
-    margin-left: 12px;
+#d-gif-tutorial {
+    width: 8cqw;
 }
 
-.tutorial-arrows {
-    width: 3rem;
-    align-items: center;
-    object-fit: contain;
+#arrow-throw-tutorial {
+    width: 8cqw;
+}
+
+#sixth-page-img, #seventh-page-img, #ninth-page-img {
+    padding-right: 2cqw;
+}
+
+#ninth-page-img {
+    height: 88cqh;
 }
 
 .menu-btns {
-    font-size: 60px;
     margin-top: 30px;
-    width: 550px;
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.menu-btns:hover {
-    width: 600px;
+.pause-btn-icons {
+    width: 7cqw;
+    padding-right: 2cqw;
 }
 
 #endscreen-div {
@@ -516,66 +583,16 @@ canvas {
     justify-content: center;
     align-items: center;
     background-color: #13131354;
+    container-type: size;
+    z-index: 4000;
+}
+
+#endscreen-div p{
+    font-size: 10cqh;
 }
 
 #game-over-img {
     width: 350px;
-}
-
-.restart-arrow {
-    width: 50px;
-    padding-right: 20px;
-}
-
-#start-menu-arrow {
-    width: 60px;
-    padding-right: 20px;
-}
-
-
-#controls-div-overlay{
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-    background-image: url('assets/img/5_background/complete_background_mirrored.png');
-    background-size: cover;
-    background-position: -75px;
-}
-
-#controls-div{
-    width: 60%;
-    height: 60%;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: 50% 50%;
-    padding: 1rem;
-    font-family: 'SairaStencilOne', Arial, Helvetica, sans-serif;
-    font-size: 28px;
-    border-radius: 12px;
-    background-color: #f9c769;
-    border: 4px solid #A0220A;
-}
-
-.controls-div-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    text-align: center;
-    height: 100%;
-}
-
-.control-icons{
-    height: 50px;
-}
-
-#control-text-div {
-    padding-right: 8px;
-}
-
-.mobile-control-text {
-    display: none;
 }
 
 #close-btn{
@@ -593,8 +610,6 @@ canvas {
 #close-btn img{
     width: 40px;
 }
-
-
 
 #mobile-controls {
     position: absolute;
@@ -643,20 +658,29 @@ canvas {
     overflow: hidden;
 }
 
-.game-div:fullscreen #start-div {
-    width: 100%;
-    height: 100vh;
-    background-position: 0;
+.game-div:fullscreen #tutorial-btns button{
+    border: var(--border-fullscreen);
+    background-size: cover;
+}
+
+.game-div:fullscreen .menu-btns {
+    border: var(--border-fullscreen);
+    background-size: cover;
 }
 
 .game-div:fullscreen #start-div {
-    width: 100%;
-    height: 100vh;
     background-position: 0;
 }
 
 .game-div:fullscreen #start-btn {
-    width: fit-content;
-    height: fit-content;
-    margin-top: 4rem;
+    background-size: cover;
+    border: var(--border-fullscreen);
+}
+
+.game-div:fullscreen #tutorial-div {
+    border: var(--border-fullscreen);
+}
+
+.game-div:fullscreen #ninth-page-img img{
+    width: 100%;
 }

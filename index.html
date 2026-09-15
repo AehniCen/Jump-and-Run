@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/fullscreen-responsive.css">
     <link rel="icon" type="image/png" href="assets/flavicon/sombrero-hut.png">
     <title>El Pollo Loco</title>
     <script src="models/level.class.js"></script>
@@ -34,14 +35,16 @@
 
     <div class="game-div" id="fullscreen">
 
-        <button id="expand-btn" class="main-settings-btns" onclick="toggleFullscreen()">
-            <img id="expand-icon" src="assets/icons/expand.png">
-        </button>
+        <div id="options-btns">
+            <button id="settings-menu-btn" class="main-settings-btns btn-transparent" onclick="openSettings()">
+                <img src="assets/icons/settings-btn.png" alt="">
+            </button>
+            <button id="expand-btn" class="main-settings-btns btn-transparent" onclick="toggleFullscreen()">
+                <img id="expand-icon" src="assets/icons/expand-btn.png">
+            </button>
+        </div>
 
         <div id="start-div" class="overlay-divs">
-            <button id="settings-menu-btn" class="main-settings-btns" onclick="openSettings()">
-                <img src="assets/icons/setting-btn.png" alt="">
-            </button>
             <button id="start-btn" onclick="showTutorial()">
                 <h2>Start Game</h2>
             </button>
@@ -65,13 +68,13 @@
                     </div>
                 </div>
 
-                <div id="tutorial-second-page" class="tutorial-pages" style="display: none;">
+                <div id="tutorial-second-page" class="tutorial-pages fs-large-tutorial" style="display: none;">
                     <div id="second-page-img" class="tutorial-imgs second-page-img">
                         <img id="tutorial-img-second-page" src="assets/img/2_character_pepe/pepe-tutorial-2.png" alt="pepe-walk">
                     </div>
                     <div id="second-page-text" class="tutorial-texts">
                         <div id="first-part-second-page" class="first-part-texts">
-                            <span>Press</span> <img id="arrow-gif-tutorial" class="tutorial-icons" src="assets/icons/left-right-arrow-key-icon12.gif" alt="arrow-key-gif">
+                            <span>Press</span> <img id="arrow-gif-tutorial" class="tutorial-icons" src="assets/icons/arrow.GIF" alt="arrow-key-gif">
                             <span>or</span> <img id="arrow-sides-tutorial" class="tutorial-icons" src="assets/icons/left-right-arrow.png" alt="walk-arrow">
                         </div>
                         <div id="second-part-second-page" class="second-part-texts">
@@ -80,7 +83,7 @@
                     </div>
                 </div>
 
-                <div id="tutorial-third-page" class="tutorial-pages" style="display: none;">
+                <div id="tutorial-third-page" class="tutorial-pages fs-large-tutorial" style="display: none;">
                     <div id="third-page-img" class="tutorial-imgs">
                         <img id="tutorial-img-third-page" src="assets/img/2_character_pepe/pepe-tutorial-3.png" alt="pepe-hurt">
                     </div>
@@ -114,11 +117,12 @@
                     </div>
                     <div id="fifth-page-text" class="tutorial-texts">
                         <div id="first-part-fifth-page" class="first-part-texts">
-                            <span>Press</span> <img id="space-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-space-key-50.gif" alt="space-key-gif">
-                            <span>or</span> <img id="arrow-up-tutorial" class="tutorial-icons" src="assets/icons/arrow-up.png" alt="jump-arrow">
+                            <span>Press</span> <img id="space-gif-tutorial" class="tutorial-icons" src="assets/icons/space.GIF" alt="space-key-gif">
+                            <span>or</span> <img id="arrow-up-tutorial" class="tutorial-icons" src="assets/icons/arrow-up.png" alt="jump-arrow"><br>
+                            <span>to let Pepe jump.</span><br>
                         </div>
                         <div id="second-part-fifth-page" class="second-part-texts">
-                            <span>to let Pepe jump. <br> <br> Jump directly onto a chicken from above, and Pepe's magnificent physique will unleash its full power, sending the poor chicken straight to its knees!</span>
+                            <span><br> Jump directly onto a chicken from above, and Pepe's magnificent physique will unleash its full power, sending the poor chicken straight to its knees!</span>
                         </div>
                     </div>
                 </div>
@@ -129,7 +133,7 @@
                     </div>
                     <div id="sixth-page-text" class="tutorial-texts">
                         <div id="first-part-sixth-page" class="first-part-texts">
-                            <span>Press</span> <img id="d-gif-tutorial" class="tutorial-icons" src="assets/icons/icons8-d-key-50.gif" alt="space-key-gif">
+                            <span>Press</span> <img id="d-gif-tutorial" class="tutorial-icons" src="assets/icons/d.GIF" alt="space-key-gif">
                             <span>or</span> <img id="arrow-throw-tutorial" class="tutorial-icons" src="assets/icons/arrow.png" alt="throw-arrow">
                         </div>
                         <div id="second-part-sixth-page" class="second-part-texts">
@@ -167,6 +171,9 @@
                 </div>
 
                 <div id="tutorial-ninth-page" class="tutorial-pages" style="display: none;">
+                    <div id="ninth-page-img" class="tutorial-imgs">
+                        <img id="tutorial-img-ninth-page" src="assets/img/2_character_pepe/pepe-top.png" alt="pepe-top">
+                    </div>
                     <div id="ninth-page-text" class="tutorial-texts">
                         <div id="first-part-ninth-page" class="first-part-texts">
                             <span>Now it's your turn, brave Muchacho! Help Pepe defeat these deli— I mean, TERRIFYING feathered monsters and fight your way to the final boss!</span>
@@ -174,9 +181,6 @@
                         <div id="second-part-ninth-page" class="second-part-texts">
                             <span>Save your salsa bottles wisely... because when the big guy shows up, you're gonna need all the heat you can get!</span>
                         </div>
-                    </div>
-                    <div id="ninth-page-img" class="tutorial-imgs">
-                        <img id="tutorial-img-ninth-page" src="assets/img/2_character_pepe/pepe-top.png" alt="pepe-top">
                     </div>
                 </div>
             </div>
@@ -193,7 +197,7 @@
                 </button>
                 <button id="tutorial-foward-btn" onclick="nextPage()">
                     <div id="foward-btn">
-                        <p id="enter-tutorial-btn-text">Enter Tutorial</p>
+                        <p id="enter-tutorial-btn-text">Tutorial</p>
                         <img id="right-arrow-tutorial" class="tutorial-arrows" src="assets/icons/foward-arrow-red.png" alt="foward-arrow">
                     </div>
                 </button>
@@ -202,50 +206,38 @@
 
         <div id="pause-div" class="overlay-divs" style="display: none;">
             <div id="pause-div-header">
-                <button id="pause-menu-settings-btn" class="main-settings-btns" onclick="openSettings()">
-                    <img src="assets/icons/setting-btn.png" alt="">
-                </button>
-                <p>Pause</p>
+                <h2>Pause</h2>
             </div>
             <div class="pause-btns">
                 <button class="menu-btns" onclick="backToGame()">
+                    <img class="pause-btn-icons" src="assets/icons/back-arrow-red.png" alt=""> 
                     <h3>Back To Game</h3>
                 </button>
                 <button class="restart-btn menu-btns" onclick="restartGame()">
-                    <img class="restart-arrow" src="assets/icons/restart-arrow.png" alt="">
+                    <img class="pause-btn-icons" src="assets/icons/restart-arrow.png" alt="">
                     <h3>Restart</h3>
                 </button>
                 <button class="start-menu-btn menu-btns" onclick="backToStartMenu()">
-                    <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> 
+                    <img class="pause-btn-icons" src="assets/icons/home-btn.png" alt="home-btn">
                     <h3>Back To Start Menu</h3>
                 </button>
             </div>
         </div>
 
-        <div id="endscreen-div" class="overlay-divs" style="display: none;">
-            <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
-            <button class="restart-btn menu-btns" onclick="restartGame()">
-                <img class="restart-arrow" src="assets/icons/restart-arrow.png" alt=""> Restart
-            </button>
-            <button class="start-menu-btn menu-btns" onclick="backToStartMenu()">
-                <img id="start-menu-arrow" src="assets/icons/back-arrow-red.png" alt=""> Back To Start Menu
-            </button>
-        </div>
-
         <div class="overlay-divs" id="settings-div" style="display: none;">
-            <button id="return-to-start-btn" onclick="closeSettings()">
+            <button id="return-to-start-btn" class="btn-transparent" onclick="closeSettings()">
                 <img src="assets/icons/back-arrow-red.png" alt="">
             </button>
             <div id="settings-menu">
                 <div id="control-menu-div" class="settings-menu-divs">
-                    <button id="controls-btn" class="settings-btn" onclick="openControls()">
+                    <button id="controls-btn" class="settings-btn btn-transparent" onclick="openControls()">
                         <img src="assets/icons/game-controls-colored.png" alt="">
                     </button>
                     <p id="control-text">Controls</p>
                 </div>
                 
                 <div id="sound-menu-div" class="settings-menu-divs">
-                    <button id="mute-btn" class="settings-btn" onclick="toggleSound(this)">
+                    <button id="mute-btn" class="settings-btn btn-transparent" onclick="toggleSound(this)">
                         <img src="assets/icons/sound.png" alt="sound-on-icon">
                     </button>
                     <p class="sound-text" id="tool-text-sound">Sound on</p>
@@ -256,13 +248,13 @@
         <div class="overlay-divs" id="controls-div-overlay" onclick="closeControls()" style="display: none;">
             <div id="controls-div">
                 <div id="control-icons-div" class="controls-div-column">
-                    <img class="control-icons" id="arrows-icon" src="assets/icons/arrow-keys.png" alt="arrow-icon">
+                    <img class="control-icons" id="arrows-icon" src="assets/icons/arrow.GIF" alt="arrow-icon">
                     <p class="mobile-control-text">walk</p>
-                    <img class="control-icons" id="space-icon" src="assets/icons/space-key.png" alt="space-icon">
+                    <img class="control-icons" id="space-icon" src="assets/icons/space.GIF" alt="space-icon">
                     <p class="mobile-control-text">jump</p>
-                    <img class="control-icons" id="d-key-icon" src="assets/icons/d-key.png" alt="d-key">
+                    <img class="control-icons" id="d-key-icon" src="assets/icons/d.GIF" alt="d-key">
                     <p class="mobile-control-text">throw bottles</p>
-                    <img class="control-icons" id="espace-icon" src="assets/icons/pause-key.png" alt="">
+                    <img class="control-icons" id="espace-icon" src="assets/icons/esc.GIF" alt="">
                     <p class="mobile-control-text">pause game</p>
                 </div>
                 <div id="control-text-div" class="controls-div-column">
@@ -272,8 +264,18 @@
                     <p class="control-text">pause game</p>
                 </div>
             </div>
-            <button id="return-to-start-btn" onclick="closeControls()">
+            <button id="return-to-start-btn" class="btn-transparent" onclick="closeControls()">
                 <img src="assets/icons/back-arrow-red.png" alt="">
+            </button>
+        </div>
+
+        <div id="endscreen-div" class="overlay-divs" style="display: none;">
+            <img id=game-over-img src="assets/img/winning_loosing/game_over_endscreen.png" alt="game-over-endscreen">
+            <button class="restart-btn menu-btns" onclick="restartGame()">
+                <img class="pause-btn-icons" src="assets/icons/restart-arrow.png" alt=""> <p>Restart</p>
+            </button>
+            <button class="start-menu-btn menu-btns" onclick="backToStartMenu()">
+                <img class="pause-btn-icons" src="assets/icons/back-arrow-red.png" alt=""> <p>Back To Start Menu</p>
             </button>
         </div>
 

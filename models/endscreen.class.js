@@ -1,9 +1,8 @@
 class Endscreen extends MovableObjects {
 
     width = 500;
-    height = 400;
     x = 100;
-    y = 20;
+    y = 70;
     animationFinished = false;
     startTime;
     started = false;
