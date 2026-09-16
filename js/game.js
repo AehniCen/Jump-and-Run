@@ -215,7 +215,7 @@ function startGame() {
          forwardBtn.style.display = 'flex';
     }
     currentPage = 1;
-    document.querySelector('.enter-tutorial p').style.display = 'flex';
+    document.getElementById('enter-tutorial-btn-text').style.display = 'flex';
     world.paused = false;
     world.character.lastActionTime = Date.now();
     getButtonSound();

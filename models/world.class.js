@@ -24,12 +24,40 @@ class World {
     endbossSound = new Audio('assets/audio/endboss-music-entrance.mp3');
     noBottleSound = new Audio('assets/audio/empty-bag.mp3');
     endbossSoundPaused;
+    lastEndbossSpawnTime = 0;
     throwCooldown = 1000;
     lastThrowTime = 0;
     canThrow = true;
-    spawnReinforcementsProgressSpawnedFirst = false;
-    spawnReinforcementsProgressSpawnedSecond = false;
-    spawnReinforcementsProgressSpawnedThird = false;
+    reinforcementSpawns = [
+        {
+            minX: 2500,
+            maxX: 4500,
+            babies: 2,
+            chickens: 3,
+            spawned: false
+        },
+        {
+            minX: 5000,
+            maxX: 7000,
+            babies: 6,
+            chickens: 8,
+            spawned: false
+        },
+        {
+            minX: 7500,
+            maxX: 10500,
+            babies: 12,
+            chickens: 16,
+            spawned: false
+        },
+        {
+            minX: 11000,
+            maxX: 14500,
+            babies: 15,
+            chickens: 12,
+            spawned: false
+        }
+    ]
     spawnCooldown = 7000;
     lastSpawnTime = 0;
 
@@ -193,6 +221,7 @@ class World {
             this.checkThrowableObjects();
             this.checkCharacterState();
             this.checkBossActivation();
+            this.checkChickenActivation();
             this.level.coins.forEach(coin => {
                 coin.update();
             });
@@ -215,6 +244,18 @@ class World {
             boss.animate();
         };
     };
+
+    checkChickenActivation() {
+    this.level.enemies.forEach(enemy => {
+        if (enemy instanceof Chicken || enemy instanceof BabyChicken) {
+            let distance = Math.abs(this.character.x - enemy.x);
+
+            if (distance < 1000 && !enemy.active) {
+                enemy.active = true;
+            }
+        }
+    });
+}
 
     lostTheGame(){
         if (this.character.state === 'dying') {
@@ -261,6 +302,9 @@ class World {
         }
         if (this.winner && this.endscreen.animationFinished) {
             document.getElementById('endscreen-div').style.display = 'flex';
+            document.getElementById('looser-endscreen-div').style.display = 'none';
+            document.getElementById('winner-endscreen-div').style.display = 'flex';
+            document.getElementById('final-coins-number').textContent = this.coinDisplay.value;
             this.paused = true;
         }
     }
@@ -343,7 +387,7 @@ class World {
     checkCharacterBossCollision(){
         const boss = this.level.boss;
         if (this.character.isColliding(boss) && !this.character.isHurt() && !boss.isDead()) {
-            this.character.damage = 20;
+            this.character.damage = 0;
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
         }
@@ -412,29 +456,34 @@ class World {
     };
 
     spawnReinforcementsEndboss75(){
-        let spawnCooldownEndboss = 4000;
-        if (Date.now() - this.lastSpawnTime < spawnCooldownEndboss) {
+         const spawnCooldownEndboss = 4000;
+        if (Date.now() - this.lastEndbossSpawnTime < spawnCooldownEndboss) {
             return;
         }
         for (let i = 0; i < 3; i++) {
             let babyChicken = new BabyChicken();
             babyChicken.world = this;
             babyChicken.x = this.level.boss.x + Math.random() * 400;
+            babyChicken.active = true;
             babyChicken.animate();
             this.level.enemies.push(babyChicken);
         }
+        this.lastSpawnTime = Date.now();
     }
 
     spawnReinforcementsEndboss50(){
-        this.level.boss.attackCooldown = 2000;
-        let spawnCooldownEndboss = 4000;
-        if (Date.now() - this.lastSpawnTime < spawnCooldownEndboss) {
+        const spawnCooldownEndboss = 4000;
+        if (Date.now() - this.lastEndbossSpawnTime < spawnCooldownEndboss) {
             return;
         }
+        this.level.boss.attackCooldown = 2000;
         for (let i = 0; i < 2; i++) {
             let babyChicken = new BabyChicken();
+
             babyChicken.world = this;
             babyChicken.x = this.level.boss.x + Math.random() * 400;
+            babyChicken.active = true;
+
             babyChicken.animate();
             this.level.enemies.push(babyChicken);
         }
@@ -442,21 +491,24 @@ class World {
             let chicken = new Chicken();
             chicken.world = this;
             chicken.x = this.level.boss.x + Math.random() * 300;
+            chicken.active = true;
             chicken.animate();
             this.level.enemies.push(chicken);
         }
+        this.lastSpawnTime = Date.now();
     };
 
     spawnReinforcementsEndboss25(){
-        this.level.boss.attackCooldown = 2000;
-        let spawnCooldownEndboss = 4000;
-        if (Date.now() - this.lastSpawnTime < spawnCooldownEndboss) {
+        const spawnCooldownEndboss = 4000;
+        if (Date.now() - this.lastEndbossSpawnTime < spawnCooldownEndboss) {
             return;
         }
+        this.level.boss.attackCooldown = 2000;
         for (let i = 0; i < 3; i++) {
             let babyChicken = new BabyChicken();
             babyChicken.world = this;
             babyChicken.x = this.level.boss.x + Math.random() * 300;
+            babyChicken.active = true;
             babyChicken.animate();
             this.level.enemies.push(babyChicken);
         }
@@ -464,57 +516,64 @@ class World {
             let chicken = new Chicken();
             chicken.world = this;
             chicken.x = this.level.boss.x + Math.random() * 400;
-            chicken.animate();
-            this.level.enemies.push(chicken);
-        }
-    };
-
-    spawnReinforcementsProgress(){
-        if (this.spawnReinforcementsProgressSpawned) {
-            return;
-        }
-        if (Date.now() - this.lastSpawnTime < this.spawnCooldown) {
-            return;
-        }
-        let babyCount = 0;
-        let chickenCount = 0;
-        if (this.character.x >= 1500 && this.character.x < 4500 && !this.spawnReinforcementsProgressSpawnedFirst) {
-            babyCount = 3;
-            chickenCount = 5;
-            this.spawnReinforcementsProgressSpawnedFirst = true;
-        }
-        if (this.character.x >= 4000 && this.character.x < 7000 && !this.spawnReinforcementsProgressSpawnedSecond) {
-            babyCount = 6;
-            chickenCount = 10;
-            this.spawnReinforcementsProgressSpawnedSecond = true;
-        }
-        if (this.character.x >= 6000 && this.character.x < 11500 && !this.spawnReinforcementsProgressSpawnedThird) {
-            babyCount = 10;
-            chickenCount = 14;
-            this.spawnReinforcementsProgressSpawnedThird = true;
-        }
-        if (this.character.x >= 11000) {
-            return;
-        }
-        if (babyCount === 0 && chickenCount === 0) {
-            return;
-        }
-        for (let i = 0; i < babyCount; i++) {
-            let babyChicken = new BabyChicken();
-            babyChicken.world = this;
-            babyChicken.x = this.character.x + 800 + Math.random() * 3000;
-            babyChicken.animate();
-            this.level.enemies.push(babyChicken);
-        }
-        for (let i = 0; i < chickenCount; i++) {
-            let chicken = new Chicken();
-            chicken.world = this;
-            chicken.x = this.character.x + 800 + Math.random() * 3000;
+            chicken.active = true;
             chicken.animate();
             this.level.enemies.push(chicken);
         }
         this.lastSpawnTime = Date.now();
-        this.progressReinforcementsSpawned = true;
+    };
+
+    getRandomSpawnX(minX, maxX) {
+        return minX + Math.random() * (maxX - minX);
+    };
+
+    spawnReinforcementsProgress() {
+        if (Date.now() - this.lastSpawnTime < this.spawnCooldown) {
+            return;
+        }
+
+        this.reinforcementSpawns.forEach(spawn => {
+            if (spawn.spawned) {
+                return;
+            }
+            if (this.character.x < spawn.minX - 1000) {
+                return;
+            }
+            if (this.character.x >= spawn.maxX) {
+                spawn.spawned = true;
+                return;
+            }
+            for (let i = 0; i < spawn.babies; i++) {
+                let babyChicken = new BabyChicken();
+
+                babyChicken.world = this;
+                babyChicken.x = this.getRandomSpawnX(
+                    spawn.minX,
+                    spawn.maxX
+                );
+
+                babyChicken.active = false;
+
+                babyChicken.animate();
+                this.level.enemies.push(babyChicken);
+            }
+            for (let i = 0; i < spawn.chickens; i++) {
+                let chicken = new Chicken();
+
+                chicken.world = this;
+                chicken.x = this.getRandomSpawnX(
+                    spawn.minX,
+                    spawn.maxX
+                );
+
+                chicken.active = false;
+
+                chicken.animate();
+                this.level.enemies.push(chicken);
+            }
+            spawn.spawned = true;
+            this.lastSpawnTime = Date.now();
+        });
     };
 
     canThrowBottle(){

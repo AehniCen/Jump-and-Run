@@ -17,7 +17,10 @@ function createCoins() {
         ...createCoinArc(4500, 110, 3),
         ...createCoinArc(6400, 110, 5),
         ...createCoinArc(8700, 110, 5),
-        ...createCoinArc(9500, 110, 3)
+        ...createCoinArc(9500, 110, 3),
+        ...createCoinArc(11200, 110, 3),
+        ...createCoinArc(12300, 110, 5),
+        ...createCoinArc(13000, 110, 5)
     ];
 };
 
@@ -45,6 +48,15 @@ function createBottles() {
         new CollectableBottles(),
         new CollectableBottles(),
         new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
+        new CollectableBottles(),
         new CollectableBottles()
     ]
 };
@@ -61,7 +73,10 @@ function createLevel1() {
             new BackgroundObjects('assets/img/5_background/complete_background.png', 7200),
             new BackgroundObjects('assets/img/5_background/complete_background.png', 8640),
             new BackgroundObjects('assets/img/5_background/complete_background.png', 10080),
-            new BackgroundObjects('assets/img/5_background/complete_background.png', 11520)
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 11520),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 12960),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 14400),
+            new BackgroundObjects('assets/img/5_background/complete_background.png', 15840)
         ],
         createEnemies(),
         new Endboss(),

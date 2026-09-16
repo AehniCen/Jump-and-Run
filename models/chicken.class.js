@@ -10,6 +10,7 @@ class Chicken extends MovableObjects {
     static aliveCount = 0;
     dyingSound = new Audio('assets/audio/chicken-attack-sound-2.mp3');
     alreadyDead = false;
+    active = false;
 
     IMAGES_WALKING = [
         'assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -28,7 +29,7 @@ class Chicken extends MovableObjects {
 
     getPositionInterval(){
         setInterval(() => {
-            if(!this.world.paused && !this.isDead())
+            if(this.active && !this.world.paused && !this.isDead())
             this.moveLeft();
             this.otherDirection = false;
         }, 1000 / 60);
@@ -47,20 +48,25 @@ class Chicken extends MovableObjects {
     }
 
     getDeadImage() {
-        if (this instanceof BabyChicken && this.isDead() && !this.world.paused && !this.alreadyDead) {
-            this.loadImage('assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png');
-            this.playDyingSound();
+        if (!this.isDead() || this.world.paused || this.alreadyDead) {
+            return;
         }
-        if (this.isDead() && !this.world.paused && !this.alreadyDead) { 
-            this.loadImage('assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-            this.playDyingSound();
+        if (this instanceof BabyChicken) {
+            this.loadImage(
+                'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+            );
+        } else {
+            this.loadImage(
+                'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+            );
         }
-    };
+        this.playDyingSound();
+    }
 
     
     animate(){
-        this.getDeadImage();
         this.getPositionInterval();
+        this.getDeadImage();
         this.getWalkingInterval();
     };
 

@@ -23,7 +23,7 @@ class MovableObjects extends DrawableObjects {
             let maxHeight = this.getMaxHeight();
             if (this.isAboveGround() || this.speedY > 0) {
                 if (this.y - this.speedY < maxHeight) {
-                    this.y = this.maxHeight;
+                    this.y = maxHeight;
                     this.speedY = 0;
                 } else {
                     this.y -= this.speedY;

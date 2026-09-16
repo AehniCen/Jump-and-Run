@@ -18,7 +18,7 @@ class CollectableBottles extends MovableObjects {
         let path = this.IMAGES[randomIndex];
         this.loadImage(path);
         this.width = this.height;
-        this.x = 1500 + Math.random() * 9500;
+        this.x = 1500 + Math.random() * 14000;
     }
 
     collect(collectedBottles) {

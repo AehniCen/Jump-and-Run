@@ -1,8 +1,9 @@
 class Endscreen extends MovableObjects {
 
     width = 500;
+    height = 500;
     x = 100;
-    y = 70;
+    y = 0;
     animationFinished = false;
     startTime;
     started = false;
@@ -36,21 +37,15 @@ class Endscreen extends MovableObjects {
             return;
         }
         let timePassed = (new Date().getTime() - this.startTime) / 1000;
-        if (timePassed < 2 && this.currentStep === 0) {
+        if (timePassed < 3 && this.currentStep === 0) {
             if (!this.world.winner) {
                 this.img = this.imageCache[this.IMAGES_ENDSCREEN_GAMEOVER[0]];
             } else if (this.world.winner) {
                 this.img = this.imageCache[this.IMAGES_ENDSCREEN_WINNER[0]];
             }
-        } else if (timePassed > 2 && this.currentStep === 0) {
-            if (!this.world.winner) {
-                this.img = this.imageCache[this.IMAGES_ENDSCREEN_GAMEOVER[1]];
-            } else if (this.world.winner) {
-                this.img = this.imageCache[this.IMAGES_ENDSCREEN_WINNER[1]];
-            }
             this.currentStep = 1;
         }
-        if (timePassed > 4 && this.currentStep === 1) {
+        if (timePassed > 3 && this.currentStep === 1) {
             this.animationFinished = true;
         }
     }

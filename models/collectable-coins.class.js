@@ -38,7 +38,7 @@ class CollectableCoins extends MovableObjects {
                 return;
             }
             if (!this.isCollected && !this.world.paused) {
-                this.y = this.baseY + Math.sin(Date.now() / 200) * 5;
+                this.y = this.baseY + Math.sin(Date.now() / 180) * 5;
             }
         }, 1000 / 60);
     }

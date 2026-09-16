@@ -584,15 +584,51 @@ canvas {
     align-items: center;
     background-color: #13131354;
     container-type: size;
-    z-index: 4000;
 }
 
 #endscreen-div p{
     font-size: 10cqh;
 }
 
-#game-over-img {
-    width: 350px;
+#winner-endscreen-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100cqw;
+    height: 100cqh;
+}
+
+#coins-endscreen-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+#collected-coins-endscreen {
+    height: 15cqh;
+    padding-right: 5cqw;
+}
+
+#winner-img-endscreen-div {
+    height: fit-content;
+    align-self: center;
+}
+
+#winner-img{
+    width: 70cqw;
+}
+
+#winner-endscreen-btns {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+}
+
+#endscreen-div #winner-endscreen-btns button {
+    margin-top: 4cqh;
 }
 
 #close-btn{
