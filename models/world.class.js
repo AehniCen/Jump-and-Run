@@ -319,8 +319,8 @@ class World {
 
     playWorldMusic(){
         if (!this.paused && !this.winner && !this.worldMusicPaused) {
+            this.worldMusic.volume = 0.2;
             this.worldMusic.play();
-            this.worldMusic.volume = 0.7;
         } else {
             this.worldMusic.pause();
         }
@@ -336,9 +336,9 @@ class World {
     playEndbossMusic() {
         let boss = this.level.boss;
         let distance = Math.abs(this.character.x - boss.x);
-
         if (
             distance < 600 &&
+            boss.state === 'walk' &&
             !this.paused &&
             !this.winner &&
             !this.endbossSoundPaused &&
@@ -346,6 +346,7 @@ class World {
         ) {
             this.endbossSound.play();
             this.endbossSound.volume = 0.3;
+            pauseWorldMusic()
         }
     }
 
@@ -395,7 +396,6 @@ class World {
         if (distance < 400 && boss.state === 'rest' && !this.paused) {       
             this.pauseWorldMusic(); 
             boss.setState('alert'); 
-            this.playEndbossMusic();
         }
         if (distance < 350 && boss.state === 'walk' && boss.canAttack()) {       
             boss.setState('attack-begin'); 

@@ -11,6 +11,12 @@
 
 @media only screen and (max-height: 480px) {
     canvas {
-        height: 100vh;
+        max-height: 100vh;
+    }
+
+    #mobile-controls {
+        display: flex;
+        justify-content: space-between;
     }
 }
+

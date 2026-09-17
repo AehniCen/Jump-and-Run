@@ -648,42 +648,41 @@ canvas {
 }
 
 #mobile-controls {
+    display: none;
     position: absolute;
-    display: flex;
-    justify-content: space-between;
     width: 100%;
-    bottom: 5px;
+    height: 10%;
+    bottom: 1.5rem;
 }
 
 .controls-mobile-btn {
+    width: 15%;
     border: none;
-    background-color: transparent;
+    background: transparent;
 }
 
 .controls-mobile-btn img {
-    width: 50px;
+    width: 100%;
 }
 
 .mobile-actions {
-    padding-right: 10px;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: end;
 }
 
-.mobile-actions img{
-    padding-right: 20px;
+#jump-arrow-mobile {
+    margin-right: 1rem;
 }
 
 #left-arrow-mobile {
     background: url("assets/icons/right-arrow.png");
     transform: scaleX(-1);
-    padding-right: 20px;
+    margin-left: 2rem;
 }
 
 #right-arrow {
-    padding-left: 20px;
-}
-
-#mobile-controls {
-    display: none;
+    padding-left: 1rem;
 }
 
 /*fullscreen - options*/

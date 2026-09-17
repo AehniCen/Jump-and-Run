@@ -89,6 +89,7 @@ class Endboss extends MovableObjects {
             switch (this.state) {
                 case 'alert':
                     this.getAlertAnimation();
+                    this.getAlertSound();
                     break;
                 
                 case 'walk':
@@ -159,13 +160,10 @@ class Endboss extends MovableObjects {
     };
 
     getAlertSound(){
-        if (this.alertPlayed) return;     
+        if (this.alertPlayed) return; 
+        this.alertSound.volume = 10;    
+        this.alertSound.play();
         this.alertPlayed = true;
-        setTimeout(() => {
-            this.alertSound.play();
-            this.alertSound.playbackRate = 0.5;
-            this.alertSound.volume = 10;
-        }, 400);
     }
 
     getHurtAnimation(){
@@ -269,7 +267,7 @@ class Endboss extends MovableObjects {
     getDeadAnimation(){
         if (!this.isDying) {
             this.isDying = true;
-            this.speedY = 15;
+            this.speedY = 25;
             this.startTime = Date.now();
         }
         this.getDyingFrame();
